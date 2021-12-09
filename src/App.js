@@ -10,7 +10,7 @@ import jwt_decode from "jwt-decode";
 
 function App() {
 
-  const {token,setToken,message} = useToken()
+  const {token,setToken} = useToken()
 
 
   if(token)
@@ -24,7 +24,7 @@ function App() {
       <Routes>
         <Route path='/' element={<><PrivateRoute><Header email = {decoded?decoded.sub:null} /><Home /></PrivateRoute></>} />
         <Route path='/signup' element={<><SignUp /></>} />
-        <Route path='/signin' element={<><SignIn setToken={setToken} message={message} token={token}/></>} />
+        <Route path='/signin' element={<><SignIn setToken={setToken}/></>} />
       </Routes>
      </Router>
     </>  
