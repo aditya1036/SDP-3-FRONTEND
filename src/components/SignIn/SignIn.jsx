@@ -10,6 +10,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { InitializeUser, RemoveUser } from '../redux/UserContext/UserSlice';
+
 import {useState } from 'react';
 import {Navigate} from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -27,13 +30,14 @@ const SignIn = ({setToken}) => {
   const [email, setEmail] = useState('')
   const [password , setPassword] = useState('')
   const [redirect , setRedirect] = useState(false)
+  const dispatch = useDispatch();
   
     
   
 
       const handleSubmit = async (e) => {
           e.preventDefault();
-          const res = await fetch('http://localhost:8080/api/auth/signin',{
+          let res = await fetch('http://localhost:8080/api/auth/signin',{
                 method: 'POST',
                 headers:
                 {
@@ -44,6 +48,15 @@ const SignIn = ({setToken}) => {
       
       const data_final = await res.json();
       setToken({'token':data_final.accessToken})
+      res = await fetch(`http://localhost:8080/api/userapi/user/${data_final.id}`, {
+        method: "GET",
+        headers: {
+          "Authorization" : `Bearer ${data_final.accessToken}`
+        }
+      })
+      res = await res.json();
+      console.log(res.data[0])
+      dispatch(InitializeUser(res.data[0]))
       setEmail('')
       setPassword('')
       setRedirect(true)

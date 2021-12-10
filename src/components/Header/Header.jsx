@@ -5,13 +5,21 @@ import SearchIcon from '@mui/icons-material/Search';
 import { TextField } from '@mui/material';
 import {Navigate} from 'react-router-dom'
 import {getUserPayload} from '../../authService'
+import { useSelector, useDispatch } from 'react-redux';
+import { RemoveUser } from '../redux/UserContext/UserSlice';
+
 const Header = () => {
+
+  const dispatch = useDispatch();
+
+
 
   const data = getUserPayload(localStorage.getItem('token'));
   console.log(data)
   const handleLogout = () =>
   {
-    localStorage.clear();
+    dispatch(RemoveUser())
+    localStorage.removeItem("token");
     <Navigate to='/signin' />
   }
     return (
