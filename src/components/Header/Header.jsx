@@ -4,10 +4,11 @@ import {Link} from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search';
 import { TextField } from '@mui/material';
 import {Navigate} from 'react-router-dom'
+import {getUserPayload} from '../../authService'
+const Header = () => {
 
-const Header = ({email}) => {
-
-
+  const data = getUserPayload(localStorage.getItem('token'));
+  console.log(data)
   const handleLogout = () =>
   {
     localStorage.clear();
@@ -30,7 +31,7 @@ const Header = ({email}) => {
 
         
           <div className="header__option">
-          <span className="header__optionLineOne">{email}</span>
+          <span className="header__optionLineOne">{data.sub}</span>
           <Link to="/signin">
           <span className="header__optionLineTwo" style={{textDecoration: 'None'}} onClick={handleLogout}>Logout</span>
           </Link>

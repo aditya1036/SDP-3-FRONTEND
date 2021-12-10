@@ -7,22 +7,18 @@ import SignIn from './components/SignIn/SignIn';
 import PrivateRoute from './PrivateRoute';
 import useToken  from './useToken';
 import jwt_decode from "jwt-decode";
+import {useEffect, useState} from 'react';
+import { Navigate } from 'react-router-dom';
 
 function App() {
 
   const {token,setToken} = useToken()
-
-
-  if(token)
-  {
-    var decoded = jwt_decode(token)
-  }
-
+  
   return (
     <>
     <Router>
       <Routes>
-        <Route path='/' element={<><PrivateRoute><Header email = {decoded?decoded.sub:null} /><Home /></PrivateRoute></>} />
+        <Route path='/' element={<><PrivateRoute><Header /><Home token={token}/></PrivateRoute></>} />
         <Route path='/signup' element={<><SignUp /></>} />
         <Route path='/signin' element={<><SignIn setToken={setToken}/></>} />
       </Routes>

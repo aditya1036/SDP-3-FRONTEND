@@ -2,6 +2,7 @@ import React from 'react'
 import { Navigate } from 'react-router-dom'
 import useToken from './useToken'
 
+import { isLoggedin } from './authService';
 const PrivateRoute = ({children, ...rest}) => {
 
     const {token} = useToken()
@@ -16,7 +17,10 @@ const PrivateRoute = ({children, ...rest}) => {
 
     // )
 
-    return token?children:<Navigate to="/signin" />
+    
+    
+
+    return isLoggedin(token)?children:<Navigate to="/signin" />
 }
 
 export default PrivateRoute

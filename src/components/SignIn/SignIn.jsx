@@ -20,13 +20,13 @@ import 'react-toastify/dist/ReactToastify.css';
 const theme = createTheme();
 
 
+
 toast.configure()
 const SignIn = ({setToken}) => {
 
   const [email, setEmail] = useState('')
   const [password , setPassword] = useState('')
   const [redirect , setRedirect] = useState(false)
-  const [message , setMessage] = useState(false)
   
     
   
