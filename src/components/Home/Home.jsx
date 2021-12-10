@@ -5,17 +5,11 @@ import Posts from './Posts'
 import Rightside from './Rightside';
 import './Home.css'
 import { useState } from 'react'
-import { selectUser } from '../redux/UserContext/UserSlice';
-import { useSelector } from 'react-redux';
 const Home = ({token}) => {
-  const user = useSelector(selectUser);
   const ts = token
   
     return (
         <div>
-<<<<<<< Updated upstream
-          <h1>Welcome to Home Component: {JSON.stringify(user)}</h1>  
-=======
           <Container>
       <Layout>
         <Leftside />
@@ -23,7 +17,6 @@ const Home = ({token}) => {
         <Rightside/>
       </Layout>
     </Container>
->>>>>>> Stashed changes
         </div>
     )
 }

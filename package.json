@@ -22,11 +22,8 @@
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "react-toastify": "^8.1.0",
-<<<<<<< Updated upstream
     "redux-persist": "^6.0.0",
-=======
     "styled-components": "^5.3.3",
->>>>>>> Stashed changes
     "web-vitals": "^1.1.2"
   },
   "scripts": {
