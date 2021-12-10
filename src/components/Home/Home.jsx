@@ -9,7 +9,7 @@ const Home = ({token}) => {
   
     return (
         <div>
-          <h1>Welcome to Home Component: {JSON.stringify(user)}</h1>  
+          <h1>Welcome to Home Component</h1>  
         </div>
     )
 }
