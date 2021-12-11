@@ -2,12 +2,12 @@ import {React} from 'react'
 import './Header.css'
 import {Link} from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search';
-import { TextField } from '@mui/material';
+import { Paper, TextField } from '@mui/material';
 import {Navigate} from 'react-router-dom'
 import {getUserPayload} from '../../authService'
 import { useSelector, useDispatch } from 'react-redux';
 import { RemoveUser } from '../redux/UserContext/UserSlice';
-
+import { Card } from '@mui/material';
 const Header = () => {
 
   const dispatch = useDispatch();
@@ -23,7 +23,8 @@ const Header = () => {
     <Navigate to='/signin' />
   }
     return (
-      <div className='header'>
+       <Card style={{position: "sticky"}}>
+       <div className='header'>
       <Link to="/" >
       <img className="logo__header"  src='images/SignUp.png'  alt='Not Found' />
       </Link>
@@ -56,8 +57,8 @@ const Header = () => {
           </div>
 
       </div>
-  
   </div>
+      </Card>  
     )
 }
 

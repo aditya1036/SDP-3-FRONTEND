@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from "styled-components";
 import Leftside  from './Leftside';
-import Posts from './Posts'
-import Rightside from './Rightside';
+import Feed from './Feed'
+import Widgets from '../Widgets/Widgets';
 import './Home.css'
+import Posts from '../Posts/Posts';
 import { useState } from 'react'
 const Home = ({token}) => {
   const ts = token
@@ -13,8 +14,9 @@ const Home = ({token}) => {
           <Container>
       <Layout>
         <Leftside />
-        <Posts />
-        <Rightside/>
+        <Feed/>
+        <Widgets/>
+       
       </Layout>
     </Container>
         </div>

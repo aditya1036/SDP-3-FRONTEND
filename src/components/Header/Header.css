@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     position: sticky;
-    background-color: #f8f8f8;
+    background-color: white;
     top: 0;
     z-index: 100;
     text-decoration: none;
@@ -41,7 +41,7 @@
 {
     padding: 5px;
     height: 22px !important;
-    background-color: #f8f8f8;
+    background-color: white;
 }
 
 
@@ -57,7 +57,7 @@
     flex-direction: column;
     margin-left: 20px;
     margin-right: 20px;
-    color: #111;
+    color: black;
 }
 
 .header__optionLineOne
@@ -68,7 +68,8 @@
 {
     font-size: 16px;
     font-weight: 800;
-    color: #111;
+    color: black
+    ;
     
 }
 
