@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './SignUp.css'
 import {useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { Card, Paper } from '@mui/material';
 
 const theme = createTheme();
 
@@ -85,12 +86,14 @@ const SignUp = () => {
 
           <Container component="main" maxWidth="xs">
             <CssBaseline />
-            <Box
-              sx={{
-                marginTop: 1,
+            <Paper
+               sx={{
+                marginTop: 8,
                 display: 'flex',
                 flexDirection: 'column',
+                flex: 1,
                 alignItems: 'center',
+                padding: "20px"
               }}
             >
               
@@ -107,7 +110,7 @@ const SignUp = () => {
                       required
                       value={first_name}
                       onChange={(e) => setFirstName(e.target.value)}
-                      size="small"
+                      size="medium"
                       id="firstName"
                       label="First Name"
                       
@@ -122,6 +125,7 @@ const SignUp = () => {
                       onChange={(e) => setLastName(e.target.value)}
                       label="Last Name"
                       name="lastName"
+                      size="medium"
                     
                     />
                   </Grid>
@@ -134,6 +138,7 @@ const SignUp = () => {
                       onChange={(e) => setUserName(e.target.value)}
                       label="Username"
                       name="username"
+                      size="medium"
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -145,6 +150,7 @@ const SignUp = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       name="email"
+                      size="medium"
                       
                     />
                   </Grid>
@@ -159,6 +165,7 @@ const SignUp = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       type="password"
                       id="password"
+                      size="medium"
                       
                     />
                   </Grid>
@@ -180,6 +187,7 @@ const SignUp = () => {
                       onChange={(e) => setPhone(e.target.value)}
                       type="text"
                       id="mobile"
+                      size="medium"
                       
                     />
                   </Grid>
@@ -194,6 +202,7 @@ const SignUp = () => {
                       id="address"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
+                      size="medium"
                     />
                   </Grid>
 
@@ -205,7 +214,7 @@ const SignUp = () => {
                     >
                     Sign Up
                 </Button>
-                <Grid container justifyContent="flex-end">
+                <Grid container justifyContent="center">
                   <Grid item>
                     <Link href="/signin" variant="body2">
                       Already have an account? Sign in
@@ -213,7 +222,7 @@ const SignUp = () => {
                   </Grid>
                 </Grid>
               </Box>
-            </Box>
+            </Paper>
           </Container>
           </ThemeProvider>
 
