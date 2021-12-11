@@ -8,39 +8,29 @@ import Typography from '@mui/material/Typography';
 export default function Profile() {
     return (
         <div>
-            <h1> This is profile </h1>
-            <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }}>
-      <Paper sx={{ maxWidth: 400, my: 1, mx: 'auto', p: 2 }}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-            <Avatar>W</Avatar>
+        <Paper sx={{ p: 2, margin : 2, maxWidth: 1200, flexGrow: 1}}>
+      <Grid container spacing={1}>
+        <Grid item xs={12} sm container>
+          <Grid item xs container direction="column" spacing={2}>
+            <Grid item xs>
+              <Typography gutterBottom variant="subtitle1" component="div">
+                Standard license
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography sx={{ cursor: 'pointer' }} variant="body2" >
+                Add
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid item xs zeroMinWidth>
-            <Typography noWrap>This is a text</Typography>
+          <Grid item>
+            <Typography variant="subtitle1" component="div">
+              $19.00
+            </Typography>
           </Grid>
         </Grid>
-      </Paper>
-      <Paper sx={{ maxWidth: 400, my: 1, mx: 'auto', p: 2 }}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-            <Avatar>W</Avatar>
-          </Grid>
-          <Grid item xs>
-            <Typography noWrap>This is a text</Typography>
-          </Grid>
-        </Grid>
-      </Paper>
-      <Paper sx={{ maxWidth: 400, my: 1, mx: 'auto', p: 2 }}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-            <Avatar>W</Avatar>
-          </Grid>
-          <Grid item xs>
-            <Typography>This is a text</Typography>
-          </Grid>
-        </Grid>
-      </Paper>
-    </Box>
+      </Grid>
+    </Paper>
         </div>
     )
 }

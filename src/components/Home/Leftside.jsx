@@ -19,7 +19,7 @@ const Leftside = (props) => {
 
       <CommunityCard>
         <a>
-          <span>Groups  </span>
+          <span>Groups</span>
         </a>
         <a>
           <span>
