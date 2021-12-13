@@ -56,7 +56,7 @@ console.log(last)
   const firstEvent = (e) => {
 		//console.log(e);
 		var bottom = e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 50;
-		if(bottom){
+		if(bottom && !last){
 			let pg = pageNo + 1;
 			setPageNo(pg);
 			getData();
