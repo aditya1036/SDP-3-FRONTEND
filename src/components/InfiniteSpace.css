@@ -1,0 +1,24 @@
+.ImageAPI{
+	height: 100vh;
+	width: 100%;
+	overflow-y: auto;
+	align-items: center;
+	justify-content: center;
+}
+
+.example {
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;  /* Firefox */
+  }
+
+.example::-webkit-scrollbar {
+    display: none;
+}
+
+.container
+{
+	display: flex;
+	align-items: center;
+	justify-items: center;
+	margin-left: 600px;
+}

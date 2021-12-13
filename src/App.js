@@ -20,6 +20,7 @@ function App() {
         <Route path='/profile' element={<><PrivateRoute><Header /><Profile /></PrivateRoute></>} />
         <Route path='/signup' element={<><SignUp /></>} />
         <Route path='/signin' element={<><SignIn setToken={setToken}/></>} />
+        
       </Routes>
      </Router>
     </>  

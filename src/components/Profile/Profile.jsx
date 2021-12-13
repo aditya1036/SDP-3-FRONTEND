@@ -18,6 +18,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import Posts from '../Posts/Posts'
+import Experience from '../Experience/Experience'
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -109,7 +111,7 @@ const Profile = () => {
          })
          
          const data = await res.json();
-         console.log(data.data[0])
+         
          setProfile(data.data[0])
         }
         userProfile()
@@ -118,7 +120,7 @@ const Profile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         
-        const res = await fetch(`http://localhost:8080/api/profile/user/profile/update`,{
+        const res = await fetch(`${API_URL}/api/profile/user/profile/update`,{
             method: 'PUT',
             headers: {
                 'Content-Type' : "application/json",
@@ -126,20 +128,32 @@ const Profile = () => {
                 
             },
             body: JSON.stringify({
-                "id": state.id,
-                "bio":bio,
-                "github_link" : github,
-                "linkedIn_link": linkedIn,
-                "skills": skills,
-                "languages" : languages,
-                "profile_image" : null
+                id: state.id,
+                bio:bio,
+                github_link : github,
+                linkedIn_link: linkedIn,
+                skills: skills,
+                languages : languages,
+                profile_image : null
             })
         })
+
+        setProfile({
+          id: state.id,
+          bio:bio,
+          github_link : github,
+          linkedIn_link: linkedIn,
+          skills: skills,
+          languages : languages,
+          profile_image : null
+      })
         const data = await res.json()
-        window.location.reload(true)
+        
     
     }
 
+
+    
 
 
     return (
@@ -151,7 +165,6 @@ const Profile = () => {
         <h4>{profile.linkedIn_link}</h4>
         <h4>{profile.skills}</h4>
         <h4>{profile.languages}</h4>
-
 
         
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -254,6 +267,10 @@ const Profile = () => {
         </DialogContent>
         
       </Dialog>
+
+      <Posts />
+
+      <Experience />
     </div>
         
     )
