@@ -6,21 +6,25 @@ import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/SignIn';
 import PrivateRoute from './PrivateRoute';
 import useToken  from './useToken';
-import Profile from './components/Profile/Profile';
+import jwt_decode from "jwt-decode";
 
 function App() {
 
-  const {token,setToken} = useToken()
-  
+  const {token,setToken,message} = useToken()
+
+
+  if(token)
+  {
+    var decoded = jwt_decode(token)
+  }
+
   return (
     <>
     <Router>
       <Routes>
-        <Route path='/' element={<><PrivateRoute><Header /><Home /></PrivateRoute></>} />
-        <Route path='/profile' element={<><PrivateRoute><Header /><Profile /></PrivateRoute></>} />
+        <Route path='/' element={<><PrivateRoute><Header email = {decoded?decoded.sub:null} /><Home /></PrivateRoute></>} />
         <Route path='/signup' element={<><SignUp /></>} />
-        <Route path='/signin' element={<><SignIn setToken={setToken}/></>} />
-        
+        <Route path='/signin' element={<><SignIn setToken={setToken} message={message} token={token}/></>} />
       </Routes>
      </Router>
     </>  
