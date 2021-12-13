@@ -22,10 +22,10 @@ const InfiniteSpace = () => {
 	
 
  
-  function getData(){
+  async function getData(){
 
 	setLoading(true)
-	axios.get(`http://localhost:8080/api/post/getallposts?pageNo=${pageNo}`,{headers:
+	await axios.get(`http://localhost:8080/api/post/getallposts?pageNo=${pageNo}`,{headers:
   {
     'Authorization' : `Bearer ${JSON.parse(localStorage.getItem("token")).token}`
   }})
@@ -48,15 +48,11 @@ const InfiniteSpace = () => {
 				alert('Axios GET request failed');
 			})
 	} 
-
-  
-
-  
-console.log(last)
+//Done
   const firstEvent = (e) => {
 		//console.log(e);
-		var bottom = e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 50;
-		if(bottom && !last){
+		// var bottom = e.target.scrollHeight  - e.target.clientHeight < 50;
+		if(e.target.scrollTop === e.target.scrollHeight - e.target.offsetHeight && !last){
 			let pg = pageNo + 1;
 			setPageNo(pg);
 			getData();
