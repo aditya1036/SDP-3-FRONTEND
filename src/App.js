@@ -6,9 +6,7 @@ import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/SignIn';
 import PrivateRoute from './PrivateRoute';
 import useToken  from './useToken';
-import jwt_decode from "jwt-decode";
-import {useEffect, useState} from 'react';
-import { Navigate } from 'react-router-dom';
+import Profile from './components/Profile/Profile';
 
 function App() {
 
@@ -18,9 +16,11 @@ function App() {
     <>
     <Router>
       <Routes>
-        <Route path='/' element={<><PrivateRoute><Header /><Home token={token}/></PrivateRoute></>} />
+        <Route path='/' element={<><PrivateRoute><Header /><Home /></PrivateRoute></>} />
+        <Route path='/profile' element={<><PrivateRoute><Header /><Profile /></PrivateRoute></>} />
         <Route path='/signup' element={<><SignUp /></>} />
         <Route path='/signin' element={<><SignIn setToken={setToken}/></>} />
+        
       </Routes>
      </Router>
     </>  
