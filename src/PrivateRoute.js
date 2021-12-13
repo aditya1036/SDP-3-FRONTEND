@@ -1,22 +1,36 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom'
+import {
+    Navigate
+} from 'react-router-dom'
+import {
+    useDispatch
+} from 'react-redux';
+import {
+    RemoveUser
+} from "./components/redux/UserContext/UserSlice";
+
+
 import useToken from './useToken'
 
-const PrivateRoute = ({children, ...rest}) => {
+import {
+    isLoggedin
+} from './authService';
+const PrivateRoute = ({
+    children,
+    ...rest
+}) => {
+    const dispatch = useDispatch();
 
-    const {token} = useToken()
-    // return (
-    // //    <Routes>
-    // //     <Route {...rest} render={props => (
-    // //         token ?
-    // //             children
-    // //         : <Navigate to="/signin" />
-    // //     )} />
-    // //     </Routes>
+    const {
+        token
+    } = useToken()
 
-    // )
 
-    return token?children:<Navigate to="/signin" />
+    if (!isLoggedin(token)) {
+        dispatch(RemoveUser())
+        return <Navigate to = "/signin" / >
+    }
+    return children
 }
 
 export default PrivateRoute

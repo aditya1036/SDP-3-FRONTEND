@@ -14,21 +14,16 @@ const useToken = () => {
 
 
     const [token , setToken] = useState(getToken())
-    const [email  ,setEmail] = useState('')
-    const [message , setMessage] = useState('')
+    
 
     const saveToken = (userToken) => {
         localStorage.setItem('token',JSON.stringify(userToken))
         setToken(userToken.token)
-        setEmail(userToken.email)
-        setMessage(userToken.message)
     }
 
     return {
         setToken: saveToken,
-        token,
-        email,
-        message
+        token
     }
 }
 
