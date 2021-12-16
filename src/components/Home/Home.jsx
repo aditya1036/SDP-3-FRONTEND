@@ -8,7 +8,7 @@ import Posts from '../Posts/Posts';
 import { useState } from 'react'
 const Home = ({token}) => {
   const ts = token
-  
+  //Done
     return (
         <div>
           <Container>
