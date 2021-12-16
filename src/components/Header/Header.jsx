@@ -8,9 +8,12 @@ import {getUserPayload} from '../../authService'
 import { useSelector, useDispatch } from 'react-redux';
 import { RemoveUser } from '../redux/UserContext/UserSlice';
 import { Card } from '@mui/material';
+import  { selectUser } from "../redux/UserContext/UserSlice"
 const Header = () => {
 
   const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
 
 
 

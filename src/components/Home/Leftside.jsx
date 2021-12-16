@@ -2,15 +2,21 @@ import { Avatar } from '@material-ui/core'
 import React from 'react'
 import './Leftside.css';
 
+import  { selectUser } from "../redux/UserContext/UserSlice"
+import { useSelector } from 'react-redux';
+
+
 export default function Sidebar() {
+    const user = useSelector(selectUser);
+
 
     return (
         <div className="sidebar">
             <div className="sidebar__top">
                 <img src="/images/linkedIn.png" alt="background" />
                 <Avatar src="/images/avatar.png" className="sidebar__avatar"> </Avatar>
-                <h2>Name</h2>
-                <h4>Email</h4>
+                <h2>{user.first_name + " " + user.last_name}</h2>
+                <h4>{user.email}</h4>
             </div>
             
             <div className="sidebar__stats">
