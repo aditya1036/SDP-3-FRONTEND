@@ -22,7 +22,7 @@ export default function Profile() {
   const ref = React.useRef(null);
     return (
         <div>
-
+        <h1> This is the Profile Page </h1>
         </div>
     )
 }

@@ -25,6 +25,7 @@ export default function Feed() {
 <Posts/>
 <Posts/>
 <Posts/>
+<Posts/>
 </div>
     )
 }
