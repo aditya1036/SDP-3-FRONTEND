@@ -7,7 +7,6 @@ import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import Posts from '../Posts/Posts';
-import FlipMove from "react-flip-move";
 export default function Feed() {
     return (
             <div className="feed">
