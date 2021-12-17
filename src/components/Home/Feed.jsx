@@ -7,9 +7,11 @@ import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import Posts from '../Posts/Posts';
-import { Box, Button, Card, Container, createTheme, CssBaseline, Grid, Link, Modal, Paper, TextField, ThemeProvider, Typography, Zoom } from '@material-ui/core';
+import { Box, Button, Card, Container, createTheme, CssBaseline, Grid, Input, Link, Modal, Paper, TextField, ThemeProvider, Typography, Zoom } from '@material-ui/core';
 import { Label, LabelOffOutlined } from '@material-ui/icons';
 import Slide from '@mui/material/Slide';
+
+
 
 const theme = createTheme();
 const style = {
@@ -20,8 +22,6 @@ const style = {
     width: 800,
     bgcolor: 'background.paper',
     borderRadius: "15px",
-    // // border: '2px solid #000',
-    // boxShadow: 24,
     p: 2
 };
 export default function Feed() {
@@ -41,19 +41,19 @@ export default function Feed() {
                     </form>
 
                 </div>
-              
-                    <div>
+
+                <div>
 
 
-                        <Modal 
+                    <Modal
                         trans
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="keep-mounted-modal-title"
-                            aria-describedby="keep-mounted-modal-description"
-                        >
-                              {/* <Zoom in={open} style={{ transitionDelay: open ? '500ms' : '0ms' }}> */}
-                              <Slide direction="up" in={open} mountOnEnter unmountOnExit>
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="keep-mounted-modal-title"
+                        aria-describedby="keep-mounted-modal-description"
+                    >
+                        {/* <Zoom in={open} style={{ transitionDelay: open ? '500ms' : '0ms' }}> */}
+                        <Slide direction="up" in={open} mountOnEnter unmountOnExit>
                             <Box sx={style}>
                                 <div style={{ textAlign: "center" }}>
                                     <ThemeProvider theme={theme}>
@@ -91,10 +91,21 @@ export default function Feed() {
                                                         label="Description"
                                                         id="description"
                                                         multiline
+                                                        style={{ marginBottom: "30px" }}
                                                     />
 
-                                                    <Button
 
+                                                    <label htmlFor="contained-button-file" >
+                                                        Upload a Image
+                                                        <Input style={{ display: "none" }} accept="image/*" id="contained-button-file" multiple type="file" />
+                                                        <Button variant="raised" component="span">
+                                                            Upload
+                                                        </Button>
+                                                    </label>
+
+
+                                                    <Button
+                                                        style={{ marginTop: "30px" }}
                                                         type="submit"
                                                         fullWidth
                                                         variant="contained"
@@ -112,9 +123,9 @@ export default function Feed() {
 
                                 </div>
                             </Box>
-                </Slide>
-                        </Modal>
-                    </div>
+                        </Slide>
+                    </Modal>
+                </div>
             </div>
 
             <Posts />
