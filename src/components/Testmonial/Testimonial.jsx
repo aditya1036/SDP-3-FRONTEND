@@ -32,6 +32,7 @@ const Testimonial = () => {
             featured: true
         }
         ,
+        //Aboutus
         {
             id: 3,
             name: "Aditya khandelwal",
