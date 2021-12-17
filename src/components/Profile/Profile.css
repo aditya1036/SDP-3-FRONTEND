@@ -1,0 +1,133 @@
+.profile__sidebar {
+  width: 900px;
+  top: 80px;
+  flex: 0.2;
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  height: fit-content;
+
+}
+
+.profile__sidebar__avatar {
+  margin-right: 700px;
+  margin-bottom: 10px;
+}
+
+.profile__sidebar__top > h1 {
+  font-size: 20px;
+  margin-top: -30px;
+  margin-right: 500px;
+  margin-left: -40px;
+}
+
+
+.profile__sidebar__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  background-color: white;
+  padding-bottom: 10px;
+}
+.profile__sidebar__top > img {
+  margin-bottom: -35px;
+  width: 100%;
+  height: 60px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  object-fit: cover;
+  height: 100px;
+}
+
+.profile__sidebar__top > .MuiAvatar-colorDefault {
+  background-color: #70b5f9;
+  width: 70px;
+  height: 70px;
+  border: 2px solid rgb(255, 255, 255);
+
+}
+
+.profile__  sidebar__top > .MuiAvatar-root {
+  width: 70px;
+  height: 70px;
+  border: 2px solid rgb(255, 255, 255);
+}
+
+.profile__sidebar__top > p {
+  margin-top: -20px;
+  margin-right: 700px;
+}
+
+.profile__widgets {
+  margin-left: 1000px;
+  margin-top: -320px;
+  margin-right: 50px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border:  1px solid lightgray;
+  height: fit-content;
+  padding-bottom: 20px;
+
+}
+
+.profile__widgets__header {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  padding: 10px;
+}
+
+.profile__widgets__header > .MuiSvgIcon-root {
+  color: #000000;
+
+}
+
+
+.profile__widgets__header > h2 {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.profile__widgets__article {
+  display: flex;
+  padding: 10px;
+  cursor: pointer;
+
+}
+
+.profile__widgets__article:hover {
+  background-color: whitesmoke;
+}
+
+.profile__widgets__articleLeft{
+  color: #70B5F9;
+  margin-right: 5px;
+}
+
+.profile__widgets__articleLeft > .MuiSvgIcon-root {
+  font-size: 15px;
+}
+
+
+.profile__widgets__articleRight{
+  flex: 1;
+}
+
+.profile__widgets__articleRight > h4 {
+  font-size: 14px;
+}
+
+.profile__widgets__articleRight > p {
+  font-size: 12px;
+  color: gray;
+}
+
+@media screen and (max-width: 750px) {
+  .widgets {
+     display: none;
+  }
+
+}

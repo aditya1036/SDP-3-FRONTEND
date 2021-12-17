@@ -25,8 +25,6 @@ function Widgets() {
                 <InfoOutlinedIcon />
             </div>
             {newsArticle("Elon Musk is now the richest person in the world", "Top news - 4296 readers")}
-
-            <img src="https://static-exp1.licdn.com/scds/common/u/images/promo/ads/li_evergreen_jobs_ad_300x250_v1.jpg" alt="ad"/>
         </div>
     )
 }
