@@ -11,6 +11,7 @@ import Profile from './components/Profile/Profile'
 import jwt_decode from "jwt-decode";
 import {useEffect, useState} from 'react';
 import { Navigate } from 'react-router-dom';
+import UsersPostPage from './components/UsersPostPage/UsersPostPage';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route path='/signup' element={<><SignUp /></>} />
         <Route path='/aboutus' element={<><PrivateRoute><Header/><Aboutus/></PrivateRoute></>}/>
         <Route path='/profile' element={<><PrivateRoute><Header/><Profile/></PrivateRoute></>}/>
+        <Route path='/userposts' element={<><PrivateRoute><Header/><UsersPostPage/></PrivateRoute></>}/>
         <Route path='/signin' element={<><SignIn setToken={setToken}/></>} />
       </Routes>
      </Router>

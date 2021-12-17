@@ -41,21 +41,28 @@ const Header = () => {
         
           <div className="header__option">
           <span className="header__optionLineOne">{data.sub}</span>
-          <Link to="/signin">
+          <Link style={{textDecoration: "None"}} to="/signin">
           <span className="header__optionLineTwo" style={{textDecoration: 'None'}} onClick={handleLogout}>Logout</span>
           </Link>
           </div>
-        
+          <Link style={{textDecoration: "None"}} to="/aboutus">
           <div className="header__option">
-          <span className="header__optionLineOne">Applied</span>
-          <span className="header__optionLineTwo">& Jobs</span>
+          <span className="header__optionLineOne">About</span>
+          <span className="header__optionLineTwo">& Us</span>
           </div>
-          
+          </Link>
+          <Link style={{textDecoration: "None"}} to="/profile">
           <div className="header__option">
           <span className="header__optionLineOne">Your</span>
-          <span className="header__optionLineTwo">Notifications</span>
+          <span className="header__optionLineTwo">Profile</span>
           </div>
-
+          </Link>
+          <Link style={{textDecoration: "None"}} to="/userposts">
+          <div className="header__option">
+          <span className="header__optionLineOne">Your</span>
+          <span className="header__optionLineTwo">Posts</span>
+          </div>
+          </Link>
       </div>
   </div>
       </Card>  
