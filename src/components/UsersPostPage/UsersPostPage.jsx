@@ -12,11 +12,14 @@ import Leftside  from '../Home/Leftside';
 import Feed from '../Home/Feed';
 
 import styled from "styled-components";
+import { useSelector } from 'react-redux';
+import { selectUser } from '../redux/UserContext/UserSlice';
 
 export default function UsersPostPage() {
     const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const user_state = useSelector(selectUser)
   var last = false
   var page = 0;
   useEffect(() => {
@@ -33,7 +36,7 @@ export default function UsersPostPage() {
   const fetchPosts = () => {
     setIsLoading(true);
     
-    fetch(`http://localhost:8080/api/post/getallposts?pageNo=${page}`,{
+    fetch(`http://localhost:8080/api/post/getallpostbyuserid/${user_state.id}?pageNo=${page}`,{
       headers:{
         'Authorization' : `Bearer ${JSON.parse(localStorage.getItem("token")).token}`
       }
