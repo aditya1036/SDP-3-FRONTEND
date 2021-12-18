@@ -4,7 +4,13 @@ import './Experience.css'
 import AddIcon from '@mui/icons-material/Add'; 
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useState ,useEffect } from 'react';
 const Experience = () => {
+    
+    useEffect(() => {
+
+    } , [])
+
     return (
         <div className='experience_container'>
         <h1 style={{marginLeft: "20px"}}>Work Experience <AddIcon style={{marginLeft: "580px"}}/></h1> 
