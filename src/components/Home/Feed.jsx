@@ -33,6 +33,8 @@ export default function Feed() {
 
     const user = useSelector(selectUser);
 
+  const [posts, setPosts] = React.useState([]);
+
 
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState("")
@@ -45,51 +47,88 @@ export default function Feed() {
     const [loading, setLoading] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
 
+    const [formErrors, setFormErrors] = React.useState({});
+    const [submitfailure, setsubmitfailure] = React.useState(false);
+
+    let errorStatus = false;
+
     const HandleSubmit = async () => {
 
+        setsubmitfailure(false);
 
-        try {
+        validate({ "description": description, "title": title });
 
-            let hashtags = description.match(/#[a-z]+/gi);
+        if (!errorStatus) {
 
-            if (hashtags.length === 0) {
-                hashtags = []
-            }
+            try {
+                let hashtags = []
 
-            let postData = {
-                userId: user.id,
-                image: image,
-                description: description,
-                hashtags : hashtags,
-                post_type: "parent",
-            }
+                hashtags = description.match(/#[a-z]+/gi);
 
-            
-            
-            let res = await axios.post(`http://localhost:8080/api/post/addposts`, JSON.stringify(postData), {
-                headers: {
-                    "Authorization" : `Bearer ${JSON.parse(localStorage.getItem("token")).token}`,
-                    "Content-Type" : "application/json"
+                if (!hashtags) {
+                    hashtags = []
                 }
-            })
 
-            console.log(res);
+                let postData = {
+                    userId: user.id,
+                    image: image,
+                    description: description,
+                    hashtags: hashtags,
+                    post_type: "parent",
+                    title: title
+                }
 
 
-        }catch (e) {
-            console.log(e);
+
+                let res = await axios.post(`http://localhost:8080/api/post/addposts`, JSON.stringify(postData), {
+                    headers: {
+                        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("token")).token}`,
+                        "Content-Type": "application/json"
+                    }
+                })
+
+                console.log("RESSS" , res);
+
+                setPosts([...posts, res.data.data])
+                setTitle("");
+                setDescription("")
+                setFiles(null)
+                setImage("")
+
+                setOpen(false);
+
+
+
+            } catch (e) {
+                setsubmitfailure(true);
+                console.log(e);
+            }
         }
-
     }
+
+    const validate = (data) => {
+
+        const errors = {};
+        if (!data.description) {
+            errors.description = "Description is required";
+        }
+        if (!data.title) {
+            errors.title = "Title is required";
+        }
+        setFormErrors(errors);
+        if (Object.entries(errors).length > 0) errorStatus = true;
+        return errors;
+    };
+
 
     const buttonSx = {
         ...(success && {
-          bgcolor: green[500],
-          '&:hover': {
-            bgcolor: green[700],
-          },
+            bgcolor: green[500],
+            '&:hover': {
+                bgcolor: green[700],
+            },
         }),
-      };
+    };
 
     const HandleUpload = async () => {
 
@@ -97,27 +136,27 @@ export default function Feed() {
             setSuccess(false);
             setLoading(true);
 
-        setEnableUpload(true);
+            setEnableUpload(true);
 
-        let form = new FormData();
+            let form = new FormData();
 
-        form.append("image", files, files.name);
+            form.append("image", files, files.name);
 
 
-        let res = await axios.post("http://localhost:3002/upload", form, {
-            onUploadProgress: progressEvent => console.log(progressEvent.loaded)
-        })
+            let res = await axios.post("http://localhost:3002/upload", form, {
+                onUploadProgress: progressEvent => console.log(progressEvent.loaded)
+            })
 
-        console.log(res);
+            console.log(res);
 
-        setImage(res.data.publicUrl);
+            setImage(res.data.publicUrl);
 
-        setSuccess(true);
-        setLoading(false);
+            setSuccess(true);
+            setLoading(false);
 
-        setFiles(null);
+            setFiles(null);
 
-    }
+        }
 
 
 
@@ -184,6 +223,8 @@ export default function Feed() {
                                                         autoFocus
                                                         value={title}
                                                     />
+                                                    <small style={{ color: "red" }}>{formErrors.title}</small>
+
                                                     <TextField
                                                         margin="normal"
                                                         required
@@ -199,12 +240,19 @@ export default function Feed() {
                                                         style={{ marginBottom: "30px" }}
                                                     />
 
+                                                    <small style={{ color: "red" }}>{formErrors.description}</small>
 
-                                                    <label htmlFor="contained-button-file" >
-                                                        Upload a Image
-                                                        <Input onChange={(e) => HandleFileChange(e)} accept="image/*" id="contained-button-file" multiple type="file" />
 
-                                                    </label>
+
+
+                                                    <div>
+
+                                                        <label htmlFor="contained-button-file" >
+                                                            Upload a Image
+                                                            <Input onChange={(e) => HandleFileChange(e)} accept="image/*" id="contained-button-file" multiple type="file" />
+
+                                                        </label>
+                                                    </div>
                                                     {/* <Button disabled={enableUpload} variant="raised" component="span" onClick={() => HandleUpload()}>
                                                             Upload
                                                         </Button> */}
@@ -217,7 +265,7 @@ export default function Feed() {
                                                             onClick={HandleUpload}
                                                             color="primary"
                                                         >
-                                                           Upload
+                                                            Upload
                                                         </Button>
                                                         {loading && (
                                                             <CircularProgress
@@ -237,7 +285,7 @@ export default function Feed() {
 
                                                     <Button
                                                         style={{ marginTop: "30px" }}
-                                                
+
                                                         fullWidth
                                                         variant="contained"
                                                         color="primary"
@@ -246,6 +294,10 @@ export default function Feed() {
                                                     >
                                                         Create Post ✨
                                                     </Button>
+
+                                                    {submitfailure && (
+                                                        <div style={{ color: "red" }}>Invalid title or description</div>
+                                                    )}
 
                                                 </Box>
                                             </Box>
@@ -260,7 +312,7 @@ export default function Feed() {
                 </div>
             </div>
 
-            <Posts />
+            <Posts posts={posts} setPosts={setPosts}/>
         </div>
     )
 }

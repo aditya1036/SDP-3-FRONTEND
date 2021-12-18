@@ -11,8 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
 import IndividualPost from './IndividualPost';
 
-export default function Posts() {
-  const [posts, setPosts] = useState([]);
+export default function Posts({posts, setPosts}) {
   const [isLoading, setIsLoading] = useState(true);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   var last = false
@@ -20,7 +19,7 @@ export default function Posts() {
   useEffect(() => {
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
+   
 
     fetchPosts();
 

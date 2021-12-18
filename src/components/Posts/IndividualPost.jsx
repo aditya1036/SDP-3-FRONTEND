@@ -63,11 +63,15 @@ function IndividualPost({ post }) {
 
   }
 
+  console.log("INDIVIDUAL POSSTTT", individualPost)
+
   return (
-    <div key={individualPost.id}>
+  <div>
+
+{individualPost && <div key={individualPost.id}>
       <div className='post'>
         <div className="post__header">
-          <Avatar src={!individualPost.userData.profile_image ? "/images/avatar.png" : individualPost.userData.profile_image}></Avatar>
+          <Avatar src={individualPost.userData.profile_image ? "/images/avatar.png" : individualPost.userData.profile_image}></Avatar>
           <div className="post__info">
             <h2>{individualPost.title}</h2>
             <p>{new Date(individualPost.created_at).toLocaleString()}</p>
@@ -109,6 +113,11 @@ function IndividualPost({ post }) {
       </div>
       <Collapse in={showComments}><CommentComponent parentId={individualPost.id} /></Collapse>
     </div>
+ }
+
+
+  </div>
+  
   )
 }
 

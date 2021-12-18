@@ -7,13 +7,14 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { InitializeUser, RemoveUser } from '../redux/UserContext/UserSlice';
 
-import {useState } from 'react';
+import {useState, useRef } from 'react';
 import {Navigate} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './SignIn.css';
@@ -23,47 +24,84 @@ import 'react-toastify/dist/ReactToastify.css';
 const theme = createTheme();
 
 
+let form = {
+  emailError: null,
+  passwordError: null,
+  mainError: null
+}
 
 toast.configure()
 const SignIn = ({setToken}) => {
 
-  const [email, setEmail] = useState('')
-  const [password , setPassword] = useState('')
+  const [email, setEmail] = useState("")
+  const [password , setPassword] = useState("")
   const [redirect , setRedirect] = useState(false)
+  const [formErrors, setFormErrors] = useState({});
+  const [loginfailure, setloginfailure] = useState(false);
   const dispatch = useDispatch();
-  
-    
-  
+
+  let errorStatus = false;
+
+
 
       const handleSubmit = async (e) => {
+        setloginfailure(false);
           e.preventDefault();
-          let res = await fetch('http://localhost:8080/api/auth/signin',{
-                method: 'POST',
-                headers:
-                {
-                  'Content-Type' : 'application/json'
-                },
-                body: JSON.stringify({'email': email , 'password': password})
-              })
-      
-      const data_final = await res.json();
-      setToken({'token':data_final.accessToken})
-      res = await fetch(`http://localhost:8080/api/userapi/user/${data_final.id}`, {
-        method: "GET",
-        headers: {
-          "Authorization" : `Bearer ${data_final.accessToken}`
-        }
-      })
-      res = await res.json();
-      console.log(res.data[0])
-      dispatch(InitializeUser(res.data[0]))
-      setEmail('')
-      setPassword('')
-      setRedirect(true)
-      
-      
 
-}
+          validate({"email" : email, "password" : password});
+
+          if (!errorStatus) {
+
+       try{
+
+         let res = await fetch('http://localhost:8080/api/auth/signin',{
+           method: 'POST',
+           headers:
+           {
+             'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({'email': email , 'password': password})
+          })
+          
+          const data_final = await res.json();
+          setToken({'token':data_final.accessToken})
+          res = await fetch(`http://localhost:8080/api/userapi/user/${data_final.id}`, {
+            method: "GET",
+            headers: {
+              "Authorization" : `Bearer ${data_final.accessToken}`
+            }
+          })
+          res = await res.json();
+          console.log(res.data[0])
+          dispatch(InitializeUser(res.data[0]))
+          setEmail('')
+          setPassword('')
+          setRedirect(true)
+        }
+        catch(e) {
+          setloginfailure(true);
+          return
+
+        }
+    }
+      
+      
+      
+    }
+    
+          const validate = (data) => {
+    
+            const errors = {};
+            if (!data.email) {
+              errors.email = "Email is required";
+            }
+            if (!data.password) {
+              errors.password = "Password is required";
+            }
+            setFormErrors(errors);
+            if (Object.entries(errors).length > 0) errorStatus = true;
+            return errors;
+          };
 
 
 
@@ -76,14 +114,17 @@ if(redirect)
   return (
   <div>
     <ThemeProvider theme={theme}>
+    
           <Container component="main" maxWidth="xs">
             <CssBaseline />
-            <Box
+            <Card
               sx={{
                 marginTop: 8,
                 display: 'flex',
                 flexDirection: 'column',
+                flex: 1,
                 alignItems: 'center',
+                padding: "20px"
               }}
             >
             <img src="images/SignUp.png" style={{height: "150px", width : "150px"}} alt="" />
@@ -102,7 +143,10 @@ if(redirect)
                   name="email"
                   autoComplete="email"
                   autoFocus
+                  
+          
                 />
+              <small style={{color: "red"}}>{formErrors.email}</small>
                 <TextField
                   margin="normal"
                   value={password}
@@ -115,10 +159,15 @@ if(redirect)
                   id="password"
                   autoComplete="current-password"
                 />
+                  <small style={{color: "red"}}>{formErrors.password}</small>
+
+                  <div>
+
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
                   label="Remember me"
-                />
+                  />
+                  </div>
                 <Button
                 
                   type="submit"
@@ -128,6 +177,9 @@ if(redirect)
                 >
                   Sign In
                 </Button>
+                {loginfailure && (
+        <div  style={{color: "red"}}>Invalid email or password</div>
+      )}
                 <Grid container>
                   <Grid item xs>
                     <Link href="#" variant="body2">
@@ -141,7 +193,7 @@ if(redirect)
                   </Grid>
                 </Grid>
               </Box>
-            </Box>
+            </Card>
           </Container>
         </ThemeProvider>
 
