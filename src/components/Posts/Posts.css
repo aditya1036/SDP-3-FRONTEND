@@ -33,7 +33,7 @@
 }
 
 .post__body {
-  overflow-wrap: anywhere;
+  /* overflow-wrap: anywhere; */
 }
 
 .post__info > h2 {

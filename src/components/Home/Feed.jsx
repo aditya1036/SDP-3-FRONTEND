@@ -10,6 +10,11 @@ import Posts from '../Posts/Posts';
 import { Box, Button, Card, Container, createTheme, CssBaseline, Grid, Input, Link, Modal, Paper, TextField, ThemeProvider, Typography, Zoom } from '@material-ui/core';
 import { Label, LabelOffOutlined } from '@material-ui/icons';
 import Slide from '@mui/material/Slide';
+import CircularProgress from '@mui/material/CircularProgress';
+import axios from "axios"
+import { green } from '@material-ui/core/colors';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../redux/UserContext/UserSlice';
 
 
 
@@ -26,9 +31,105 @@ const style = {
 };
 export default function Feed() {
 
+    const user = useSelector(selectUser);
+
+
     const [open, setOpen] = React.useState(false);
+    const [title, setTitle] = React.useState("")
+    const [description, setDescription] = React.useState("")
+    const [files, setFiles] = React.useState(null)
+    const [image, setImage] = React.useState("");
+    const [enableUpload, setEnableUpload] = React.useState(true);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [loading, setLoading] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+
+    const HandleSubmit = async () => {
+
+
+        try {
+
+            let hashtags = description.match(/#[a-z]+/gi);
+
+            if (hashtags.length === 0) {
+                hashtags = []
+            }
+
+            let postData = {
+                userId: user.id,
+                image: image,
+                description: description,
+                hashtags : hashtags,
+                post_type: "parent",
+            }
+
+            
+            
+            let res = await axios.post(`http://localhost:8080/api/post/addposts`, JSON.stringify(postData), {
+                headers: {
+                    "Authorization" : `Bearer ${JSON.parse(localStorage.getItem("token")).token}`,
+                    "Content-Type" : "application/json"
+                }
+            })
+
+            console.log(res);
+
+
+        }catch (e) {
+            console.log(e);
+        }
+
+    }
+
+    const buttonSx = {
+        ...(success && {
+          bgcolor: green[500],
+          '&:hover': {
+            bgcolor: green[700],
+          },
+        }),
+      };
+
+    const HandleUpload = async () => {
+
+        if (!loading) {
+            setSuccess(false);
+            setLoading(true);
+
+        setEnableUpload(true);
+
+        let form = new FormData();
+
+        form.append("image", files, files.name);
+
+
+        let res = await axios.post("http://localhost:3002/upload", form, {
+            onUploadProgress: progressEvent => console.log(progressEvent.loaded)
+        })
+
+        console.log(res);
+
+        setImage(res.data.publicUrl);
+
+        setSuccess(true);
+        setLoading(false);
+
+        setFiles(null);
+
+    }
+
+
+
+    }
+
+    const HandleFileChange = async (e) => {
+        setEnableUpload(false)
+        setFiles(e.target.files[0])
+
+
+    }
+
 
     return (
         <div className="feed">
@@ -73,6 +174,7 @@ export default function Feed() {
                                                 <Box component="form" noValidate sx={{ mt: 1 }}>
                                                     <TextField
                                                         margin="normal"
+                                                        onChange={(e) => setTitle(e.target.value)}
                                                         required
                                                         variant="outlined"
                                                         fullWidth
@@ -80,10 +182,12 @@ export default function Feed() {
                                                         label="Post Title"
                                                         name="title"
                                                         autoFocus
+                                                        value={title}
                                                     />
                                                     <TextField
                                                         margin="normal"
                                                         required
+                                                        onChange={(e) => setDescription(e.target.value)}
                                                         fullWidth
                                                         variant="outlined"
                                                         minRows={15}
@@ -91,25 +195,53 @@ export default function Feed() {
                                                         label="Description"
                                                         id="description"
                                                         multiline
+                                                        value={description}
                                                         style={{ marginBottom: "30px" }}
                                                     />
 
 
                                                     <label htmlFor="contained-button-file" >
                                                         Upload a Image
-                                                        <Input style={{ display: "none" }} accept="image/*" id="contained-button-file" multiple type="file" />
-                                                        <Button variant="raised" component="span">
-                                                            Upload
-                                                        </Button>
+                                                        <Input onChange={(e) => HandleFileChange(e)} accept="image/*" id="contained-button-file" multiple type="file" />
+
                                                     </label>
+                                                    {/* <Button disabled={enableUpload} variant="raised" component="span" onClick={() => HandleUpload()}>
+                                                            Upload
+                                                        </Button> */}
+
+                                                    <Box sx={{ m: 1, position: 'relative' }}>
+                                                        <Button
+                                                            variant="contained"
+                                                            sx={buttonSx}
+                                                            disabled={enableUpload}
+                                                            onClick={HandleUpload}
+                                                            color="primary"
+                                                        >
+                                                           Upload
+                                                        </Button>
+                                                        {loading && (
+                                                            <CircularProgress
+                                                                size={24}
+                                                                sx={{
+                                                                    color: green[500],
+                                                                    position: 'absolute',
+                                                                    top: '50%',
+                                                                    left: '50%',
+                                                                    marginTop: '-12px',
+                                                                    marginLeft: '-12px',
+                                                                }}
+                                                            />
+                                                        )}
+                                                    </Box>
 
 
                                                     <Button
                                                         style={{ marginTop: "30px" }}
-                                                        type="submit"
+                                                
                                                         fullWidth
                                                         variant="contained"
                                                         color="primary"
+                                                        onClick={() => HandleSubmit()}
                                                         sx={{ mt: 3, mb: 2 }}
                                                     >
                                                         Create Post ✨

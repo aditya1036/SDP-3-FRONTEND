@@ -48,7 +48,7 @@ export default function Posts() {
       .catch((e) => {
 
         console.log(e);
-  
+
       });
 
   };
@@ -69,8 +69,6 @@ export default function Posts() {
 
   return (
     <>
-
-
       {isFirstLoad ? (
         <h3 style={{ display: "flex", alignItems: "center", justifyContent: "center" }}><CircularProgress disableShrink /></h3>
       ) : (
@@ -79,34 +77,7 @@ export default function Posts() {
             <>
               {posts.map((post) => (
 
-                <IndividualPost key={post.id} post={post}/>
-
-                // <div key={post.id+post.userId}>
-                //   <div className='post'>
-                //     <div className="post__header">
-                //       <Avatar src={!post.userData.profile_image ? "/images/avatar.png" : post.userData.profile_image}></Avatar>
-                //       <div className="post__info">
-                //         <h2>{post.title}</h2>
-                //         <p>{new Date(post.created_at).toLocaleString()}</p>
-                //       </div>
-                //     </div>
-
-
-                //     <div className="post__body">
-                //       <p>{post.description}</p>
-                //       <p>{post.hashtags.map(el => `#${el} `)}</p>
-                //     </div>
-                //     <div className="post__buttons">
-                //       <span onClick={() => HandleLike(post.userId, post.id)}>
-
-                //       <InputOption Icon={ThumbUpIcon} title={`Like : ${post.like_count}`} color={post.liked === true ? "blue" : "gray"} />
-                //       </span>
-                //       <InputOption Icon={ChatOutlinedIcon} title="Comment" color="gray" />
-                //       <InputOption Icon={ShareOutlinedIcon} title="Share" color="gray" />
-                //       <InputOption Icon={SendOutlinedIcon} title="Send" color="gray" />
-                //     </div>
-                //   </div>
-                // </div>
+                <IndividualPost key={post.id} post={post} />
               ))}
             </>
           ) : null}

@@ -1,26 +1,27 @@
 import React from 'react'
 import styled from "styled-components";
-import Leftside  from './Leftside';
+import Leftside from './Leftside';
 import Feed from './Feed'
 import Widgets from '../Widgets/Widgets';
 import './Home.css'
 import Posts from '../Posts/Posts';
 import { useState } from 'react'
-const Home = ({token}) => {
+import NavBar from '../Header/NavBar';
+const Home = ({ token }) => {
   const ts = token
   //Done with everything
-    return (
-        <div>
-          <Container>
-      <Layout>
-        <Leftside />
-        <Feed/>
-        <Widgets/>
-       
-      </Layout>
-    </Container>
-        </div>
-    )
+  return (
+    <div>
+      <Container>
+        <Layout>
+          <Leftside />
+          <Feed />
+          <Widgets />
+
+        </Layout>
+      </Container>
+    </div>
+  )
 }
 
 const Container = styled.div`

@@ -43,7 +43,7 @@ const Testimonial = () => {
     return (
         <div className="testimonials" id="testimonial">
             <h1>About us</h1>
-            <div className="container">
+            <div className="container2">
                 {data.map((item) => (
 
                     <div key={item.id} className={item.featured ? "card featured" : "card"}>
