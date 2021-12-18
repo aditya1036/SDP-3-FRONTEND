@@ -15,7 +15,7 @@ import Slide from '@mui/material/Slide';
 
 const theme = createTheme();
 const style = {
-    position: 'absolute',
+    position: 'sticky',
     top: '20%',
     left: '20%',
     transform: 'translate(-50%, -50%)',
