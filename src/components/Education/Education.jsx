@@ -251,7 +251,7 @@ const Education = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={(e) => handleAddEducation(e,user_state.id)}>Save</Button>
+          <Button onClick={(e) => handleAddEducation(e,user_state.id)}>Add</Button>
         </DialogActions>
       </Dialog>
       <Dialog open={open1} onClose={handleClose1}>
@@ -315,7 +315,7 @@ const Education = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose1}>Cancel</Button>
-          <Button onClick={(e) => handleUpdateEducation(e,edu_id)}>Save</Button>
+          <Button onClick={(e) => handleUpdateEducation(e,edu_id)}>Update</Button>
         </DialogActions>
       </Dialog>
     </div>
