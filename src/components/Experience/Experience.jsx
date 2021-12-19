@@ -25,107 +25,16 @@ import Education from '../Education/Education';
 
 const Experience = () => {
 
-    const user_state = useSelector(selectUser)
-    const [experience, setExperience] = useState([]);
-    const [value, setValue] = useState([null, null]);
-    const [open, setOpen] = useState(false);
-    const [open1, setOpen1] = useState(false);
-    const [title, setTitle] = useState('');
-    const [location, setLocation] = useState('');
-    const [exp_id, setExp] = useState(null);
-
-    function convert(str) {
-        var date = new Date(str),
-          mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-          day = ("0" + date.getDate()).slice(-2);
-        return [date.getFullYear(), mnth, day].join("-");
-      }
-
-    var experience_duration = convert(value[0])+" "+convert(value[1]);
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const handleClickOpen1 = (e,id) => {
-        setOpen1(true);
-        setExp(id)
-    };
-
-    const handleClose1 = () => {
-        setOpen1(false);
-    };
-
-    useEffect(() => {
-
-        async function userExperience()
-        {
-            const res = await fetch(`${API_URL}/api/experience/getByUserId/${user_state.id}` , 
-            {
-                method:'GET',
-                headers:
-                {
-                    "Content-Type": "application/json",
-                    "Authorization" : `Bearer ${JSON.parse(localStorage.getItem("token")).token}`,
-                }
-            })
-            const data = await res.json();
-            setExperience(data.Listdata)
-        }
-        userExperience();
-    },[])
-
-    const handleAddExperience = async(e,id) => {
-        e.preventDefault()
-
-        const res = await fetch(`${API_URL}/api/education/add`, {
-            method: "POST",
-            headers:
-                {
-                    "Content-Type": "application/json",
-                    "Authorization" : `Bearer ${JSON.parse(localStorage.getItem("token")).token}`,
-                },
-            body:JSON.stringify({
-                title: title,
-                duration: experience_duration,
-                location: location,
-                user_id: id
-            })
-        })
-        const data = await res.json()
-        console.log(data)
-        setExperience([...experience ,{
-            title: title,
-            duration: experience_duration,
-            location: location,
-            user_id: id
-        }])
-
-        handleClose()
-        setTitle('')
-        setLocation('')
-    }
-
-
-
-
-
     return (
         <div className='experience_container'>
-        <h1 style={{marginLeft: "20px"}}>Work Experience<span onClick={handleClickOpen}><AddIcon style={{marginLeft: "580px"}}/></span></h1> 
-        {experience && experience.map((exp) => (
+        <h1 style={{marginLeft: "20px"}}>Work Experience<AddIcon style={{marginLeft: "580px"}}/></h1> 
             <>
             <div className='experience_content'>
-            <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{exp.title}</h4>
-            <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{exp.duration}</h4>
-            <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{exp.location}</h4>
-            <span onClick={(e) => handleClickOpen1(e,exp.id)}></span>
+            <h4 style={{marginLeft: "40px", marginTop: "30px"}}>title</h4>
+            <h4 style={{marginLeft: "40px", marginTop: "30px"}}>duration</h4>
+            <h4 style={{marginLeft: "40px", marginTop: "30px"}}>location</h4>
             </div>
             </>
-        ))}
         </div>
     )
 }
