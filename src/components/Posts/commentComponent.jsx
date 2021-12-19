@@ -67,9 +67,9 @@ function CommentComponent({parentId}) {
     
 
     return (
-        <Card elevation={2} style={{ padding: "30px", marginBottom: "10px" }} >
+        <div style={{ padding: "10px", marginBottom: "10px", overflow: "auto", height: comments.length > 3 ? "50vh" : "auto"   }} >
 
-            <Paper component={'div'} elevation={3} style={{ alignItems: "center", justifyContent: "center", display: "flex", height: "70px", marginBottom: "10px", padding: "10px" }}>
+            <div style={{ alignItems: "center", justifyContent: "center", display: "flex", height: "70px", marginBottom: "10px", padding: "10px" }}>
 
 
                 <TextField
@@ -90,13 +90,13 @@ function CommentComponent({parentId}) {
                     <Button onClick={handleSubmit} variant='outlined' color="primary">Comment</Button>
                 </div>
 
-            </Paper>
+            </div>
             
 
             {comments && comments.map(el => <IndividualComment key={el.id} data={el} setComments={setComments} comments={comments}/>)}
 
 
-        </Card>
+        </div>
     )
 }
 

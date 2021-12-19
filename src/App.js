@@ -12,6 +12,8 @@ import jwt_decode from "jwt-decode";
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import NavBar from './components/Header/NavBar';
+import PostDetails from './components/Posts/PostDetails';
+import NotFound from './components/NotFoundPage/NotFound';
 
 function App() {
 
@@ -26,7 +28,10 @@ function App() {
           <Route path='/signup' element={<><SignUp /></>} />
           <Route path='/aboutus' element={<><PrivateRoute> <NavBar /><Aboutus /></PrivateRoute></>} />
           <Route path='/profile' element={<><PrivateRoute> <NavBar /><Profile /></PrivateRoute></>} />
+          <Route path='/post/:id' element={<><PrivateRoute> <NavBar /><PostDetails /></PrivateRoute></>} />
           <Route path='/signin' element={<><SignIn setToken={setToken} /></>} />
+          <Route path='*' element={<><NotFound/></>} />
+
         </Routes>
       </Router>
     </>

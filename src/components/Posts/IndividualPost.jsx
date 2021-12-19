@@ -13,6 +13,7 @@ import { selectUser } from "../redux/UserContext/UserSlice";
 import { useSelector } from "react-redux";
 import { color } from "@mui/system";
 import CommentComponent from "./commentComponent";
+import { Link } from "react-router-dom";
 
 function IndividualPost({ post }) {
   const user = useSelector(selectUser);
@@ -106,9 +107,16 @@ function IndividualPost({ post }) {
                     ? "/images/avatar.png"
                     : individualPost.userData.profile_image
                 }
+
+                style={{marginRight: "10px"}}
               ></Avatar>
-              <div className="post__info">
-                <h2>{individualPost.title}</h2>
+
+
+                <Link to={`post/${individualPost.id}`}>
+                <span>{individualPost.title}</span>
+                </Link>
+              <div className="post__info" style={{float: "right"}}>
+              
                 <p>{timeString}</p>
               </div>
             </div>
