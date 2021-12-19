@@ -96,8 +96,8 @@ const Education = () => {
             })
         })
         const data = await res.json()
-        console.log(data)
         setEducation([...education ,{
+            id: data.Data.id,
             institution_name: institute,
             duration: education_duration,
             location: location,
@@ -124,7 +124,6 @@ const Education = () => {
                 }
         })
         const data = await res.json();
-        console.log(data)
         setEducation(education.filter((edu => edu.id !== id)))
         
 
@@ -164,7 +163,6 @@ const Education = () => {
             user_id: user_state.id
         }
         setEducation(updated_education)
-        console.log(data)
         handleClose1()
     }
 
