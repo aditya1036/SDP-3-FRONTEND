@@ -89,7 +89,7 @@ export default function Feed() {
 
                 console.log("RESSS" , res);
 
-                setPosts([...posts, res.data.data])
+                setPosts([ res.data.data, ...posts])
                 setTitle("");
                 setDescription("")
                 setFiles(null)

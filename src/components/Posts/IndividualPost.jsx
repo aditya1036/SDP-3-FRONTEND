@@ -25,6 +25,9 @@ function IndividualPost({ post }) {
   const [likeCount, setLikeCount] = useState(post.like_count);
   const [individualPost, setindividualPost] = useState(post);
 
+  const [time, setTime] = useState(new Date(post.created_at))
+  const [timeString, setTimeString] = useState("");
+
   const [showComments, setShowComments] = useState(false);
 
   const [isReadMore, setIsReadMore] = useState(true);
@@ -37,6 +40,50 @@ function IndividualPost({ post }) {
     setShowComments(!showComments);
 
   }
+
+  const getTimeForPost = (f) => {
+    let diff = Math.round((new Date().getTime() - f.getTime()) / 60000)
+    if (diff < 10) {
+      return "Just now"
+    } 
+    else if (diff >= 10 && diff <= 60 )
+    {
+      return `${diff} mins ago`
+    }
+    else if (diff > 60 && diff <= 1440) {
+
+      let h = Math.round(diff / 60)
+
+      if (h <= 1) {
+        return `${h} hour ago`
+      } 
+
+      return `${Math.round(diff / 60)} hours ago`
+    }
+    else if (diff > 1440 && diff <= 10080) {
+      diff = diff / 60;
+      diff = diff / 7;
+
+      return `${diff} days ago`
+    }
+    else if (diff > 10080 && diff <= 43800) {
+    
+
+      return f
+    }
+
+
+
+  }
+
+  useEffect(() => {
+
+    let j = getTimeForPost(time);
+    
+    setTimeString(j)
+
+
+  }, [])
 
   const HandleLike = async () => {
 
@@ -65,6 +112,8 @@ function IndividualPost({ post }) {
 
   console.log("INDIVIDUAL POSSTTT", individualPost)
 
+  
+
   return (
   <div>
 
@@ -74,7 +123,7 @@ function IndividualPost({ post }) {
           <Avatar src={individualPost.userData.profile_image ? "/images/avatar.png" : individualPost.userData.profile_image}></Avatar>
           <div className="post__info">
             <h2>{individualPost.title}</h2>
-            <p>{new Date(individualPost.created_at).toLocaleString()}</p>
+            <p>{timeString}</p>
           </div>
         </div>
 
