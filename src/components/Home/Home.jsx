@@ -25,7 +25,7 @@ const Home = ({ token }) => {
 }
 
 const Container = styled.div`
-  padding-top: 52px;
+  padding-top: 10px;
   max-width: 100%;
 `;
 

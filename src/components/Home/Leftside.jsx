@@ -4,6 +4,7 @@ import './Leftside.css';
 
 import  { selectUser } from "../redux/UserContext/UserSlice"
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 export default function Sidebar() {
@@ -15,14 +16,16 @@ export default function Sidebar() {
             <div className="sidebar__top">
                 <img src="/images/linkedIn.png" alt="background" />
                 <Avatar src="/images/avatar.png" className="sidebar__avatar"> </Avatar>
-                <h2>{user.first_name + " " + user.last_name}</h2>
-                <h4>{user.email}</h4>
+                <span>{user.first_name + " " + user.last_name}</span>
+                <span>{user.email}</span>
             </div>
             
             <div className="sidebar__stats">
                 <div className="sidebar__stat">
-                <p>Views of your post</p>
-                <p className="sidebar__statNumber">67</p>
+                <Link to="/userposts">
+                <span>Views of your post</span>
+                </Link>
+                <span className="sidebar__statNumber">67</span>
                 </div>
 
             </div>

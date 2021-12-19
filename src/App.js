@@ -14,6 +14,8 @@ import { Navigate } from 'react-router-dom';
 import NavBar from './components/Header/NavBar';
 import PostDetails from './components/Posts/PostDetails';
 import NotFound from './components/NotFoundPage/NotFound';
+import UserPosts from './components/Posts/UserPosts';
+import "./App.css"
 
 function App() {
 
@@ -28,6 +30,7 @@ function App() {
           <Route path='/signup' element={<><SignUp /></>} />
           <Route path='/aboutus' element={<><PrivateRoute> <NavBar /><Aboutus /></PrivateRoute></>} />
           <Route path='/profile' element={<><PrivateRoute> <NavBar /><Profile /></PrivateRoute></>} />
+          <Route path='/userposts' element={<><PrivateRoute> <NavBar /><UserPosts /></PrivateRoute></>} />
           <Route path='/post/:id' element={<><PrivateRoute> <NavBar /><PostDetails /></PrivateRoute></>} />
           <Route path='/signin' element={<><SignIn setToken={setToken} /></>} />
           <Route path='*' element={<><NotFound/></>} />
