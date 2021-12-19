@@ -1,31 +1,27 @@
-import React from 'react'
+import React from "react";
 import "./Posts.css";
-import { useState, useEffect } from 'react'
-import { Avatar, Collapse } from '@material-ui/core'
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
-import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
-import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
-import InputOption from '../Home/InputOption';
-import CircularProgress from '@mui/material/CircularProgress';
-import axios from 'axios';
-import { selectUser } from "../redux/UserContext/UserSlice"
-import { useSelector } from 'react-redux';
-import { color } from '@mui/system';
-import CommentComponent from './commentComponent';
-
-
+import { useState, useEffect } from "react";
+import { Avatar, Collapse } from "@material-ui/core";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
+import ShareOutlinedIcon from "@material-ui/icons/ShareOutlined";
+import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
+import InputOption from "../Home/InputOption";
+import CircularProgress from "@mui/material/CircularProgress";
+import axios from "axios";
+import { selectUser } from "../redux/UserContext/UserSlice";
+import { useSelector } from "react-redux";
+import { color } from "@mui/system";
+import CommentComponent from "./commentComponent";
 
 function IndividualPost({ post }) {
-
   const user = useSelector(selectUser);
-
 
   const [isLiked, setIsliked] = useState(post.liked);
   const [likeCount, setLikeCount] = useState(post.like_count);
   const [individualPost, setindividualPost] = useState(post);
 
-  const [time, setTime] = useState(new Date(post.created_at))
+  const [time, setTime] = useState(new Date(post.created_at));
   const [timeString, setTimeString] = useState("");
 
   const [showComments, setShowComments] = useState(false);
@@ -36,57 +32,40 @@ function IndividualPost({ post }) {
   };
 
   const ToggleComment = async () => {
-
     setShowComments(!showComments);
-
-  }
+  };
 
   const getTimeForPost = (f) => {
-    let diff = Math.round((new Date().getTime() - f.getTime()) / 60000)
+    let diff = Math.round((new Date().getTime() - f.getTime()) / 60000);
     if (diff < 10) {
-      return "Just now"
-    } 
-    else if (diff >= 10 && diff <= 60 )
-    {
-      return `${diff} mins ago`
-    }
-    else if (diff > 60 && diff <= 1440) {
-
-      let h = Math.round(diff / 60)
+      return "Just now";
+    } else if (diff >= 10 && diff <= 60) {
+      return `${diff} mins ago`;
+    } else if (diff > 60 && diff <= 1440) {
+      let h = Math.round(diff / 60);
 
       if (h <= 1) {
-        return `${h} hour ago`
-      } 
+        return `${h} hour ago`;
+      }
 
-      return `${Math.round(diff / 60)} hours ago`
-    }
-    else if (diff > 1440 && diff <= 10080) {
+      return `${Math.round(diff / 60)} hours ago`;
+    } else if (diff > 1440 && diff <= 10080) {
       diff = diff / 60;
       diff = diff / 7;
 
-      return `${diff} days ago`
+      return `${diff} days ago`;
+    } else if (diff > 10080 && diff <= 43800) {
+      return f;
     }
-    else if (diff > 10080 && diff <= 43800) {
-    
-
-      return f
-    }
-
-
-
-  }
+  };
 
   useEffect(() => {
-
     let j = getTimeForPost(time);
-    
-    setTimeString(j)
 
-
-  }, [])
+    setTimeString(j);
+  }, []);
 
   const HandleLike = async () => {
-
     setIsliked(!isLiked);
 
     if (!isLiked) {
@@ -96,78 +75,110 @@ function IndividualPost({ post }) {
     }
 
     let data = { userId: user.id, postId: post.id, isliked: !isLiked };
-    console.log(data)
+    console.log(data);
 
-    let re = await axios.post(`http://localhost:8080/api/activity/create`, data, {
-      headers: {
-        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("token")).token}`
+    let re = await axios.post(
+      `http://localhost:8080/api/activity/create`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).token
+          }`,
+        },
       }
-    })
+    );
 
     console.log(re);
+  };
 
-
-
-  }
-
-  console.log("INDIVIDUAL POSSTTT", individualPost)
-
-  
+  console.log("INDIVIDUAL POSSTTT", individualPost);
 
   return (
-  <div>
+    <div>
+      {individualPost && (
+        <div key={individualPost.id}>
+          <div className="post">
+            <div className="post__header">
+              <Avatar
+                src={
+                  individualPost.userData.profile_image
+                    ? "/images/avatar.png"
+                    : individualPost.userData.profile_image
+                }
+              ></Avatar>
+              <div className="post__info">
+                <h2>{individualPost.title}</h2>
+                <p>{timeString}</p>
+              </div>
+            </div>
 
-{individualPost && <div key={individualPost.id}>
-      <div className='post'>
-        <div className="post__header">
-          <Avatar src={individualPost.userData.profile_image ? "/images/avatar.png" : individualPost.userData.profile_image}></Avatar>
-          <div className="post__info">
-            <h2>{individualPost.title}</h2>
-            <p>{timeString}</p>
+            <div className="post__body">
+              <div style={{ marginLeft: "20px" }}>
+                {isReadMore
+                  ? individualPost.description.slice(0, 150)
+                  : individualPost.description}
+
+                {individualPost.description.length > 150 && (
+                  <span
+                    onClick={toggleReadMore}
+                    style={{ color: "rgb(3, 136, 252)", cursor: "pointer" }}
+                  >
+                    {isReadMore ? "...read more" : " show less"}
+                  </span>
+                )}
+                <p>{individualPost.hashtags.map((el) => `${el} `)}</p>
+              </div>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <img
+                  src={individualPost.image}
+                  alt=""
+                  style={{ maxHeight: "400px", maxWidth: "600px" }}
+                />
+              </div>
+            </div>
+            <div className="post__buttons">
+              <span
+                onClick={HandleLike}
+                style={{ color: isLiked === true ? "blue" : "gray" }}
+              >
+                <InputOption
+                  className="PostIcons"
+                  Icon={ThumbUpIcon}
+                  title={`Like : ${likeCount}`}
+                  color={isLiked === true ? "blue" : "gray"}
+                />
+              </span>
+
+              <span onClick={ToggleComment}>
+                <InputOption
+                  className="PostIcons"
+                  Icon={ChatOutlinedIcon}
+                  title="Comment"
+                  color="gray"
+                />
+              </span>
+              <InputOption
+                className="PostIcons"
+                Icon={ShareOutlinedIcon}
+                title="Share"
+                color="gray"
+              />
+              <InputOption
+                className="PostIcons"
+                Icon={SendOutlinedIcon}
+                title="Send"
+                color="gray"
+              />
+            </div>
           </div>
+          <Collapse in={showComments}>
+            <CommentComponent parentId={individualPost.id} />
+          </Collapse>
         </div>
-
-
-        <div className="post__body">
-
-          <div style={{ marginLeft: "20px" }}>
-
-
-            {isReadMore ? individualPost.description.slice(0, 150) : individualPost.description}
-           
-           { individualPost.description.length > 150 && <span onClick={toggleReadMore} style={{color: "rgb(3, 136, 252)", cursor: "pointer"}}>
-              {isReadMore ? "...read more" : " show less"}
-            </span> }
-            <p>{individualPost.hashtags.map(el => `${el} `)}</p>
-
-          </div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <img src={individualPost.image} alt="" style={{ maxHeight: "400px", maxWidth: "600px" }} />
-          </div>
-
-        </div>
-        <div className="post__buttons">
-          <span onClick={HandleLike} style={{ color: isLiked === true ? "blue" : "gray" }}>
-
-            <InputOption className="PostIcons" Icon={ThumbUpIcon} title={`Like : ${likeCount}`} color={isLiked === true ? "blue" : "gray"} />
-          </span>
-
-          <span onClick={ToggleComment}>
-
-          <InputOption className="PostIcons" Icon={ChatOutlinedIcon} title="Comment" color="gray" />
-          </span>
-          <InputOption className="PostIcons" Icon={ShareOutlinedIcon} title="Share" color="gray" />
-          <InputOption className="PostIcons" Icon={SendOutlinedIcon} title="Send" color="gray" />
-        </div>
-      </div>
-      <Collapse in={showComments}><CommentComponent parentId={individualPost.id} /></Collapse>
+      )}
     </div>
- }
-
-
-  </div>
-  
-  )
+  );
 }
 
-export default IndividualPost
+export default IndividualPost;
