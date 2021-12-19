@@ -8,6 +8,7 @@
     padding: 15px;
     padding-top: 5px;
     border-radius: 10px;
+    color: rgb(37, 37, 36);
     -webkit-box-shadow: 0px 3px 11px 1px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 3px 11px 1px rgba(0, 0, 0, 0.1);
   }
@@ -24,5 +25,16 @@
   }
 
   .experience_content{
+    font-family: Arial, Helvetica, sans-serif;
       border-bottom: 0.5px solid rgb(231, 231, 231);
+      color: rgb(37, 37, 36);
+  }
+
+  .experience__info > p{
+    font-family: Arial, Helvetica, sans-serif;
+    color: grey;
+  }
+
+  .experience__info{
+    margin-left: 55px;
   }

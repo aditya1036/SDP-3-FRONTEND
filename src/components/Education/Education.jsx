@@ -38,7 +38,7 @@ const Education = () => {
         return [date.getFullYear(), mnth, day].join("-");
       }
     
-    var education_duration = convert(value[0])+" "+convert(value[1]);
+    var education_duration = convert(value[0])+" to "+convert(value[1]);
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -176,11 +176,14 @@ const Education = () => {
             {education.map((edu) => (
                 <>
                 <div className='education_content'>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{edu.institution_name}</h4>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{edu.duration}</h4>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{edu.location}</h4>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{edu.degree_type}</h4>
-                <span onClick={(e) => handleClickOpen1(e,edu.id)}><EditIcon style={{marginLeft: "800px"}}/></span>&nbsp;<span onClick={(e) => deleteEducation(e,edu.id)}><DeleteIcon/></span>
+                <span onClick={(e) => handleClickOpen1(e,edu.id)}><EditIcon style={{marginLeft: "800px", marginTop: "15px"}}/></span>&nbsp;<span onClick={(e) => deleteEducation(e,edu.id)}><DeleteIcon/></span>
+                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>Name: {edu.institution_name}</h4>
+                <div className='education__info'>
+                <p>Duration: {edu.duration}</p>
+                <p>Location: {edu.location}</p>
+                </div>
+                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>Degree Type: {edu.degree_type}</h4>
+                
                 </div>
                 </>  
             ))}

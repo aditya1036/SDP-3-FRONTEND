@@ -180,11 +180,14 @@ const Certification = () => {
         {licenses.map((lic) => (
                 <>
                 <div className='certification_content' key={lic.id}>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{lic.license_name}</h4>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{lic.received_date}</h4>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{lic.expiration_date}</h4>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{lic.pdf_link}</h4>
-                <span onClick={(e) => handleClickOpen1(e,lic.id)}><EditIcon style={{marginLeft: "800px"}}/></span>&nbsp;<span onClick={(e) => deleteCertification(e,lic.id)} ><DeleteIcon/></span>
+                <span onClick={(e) => handleClickOpen1(e,lic.id)}><EditIcon style={{marginLeft: "800px", marginTop: "15px"}}/></span>&nbsp;<span onClick={(e) => deleteCertification(e,lic.id)} ><DeleteIcon/></span>
+                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>Name: {lic.license_name}</h4>
+                <div className='certification__info'>
+                <p>Recieved Date: {lic.received_date}</p>
+                <p>Expiration Date: {lic.expiration_date}</p>
+                </div>
+                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>Link: {lic.pdf_link}</h4>
+                
                 </div>
                 </>  
             ))}

@@ -293,14 +293,16 @@ export default function Profile() {
                 <img src="/images/linkedIn.png" alt="background" />
                 
                 <Avatar src="/images/avatar.png" className="profile__sidebar__avatar" style={{height: "150px", width: "150px"}}></Avatar> 
-                <h1 style={{padding:"35px"}}>{user_state.first_name}&nbsp;{user_state.last_name}<span onClick={handleClickOpen}><EditIcon/></span></h1>
-                <h3> Followers Count: 456</h3>
-                <h3> Github Link : {userProfile.github_link}</h3>
-                <h3> LinkedIn Link: {userProfile.linkedIn_link}</h3>
-                <h3> Bio : {userProfile.bio}</h3>
-                <h3>Languages : {userProfile.languages}</h3>
-                <h3>Skills : {userProfile.skills}</h3>
-
+                <span onClick={handleClickOpen}><EditIcon style={{marginLeft: "850px"}}/></span>
+                <h1 style={{padding:"20px"}}>{user_state.first_name}&nbsp;{user_state.last_name}</h1>
+                <div className='profile__info'>
+                <p>456 Connections</p>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <p> Github: {userProfile.github_link}</p>&nbsp;&nbsp;&nbsp;&nbsp;
+                <p> LinkedIn: {userProfile.linkedIn_link}</p>&nbsp;&nbsp;&nbsp;&nbsp;
+                <p> Bio: {userProfile.bio}</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <p>Languages: {userProfile.languages}</p>&nbsp;&nbsp;&nbsp;&nbsp;
+                <p>Skills: {userProfile.skills}</p>&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             
         </div>

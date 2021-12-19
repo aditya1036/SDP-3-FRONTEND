@@ -40,7 +40,7 @@ const Experience = () => {
         return [date.getFullYear(), mnth, day].join("-");
       }
     
-    var experience_duration = convert(value[0])+" "+convert(value[1]);
+    var experience_duration = convert(value[0])+" to    "+convert(value[1]);
     
     const handleClickOpen = () => {
         setOpen(true);
@@ -190,15 +190,21 @@ const Experience = () => {
     return (
         <>
         <div className='experience_container'>
-        <h1 style={{marginLeft: "20px"}}>Work Experience<span onClick={handleClickOpen}><AddIcon style={{marginLeft: "580px"}}/></span></h1> 
+        <h1 style={{marginLeft: "20px"}}>Experience<span onClick={handleClickOpen}><AddIcon style={{marginLeft: "650px"}}/></span></h1> 
         {experience.map((exp) => (
                 <>
                 <div className='experience_content' key={exp.id}>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{exp.title}</h4>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{exp.duration}</h4>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{exp.location}</h4>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>{exp.description}</h4>
-                <span onClick={(e) => handleClickOpen1(e,exp.id)}><EditIcon style={{marginLeft: "800px"}}/></span>&nbsp;<span onClick={(e) => deleteEducation(e,exp.id)}><DeleteIcon/></span>
+                <span onClick={(e) => handleClickOpen1(e,exp.id)}><EditIcon style={{marginLeft: "800px", marginTop: "15px"}}/></span>&nbsp;<span onClick={(e) => deleteEducation(e,exp.id)}><DeleteIcon/></span>
+                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>Title: {exp.title} </h4>
+
+
+                <div className='experience__info'>
+                <p>Duration: {exp.duration}</p>
+                <p> Location: {exp.location}</p>
+                </div>
+
+                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>Description: {exp.description}</h4>
+                
                 </div>
                 </>  
             ))}

@@ -7,11 +7,13 @@
   border-radius: 10px;
   margin-bottom: 10px;
   height: fit-content;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(37, 36, 36);
 
 }
 
 .profile__sidebar__avatar {
-  margin-right: 700px;
+  margin-left: 20px;
   margin-bottom: 10px;
 }
 
@@ -19,14 +21,12 @@
   font-size: 20px;
   margin-top: -30px;
   margin-right: 500px;
-  margin-left: -40px;
+  margin-left: 10px;
 }
-
 
 .profile__sidebar__top {
   display: flex;
   flex-direction: column;
-  align-items: center;
   border: 1px solid lightgray;
   border-radius: 10px;
   background-color: white;
@@ -50,6 +50,12 @@
 
 }
 
+.profile__info{
+  color: grey;
+  margin-left: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .profile__  sidebar__top > .MuiAvatar-root {
   width: 70px;
   height: 70px;
@@ -58,7 +64,8 @@
 
 .profile__sidebar__top > p {
   margin-top: -20px;
-  margin-right: 700px;
+  margin-left: 30px;
+  color: rgb(37, 36, 36);
 }
 
 .profile__widgets {
