@@ -1,4 +1,4 @@
-import './App.css';
+  import './App.css';
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'; 
 import Home from './components/Home/Home';
 import Header from './components/Header/Header';
@@ -12,6 +12,7 @@ import jwt_decode from "jwt-decode";
 import {useEffect, useState} from 'react';
 import { Navigate } from 'react-router-dom';
 import UsersPostPage from './components/UsersPostPage/UsersPostPage';
+import JobPosting from './components/JobPosting/JobPosting';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='/aboutus' element={<><PrivateRoute><Header/><Aboutus/></PrivateRoute></>}/>
         <Route path='/profile' element={<><PrivateRoute><Header/><Profile/></PrivateRoute></>}/>
         <Route path='/userposts' element={<><PrivateRoute><Header/><UsersPostPage/></PrivateRoute></>}/>
+        <Route path='/jobposting' element={<><PrivateRoute><Header/><JobPosting/></PrivateRoute></>}/>
         <Route path='/signin' element={<><SignIn setToken={setToken}/></>} />
       </Routes>
      </Router>
