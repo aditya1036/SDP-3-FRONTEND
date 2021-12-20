@@ -190,7 +190,7 @@ const Experience = () => {
     return (
         <>
         <div className='experience_container'>
-        <h1 style={{marginLeft: "20px"}}>Experience<span onClick={handleClickOpen}><AddIcon style={{marginLeft: "650px"}}/></span></h1> 
+        <h1 style={{marginLeft: "20px"}}>Experience<span onClick={handleClickOpen}><AddIcon style={{marginLeft: "680px"}}/></span></h1> 
         {experience.map((exp) => (
                 <>
                 <div className='experience_content' key={exp.id}>
