@@ -71,13 +71,13 @@ const Testimonial = () => {
                     <div key={item.id} className={item.featured ? "card featured" : "card"}>
                         <div className="top">
                             <Link>
-                                <LinkedInIcon fontSize='large'/>
+                                <LinkedInIcon fontSize='large' style={{color: 'black'}}/>
                             </Link>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <Avatar style={{height: "50px", width:"50px"}}src={item.img}> </Avatar>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <Link href={item.github_link} target="_blank">
-                            <GitHubIcon fontSize='large'/>
+                            <GitHubIcon fontSize='large' style={{color: 'black'}}/>
                             </Link>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </div>

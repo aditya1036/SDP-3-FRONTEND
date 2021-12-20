@@ -301,10 +301,10 @@ export default function Profile() {
                 <h1 style={{padding:"20px"}}>{user_state.first_name}&nbsp;{user_state.last_name}</h1>
                 <div>
                 <Link href={userProfile.github_link} style={{marginLeft: "30px"}} target="_blank">
-                  <GitHubIcon/>
+                  <GitHubIcon style={{color: 'black'}}/>
                 </Link>
                 <Link href={userProfile.linkedIn_link} style={{marginLeft: "10px"}} target="_blank">
-                  <LinkedInIcon/>
+                  <LinkedInIcon style={{color: 'black'}}/>
                 </Link>
                 </div>
                 <div className='profile__info'>
