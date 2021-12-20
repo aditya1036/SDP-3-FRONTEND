@@ -290,6 +290,8 @@ export default function Profile() {
             </Dialog>
             </div>
         <Container>
+
+        <div> 
         <div className="profile__sidebar">
             <div className="profile__sidebar__top">
                 <img src="/images/linkedIn.png" alt="background" />
@@ -316,18 +318,21 @@ export default function Profile() {
             </div>
             
         </div>
+        <Experience/>
+        <Education/>
+        <Certification/>
+        </div>
         <div className="profile__widgets">
             <div className="profile__widgets__header">
                 <h2>Job Interests</h2>
                 <InfoOutlinedIcon />
             </div>
+
+          
             {newsArticle("Elon Musk is now the richest person in the world", "Top news - 4296 readers")}
             {newsArticle("Elon Musk is now the richest person in the world", "Top news - 4296 readers")}
             
         </div>
-        <Experience/>
-        <Education/>
-        <Certification/>
         </Container>
 
         </>
@@ -336,6 +341,8 @@ export default function Profile() {
 }
 
 const Container = styled.div`
-  padding-top: 30px;
+  padding-top: 20px;
+  display : flex;
+  flex-direction: row;
   max-width: 100%;
 `;
