@@ -176,6 +176,7 @@ export default function Profile() {
         </div>
     </div>
 );
+console.log(languages)
     return (
         <>
         <div>
@@ -223,6 +224,7 @@ export default function Profile() {
                     variant="standard"
                     required
                 />
+                &nbsp;&nbsp;&nbsp;
                  <Select
           multiple
           displayEmpty
@@ -297,7 +299,7 @@ export default function Profile() {
                 <img src="/images/linkedIn.png" alt="background" />
                 
                 <Avatar src="/images/avatar.png" className="profile__sidebar__avatar" style={{height: "150px", width: "150px"}}></Avatar> 
-                <span onClick={handleClickOpen}><EditIcon style={{marginLeft: "850px"}}/></span>
+                <span onClick={handleClickOpen}><EditIcon style={{marginLeft: "900px"}}/></span>
                 <h1 style={{padding:"20px"}}>{user_state.first_name}&nbsp;{user_state.last_name}</h1>
                 <div>
                 <Link href={userProfile.github_link} style={{marginLeft: "30px"}} target="_blank">
@@ -312,8 +314,16 @@ export default function Profile() {
                 </div>
                 <div className='profile__addition'>
                 <p> Bio: {userProfile.bio}</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <p>Languages: {userProfile.languages}</p>&nbsp;&nbsp;&nbsp;&nbsp;
-                <p>Skills: {userProfile.skills}</p>&nbsp;&nbsp;&nbsp;&nbsp;
+                <p>Languages: {userProfile.languages && userProfile.languages.map((e , i)=> {
+                  if (i === userProfile.languages.length -1 )
+                  return <span>{e}</span>
+                  else return <span>{e}, </span> 
+                  } )}</p>&nbsp;&nbsp;&nbsp;&nbsp;
+                <p>Skills: {userProfile.skills && userProfile.skills.map((e, i) => {
+                  if(i== userProfile.skills.length -1)
+                  return <span>{e}</span>
+                  else return <span>{e}, </span>
+                })}</p>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
             </div>
             

@@ -22,6 +22,7 @@ const Testimonial = () => {
             description: "I am a developer that like to work on MERN and I have worked on the authetication part of the project",
             img: 'images/avatar.png',
             github_link: 'https://github.com/Navneet7716',
+            linked_link: 'https://www.linkedin.com/in/navneet7716/',
             featured: false
         }
         ,
@@ -32,6 +33,7 @@ const Testimonial = () => {
             description: "I am a developer that like to work on MERN and I have worked on the authetication part of the project",
             img: 'images/avatar.png',
             github_link: 'https://github.com/udbhav3101',
+            linked_link: 'https://www.linkedin.com/in/udbhav-govindu/',
             featured: true
         }
         ,
@@ -43,6 +45,7 @@ const Testimonial = () => {
             description: "I am a developer that like to work on MERN and I have worked on the authetication part of the project",
             img: 'images/avatar.png',
             github_link: 'https://github.com/aditya1036',
+            linked_link: 'https://www.linkedin.com/in/aditya-khandelwal-6237821aa/',
             featured: false
         }
 
@@ -70,7 +73,7 @@ const Testimonial = () => {
 
                     <div key={item.id} className={item.featured ? "card featured" : "card"}>
                         <div className="top">
-                            <Link>
+                            <Link href={item.linked_link}>
                                 <LinkedInIcon fontSize='large' style={{color: 'black'}}/>
                             </Link>
                             &nbsp;&nbsp;&nbsp;&nbsp;
