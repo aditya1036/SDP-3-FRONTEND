@@ -36,26 +36,32 @@ function IndividualPost({ post }) {
     setShowComments(!showComments);
   };
 
+
   const getTimeForPost = (f) => {
-    let diff = Math.round((new Date().getTime() - f.getTime()) / 60000);
-    if (diff < 10) {
+
+    // console.log(new Date(f).getTime());
+    let diff = (new Date().getTime() - new Date(f).getTime()) / 60000;
+    console.log(diff)
+    if (diff < 1) {
       return "Just now";
-    } else if (diff >= 10 && diff <= 60) {
-      return `${diff} mins ago`;
+    } else if (diff >= 1 && diff <= 60) {
+      return `${Math.floor(diff)} mins ago`;
     } else if (diff > 60 && diff <= 1440) {
-      let h = Math.round(diff / 60);
+      let h = diff / 60;
 
       if (h <= 1) {
-        return `${h} hour ago`;
+        return `${Math.floor(h)} hour ago`;
       }
 
-      return `${Math.round(diff / 60)} hours ago`;
+      return `${Math.floor(diff / 60)} hours ago`;
     } else if (diff > 1440 && diff <= 10080) {
       diff = diff / 60;
-      diff = diff / 7;
+      diff = diff / 24;
 
-      return `${diff} days ago`;
-    } else if (diff > 10080 && diff <= 43800) {
+      if (Math.floor(diff) < 2) return `${Math.floor(diff)} day ago`
+
+      return `${Math.floor(diff)} days ago`;
+    } else if (diff > 10080) {
       return f;
     }
   };
@@ -93,7 +99,7 @@ function IndividualPost({ post }) {
     console.log(re);
   };
 
-  console.log("INDIVIDUAL POSSTTT", individualPost);
+  // console.log("INDIVIDUAL POSSTTT", individualPost);
 
   return (
     <div>
@@ -117,7 +123,7 @@ function IndividualPost({ post }) {
                 </Link>
               <div className="post__info" style={{float: "right"}}>
               
-                <p>{timeString}</p>
+                <p>{timeString + " ⏳"}</p>
               </div>
             </div>
 
@@ -153,7 +159,7 @@ function IndividualPost({ post }) {
                 <InputOption
                   className="PostIcons"
                   Icon={ThumbUpIcon}
-                  title={`Like : ${likeCount}`}
+                  title={`Like  ${likeCount}`}
                   color={isLiked === true ? "blue" : "gray"}
                 />
               </span>

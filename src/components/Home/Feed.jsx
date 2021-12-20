@@ -4,6 +4,7 @@ import InputOption from "./InputOption";
 import CreateIcon from "@material-ui/icons/Create";
 import ImageIcon from "@material-ui/icons/Image";
 import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
+import SaveIcon from '@mui/icons-material/Save';
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import CalendarViewDayIcon from "@material-ui/icons/CalendarViewDay";
 import Posts from "../Posts/Posts";
@@ -31,6 +32,7 @@ import axios from "axios";
 import { green } from "@material-ui/core/colors";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/UserContext/UserSlice";
+import { LoadingButton } from "@mui/lab";
 
 const theme = createTheme();
 const style = {
@@ -54,10 +56,12 @@ export default function Feed() {
   const [files, setFiles] = React.useState(null);
   const [image, setImage] = React.useState("");
   const [enableUpload, setEnableUpload] = React.useState(true);
+  const [loadingButton, setLoadingButton] = React.useState(false)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
+  const [SuccessMessage, setSuccessMessage] = React.useState("");
 
   const [formErrors, setFormErrors] = React.useState({});
   const [submitfailure, setsubmitfailure] = React.useState(false);
@@ -143,7 +147,7 @@ export default function Feed() {
     if (!loading) {
       setSuccess(false);
       setLoading(true);
-
+      setLoadingButton(true);
       setEnableUpload(true);
 
       let form = new FormData();
@@ -159,7 +163,9 @@ export default function Feed() {
       setImage(res.data.publicUrl);
 
       setSuccess(true);
+      setSuccessMessage("File Upload Successfull ✅")
       setLoading(false);
+      setLoadingButton(false);
 
       setFiles(null);
     }
@@ -209,7 +215,7 @@ export default function Feed() {
                         }}
                       >
                         <Typography component="h1" variant="h5">
-                          Create a post 😁
+                          Create a post 📝
                         </Typography>
                         <Box component="form" noValidate sx={{ mt: 1 }}>
                           <TextField
@@ -264,30 +270,18 @@ export default function Feed() {
                                                         </Button> */}
 
                           <Box sx={{ m: 1, position: "relative" }}>
-                            <Button
-                              variant="contained"
-                              sx={buttonSx}
+                            <LoadingButton
+                              loading={loadingButton}
                               disabled={enableUpload}
+                              loadingPosition="start"
+                              startIcon={<SaveIcon />}
                               onClick={HandleUpload}
-                              color="primary"
+                              variant="outlined"
                             >
                               Upload
-                            </Button>
-                            {loading && (
-                              <CircularProgress
-                                size={24}
-                                sx={{
-                                  color: green[500],
-                                  position: "absolute",
-                                  top: "50%",
-                                  left: "50%",
-                                  marginTop: "-12px",
-                                  marginLeft: "-12px",
-                                }}
-                              />
-                            )}
+                            </LoadingButton>
                           </Box>
-
+                          <span>{SuccessMessage}</span>
                           <Button
                             style={{ marginTop: "30px" }}
                             fullWidth

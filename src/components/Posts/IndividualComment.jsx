@@ -58,7 +58,7 @@ function IndividualComment({data, setComments, comments}) {
                         </span>
                         </div>
                         <div style={{display: "flex" , justifyContent: "space-between", alignItems: "center"}}>
-                        <span style={{ fontSize: ".8rem", fontWeight: "bold", color: "GrayText" }}> Created At : 18/12/2021, 20:27:24</span>
+                        <span style={{ fontSize: ".8rem", fontWeight: "bold", color: "GrayText" }}> Created At : {new Date(data.created_at).toLocaleString()}</span>
                         <span style={{ fontSize: ".8rem", fontWeight: "bold", color: "GrayText" }}> By : {data.userData.fullname ? data.userData.fullname : "Anonymous"}</span>
 
                         </div>

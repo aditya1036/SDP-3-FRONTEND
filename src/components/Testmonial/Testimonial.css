@@ -1,3 +1,18 @@
+.testimonial_aboutus_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-left: 20px;
+    width: 900px;
+    padding: 20px;
+    padding-top: 5px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 3px 11px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 3px 11px 1px rgba(0, 0, 0, 0.1);
+  }
+
 .testimonials {
     background-color: white;
     display: flex;
@@ -9,14 +24,16 @@
     margin-top: 30px;
     overflow: hidden;
 }
-.testimonials .container2 {
+.testimonials .container {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
 }
-.testimonials .container2 .card {
+.testimonials .container .card {
     width: 20%;
     height: 70%;
     display: flex;
@@ -27,35 +44,44 @@
     box-shadow: 0px 0px 13px -8px black;
     transition: all 1s ease;
 }
-.testimonials .container2 .card.featured {
+.testimonials .container .card.featured {
     width: 300px;
     height: 75%;
     margin: 0px 30px;
 }
-.testimonials .container2 .card .top {
+.testimonials .container .card .top {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.testimonials .container2 .card .top img {
+.testimonials .container .card .top img {
     height: 50px;
     width: 50px;
     margin: auto;
 }
-.testimonials .container2 .card .center {
-    background-color: #fde5ea;
+.testimonials .container .card .center {
+    background-color: #bcf5eb;
+    margin-top: 30px;
     border-radius: 10px;
 }
-.testimonials .container2 .card .center p {
+.testimonials .container .card .center p {
     margin: auto;
     padding: 10px 10px 10px 10px;
 }
-.testimonials .container2 .card .bottom {
+.testimonials .container .card .bottom {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
 }
-.testimonials .container2 .card:hover {
+.testimonials .container .card:hover {
     transform: scale(1.1);
 }
+
+.parent_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+

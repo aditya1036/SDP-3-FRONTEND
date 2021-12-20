@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../redux/UserContext/UserSlice";
 import Leftside from '../Home/Leftside';
 import Widgets from "../Widgets/Widgets";
+import { Skeleton } from "@mui/material";
 
 export default function UserPosts() {
     const user = useSelector(selectUser);
@@ -42,8 +43,8 @@ export default function UserPosts() {
         setPosts((posts) => [...posts, ...data.content]);
         last = data.last;
         console.log(data.content);
+  setIsFirstLoad(false);
 
-        setIsFirstLoad(false);
         setIsLoading(false);
       })
       .catch((e) => {
@@ -66,26 +67,24 @@ export default function UserPosts() {
 
   return (
     <div>
+
+      
         
       <Container>
         <Layout>
           <Leftside />
           <div >
           <div style={{marginTop: "-1rem", marginBottom: "1rem", textAlign: "center", fontSize: "2rem",fontFamily: "Rubik, sans-serif", fontWeight: "500"}}>
-          <span>Here are your posts...</span>
+          {posts.length === 0 ? <span>You don't even have a single post 👏</span> : <span>Here are your posts...</span> }
 
         </div>
 
       {isFirstLoad ? (
-          <h3
-          style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            >
-          <CircularProgress disableShrink />
-        </h3>
+        <div>
+        <SkeletonPosts />
+        <SkeletonPosts />
+        <SkeletonPosts />
+        </div>
       ) : (
           <>
           {posts.length ? (
@@ -132,3 +131,29 @@ const Layout = styled.div`
     padding: 0 5px;
   }
 `;
+
+const SkeletonPosts = () => {
+  return  <div className="post">
+  <div className="post__header">
+  <Skeleton variant="circular" width={40} height={40} animation="pulse" style={{marginRight: "1rem"}}/>
+      <Skeleton animation="wave" width={"10vh"} />
+    <div className="post__info" style={{float: "right"}}>
+    
+    <Skeleton animation="wave"  width={"10vh"} />
+    </div>
+  </div>
+
+  <div className="post__body">
+  <Skeleton animation="wave" width={"70vh"} />
+  <Skeleton animation="wave" width={"70vh"} />
+  <Skeleton animation="wave" width={"70vh"} style={{marginBottom : "1rem"}}/>
+  <Skeleton animation="wave" variant="rectangular" height={"50vh"} width={"85vh"}/>
+
+  </div>
+
+  <div style={{display: "flex", justifyContent:"center", alignItems: "center"}}>
+    
+  <Skeleton animation="wave" width={"70vh"} height={"10vh"}/>
+  </div>
+</div>
+}

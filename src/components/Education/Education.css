@@ -1,0 +1,39 @@
+.education_container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-right: 50px;
+    width: 900px;
+    padding: 20px;
+    padding-top: 5px;
+    border-radius: 10px;
+    color: rgb(37, 37, 36);
+    -webkit-box-shadow: 0px 3px 11px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 3px 11px 1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .education_card {
+    margin-left: 30px;
+    margin-top: 20px;
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 3px 11px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 3px 11px 1px rgba(0, 0, 0, 0.1);
+  }
+
+  .education_content{
+      border-bottom: 0.5px solid rgb(231, 231, 231);
+      font-family: Arial, Helvetica, sans-serif;
+      color: rgb(37, 37, 36);
+  }
+
+  .education__info{
+    margin-left: 55px;
+  }
+  .education__info > p{
+    font-family: Arial, Helvetica, sans-serif;
+    color: grey;
+  }

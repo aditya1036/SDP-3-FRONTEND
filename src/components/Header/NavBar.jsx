@@ -164,7 +164,7 @@ const NavBar = () => {
                   Notification
               </Button>
                     </Link>
-              <Link to="/profile">
+              <Link to={`/profile/${user.id}`}>
 
 
               <Button

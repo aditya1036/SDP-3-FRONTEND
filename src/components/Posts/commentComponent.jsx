@@ -123,7 +123,7 @@ function CommentComponent({ parentId }) {
         <small style={{ color: "red" }}>{formErrors.description}</small>
 
         <div>
-          <Button onClick={handleSubmit} variant="outlined" color="primary">
+          <Button onClick={handleSubmit}  variant="contained" color="primary">
             Comment
           </Button>
         </div>
