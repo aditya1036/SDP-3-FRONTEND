@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Avatar } from '@mui/material';
+import Link from '@material-ui/core/Link';
 const Testimonial = () => {
 
     const data = [
@@ -20,6 +21,7 @@ const Testimonial = () => {
             designation: 'CEO',
             description: "I am a developer that like to work on MERN and I have worked on the authetication part of the project",
             img: 'images/avatar.png',
+            github_link: 'https://github.com/Navneet7716',
             featured: false
         }
         ,
@@ -29,6 +31,7 @@ const Testimonial = () => {
             designation: 'Web Developer',
             description: "I am a developer that like to work on MERN and I have worked on the authetication part of the project",
             img: 'images/avatar.png',
+            github_link: 'https://github.com/udbhav3101',
             featured: true
         }
         ,
@@ -39,6 +42,7 @@ const Testimonial = () => {
             designation: 'Web Developer',
             description: "I am a developer that like to work on MERN and I have worked on the authetication part of the project",
             img: 'images/avatar.png',
+            github_link: 'https://github.com/aditya1036',
             featured: false
         }
 
@@ -66,9 +70,16 @@ const Testimonial = () => {
 
                     <div key={item.id} className={item.featured ? "card featured" : "card"}>
                         <div className="top">
-                            <LinkedInIcon fontSize='large'/>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Avatar style={{height: "50px", width:"50px"}}src={item.img}> </Avatar>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <GitHubIcon fontSize='large'/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <Link>
+                                <LinkedInIcon fontSize='large'/>
+                            </Link>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <Avatar style={{height: "50px", width:"50px"}}src={item.img}> </Avatar>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <Link href={item.github_link} target="_blank">
+                            <GitHubIcon fontSize='large'/>
+                            </Link>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
                         <div className="center">
                             <p>{item.description}</p>
