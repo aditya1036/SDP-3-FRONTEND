@@ -4,8 +4,6 @@ import {selectUser} from '../redux/UserContext/UserSlice'
 import Avatar from '@mui/material/Avatar';
 import styled from "styled-components";
 import {useState , useEffect} from 'react';
-import AddIcon from '@mui/icons-material/Add';
-import InputOption from '../Home/InputOption';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import './Profile.css';
@@ -24,8 +22,10 @@ import {API_URL} from '../../config/env'
 import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import Link from '@material-ui/core/Link';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -197,6 +197,7 @@ export default function Profile() {
                     variant="standard"
                     required
                 />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <TextField
                     autoFocus
                     value={github_link}
@@ -209,6 +210,7 @@ export default function Profile() {
                     variant="standard"
                     required
                 />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <TextField
                     autoFocus
                     margin="dense"
@@ -250,7 +252,7 @@ export default function Profile() {
             </MenuItem>
           ))}
         </Select>
-
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Select
           multiple
           displayEmpty
@@ -295,14 +297,22 @@ export default function Profile() {
                 <Avatar src="/images/avatar.png" className="profile__sidebar__avatar" style={{height: "150px", width: "150px"}}></Avatar> 
                 <span onClick={handleClickOpen}><EditIcon style={{marginLeft: "850px"}}/></span>
                 <h1 style={{padding:"20px"}}>{user_state.first_name}&nbsp;{user_state.last_name}</h1>
+                <div>
+                <Link href={userProfile.github_link} style={{marginLeft: "30px"}} target="_blank">
+                  <GitHubIcon/>
+                </Link>
+                <Link href={userProfile.linkedIn_link} style={{marginLeft: "10px"}} target="_blank">
+                  <LinkedInIcon/>
+                </Link>
+                </div>
                 <div className='profile__info'>
                 <p>456 Connections</p>&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
-                <p> Github: {userProfile.github_link}</p>&nbsp;&nbsp;&nbsp;&nbsp;
-                <p> LinkedIn: {userProfile.linkedIn_link}</p>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div className='profile__addition'>
                 <p> Bio: {userProfile.bio}</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <p>Languages: {userProfile.languages}</p>&nbsp;&nbsp;&nbsp;&nbsp;
                 <p>Skills: {userProfile.skills}</p>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
             </div>
             
         </div>
