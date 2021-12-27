@@ -17,6 +17,7 @@ import NotFound from './components/NotFoundPage/NotFound';
 import UserPosts from './components/Posts/UserPosts';
 import JobPosting from "./components/JobPosting/JobPosting"
 import "./App.css"
+import StepForm from './components/Jobform/StepForm';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
           <Route path='/profile/:id' element={<><PrivateRoute> <NavBar /><Profile /></PrivateRoute></>} />
           <Route path='/userposts' element={<><PrivateRoute> <NavBar /><UserPosts /></PrivateRoute></>} />
           <Route path='/jobposting' element={<><PrivateRoute> <NavBar /><JobPosting /></PrivateRoute></>} />
+          <Route path='/jobform' element={<><PrivateRoute><NavBar /><StepForm /></PrivateRoute></>}/>
           <Route path='/post/:id' element={<><PrivateRoute> <NavBar /><PostDetails /></PrivateRoute></>} />
           <Route path='/signin' element={<><SignIn setToken={setToken} /></>} />
           <Route path='*' element={<><NotFound/></>} />

@@ -18,6 +18,7 @@ import DateRangePicker from "@mui/lab/DateRangePicker";
 import Box from "@mui/material/Box";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import IndividualExperience from "./IndividualExperience";
 
 const Experience = () => {
   const user_state = useSelector(selectUser);
@@ -47,16 +48,9 @@ const Experience = () => {
     setOpen(false);
   };
 
-  const handleClickOpen1 = (e, id) => {
-    setOpen1(true);
-    setExp(id);
-  };
-
-  const handleClose1 = () => {
-    setOpen1(false);
-  };
-
   useEffect(() => {
+    let fetching = true;
+
     async function userExperience() {
       const res = await fetch(
         `${API_URL}/api/experience/getByUserId/${user_state.id}`,
@@ -71,9 +65,17 @@ const Experience = () => {
         }
       );
       const data = await res.json();
-      setExperience(data.Listdata);
+      if (fetching) {
+        setExperience(data.Listdata);
+      }
     }
-    userExperience();
+    if (fetching) {
+      userExperience();
+    }
+
+    return () => {
+      fetching = false;
+    };
   }, []);
 
   const handleAddExperience = async (e, id) => {
@@ -95,10 +97,10 @@ const Experience = () => {
         user_id: id,
       }),
     });
+
     const data = await res.json();
     console.log(data);
     setExperience([
-      ...experience,
       {
         id: data.data.id,
         title: title,
@@ -107,63 +109,13 @@ const Experience = () => {
         location: location,
         user_id: id,
       },
+      ...experience,
     ]);
 
     handleClose();
     setTitle("");
     setDescription("");
     setLocation("");
-  };
-
-  const deleteEducation = async (e, id) => {
-    e.preventDefault();
-    const res = await fetch(`${API_URL}/api/experience/deletebyid/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("token")).token
-        }`,
-      },
-    });
-    const data = await res.json();
-    console.log(data);
-    setExperience(experience.filter((edu) => edu.id !== id));
-  };
-
-  const handleUpdateExperience = async (e, id) => {
-    e.preventDefault();
-    const res = await fetch(`${API_URL}/api/experience/updateById`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("token")).token
-        }`,
-      },
-      body: JSON.stringify({
-        id: id,
-        title: title,
-        description: description,
-        duration: experience_duration,
-        location: location,
-        user_id: user_state.id,
-      }),
-    });
-
-    const data = await res.json();
-    const index = experience.findIndex((exp) => exp.id === id);
-    var updated_experience = [...experience];
-    updated_experience[index] = {
-      id: id,
-      title: title,
-      description: description,
-      duration: experience_duration,
-      location: location,
-      user_id: user_state.id,
-    };
-    setExperience(updated_experience);
-    handleClose1();
   };
 
   return (
@@ -184,166 +136,89 @@ const Experience = () => {
             <AddIcon />
           </span>
         </div>
-        {experience.length === 0 ? <div>
-          <span style={{fontSize: "1rem"}}>Please Add some Experience to your profile.. 👨‍💼</span>
-        </div>  : experience.map((exp) => (
-          <>
-            <div className="experience_content" key={exp.id}>
-              <span onClick={(e) => handleClickOpen1(e, exp.id)}>
-                <EditIcon style={{ marginLeft: "800px", marginTop: "15px" }} />
-              </span>
-              &nbsp;
-              <span onClick={(e) => deleteEducation(e, exp.id)}>
-                <DeleteIcon />
-              </span>
-              <h4 style={{ marginLeft: "40px", marginTop: "30px" }}>
-                Title: {exp.title}{" "}
-              </h4>
-              <div className="experience__info">
-                <p>Duration: {exp.duration}</p>
-                <p> Location: {exp.location}</p>
-              </div>
-              <h4 style={{ marginLeft: "40px", marginTop: "30px" }}>
-                Description: {exp.description}
-              </h4>
-            </div>
-          </>
-        ))}
+        {experience.length === 0 ? (
+          <div>
+            <span style={{ fontSize: "1rem" }}>
+              Please Add some Experience to your profile.. 👨‍💼
+            </span>
+          </div>
+        ) : (
+          experience.map((exp) => (
+            <IndividualExperience
+              key={exp.id}
+              exp={exp}
+              setExpereinces={setExperience}
+              experiences={experience}
+            />
+          ))
+        )}
       </div>
-      <div>
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Add Experience</DialogTitle>
-          <DialogContent>
-            <DialogContentText></DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              label="Title"
-              type="text"
-              fullWidth
-              variant="standard"
-              required
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Add Experience</DialogTitle>
+        <DialogContent>
+          <DialogContentText></DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            label="Title"
+            type="text"
+            fullWidth
+            variant="standard"
+            required
+          />
+          &nbsp;
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DateRangePicker
+              startText="From"
+              endText="To"
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue);
+              }}
+              renderInput={(startProps, endProps) => (
+                <React.Fragment>
+                  <TextField {...startProps} />
+                  <Box sx={{ mx: 2 }}> to </Box>
+                  <TextField {...endProps} />
+                </React.Fragment>
+              )}
             />
-            &nbsp;
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DateRangePicker
-                startText="From"
-                endText="To"
-                value={value}
-                onChange={(newValue) => {
-                  setValue(newValue);
-                }}
-                renderInput={(startProps, endProps) => (
-                  <React.Fragment>
-                    <TextField {...startProps} />
-                    <Box sx={{ mx: 2 }}> to </Box>
-                    <TextField {...endProps} />
-                  </React.Fragment>
-                )}
-              />
-            </LocalizationProvider>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="location"
-              label="Location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              type="text"
-              fullWidth
-              variant="standard"
-              required
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              label="Description"
-              type="text"
-              fullWidth
-              variant="standard"
-              required
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={(e) => handleAddExperience(e, user_state.id)}>
-              Add
-            </Button>
-          </DialogActions>
-        </Dialog>
-        <Dialog open={open1} onClose={handleClose1}>
-          <DialogTitle>Update Experience</DialogTitle>
-          <DialogContent>
-            <DialogContentText></DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              label="Title"
-              type="text"
-              fullWidth
-              variant="standard"
-              required
-            />
-            &nbsp;
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DateRangePicker
-                startText="From"
-                endText="To"
-                value={value}
-                onChange={(newValue) => {
-                  setValue(newValue);
-                }}
-                renderInput={(startProps, endProps) => (
-                  <React.Fragment>
-                    <TextField {...startProps} />
-                    <Box sx={{ mx: 2 }}> to </Box>
-                    <TextField {...endProps} />
-                  </React.Fragment>
-                )}
-              />
-            </LocalizationProvider>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="location"
-              label="Location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              type="text"
-              fullWidth
-              variant="standard"
-              required
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              label="Description"
-              type="text"
-              fullWidth
-              variant="standard"
-              required
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose1}>Cancel</Button>
-            <Button onClick={(e) => handleUpdateExperience(e, exp_id)}>
-              Update
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+          </LocalizationProvider>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="location"
+            label="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            type="text"
+            fullWidth
+            variant="standard"
+            required
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            label="Description"
+            type="text"
+            fullWidth
+            variant="standard"
+            required
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={(e) => handleAddExperience(e, user_state.id)}>
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

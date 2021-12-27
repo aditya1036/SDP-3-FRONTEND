@@ -4,7 +4,7 @@ import InputOption from "./InputOption";
 import CreateIcon from "@material-ui/icons/Create";
 import ImageIcon from "@material-ui/icons/Image";
 import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
-import SaveIcon from '@mui/icons-material/Save';
+import SaveIcon from "@mui/icons-material/Save";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import CalendarViewDayIcon from "@material-ui/icons/CalendarViewDay";
 import Posts from "../Posts/Posts";
@@ -49,6 +49,7 @@ export default function Feed() {
   const user = useSelector(selectUser);
 
   const [posts, setPosts] = React.useState([]);
+  const [filename, setFilename] = React.useState("");
 
   const [open, setOpen] = React.useState(false);
   const [title, setTitle] = React.useState("");
@@ -56,7 +57,7 @@ export default function Feed() {
   const [files, setFiles] = React.useState(null);
   const [image, setImage] = React.useState("");
   const [enableUpload, setEnableUpload] = React.useState(true);
-  const [loadingButton, setLoadingButton] = React.useState(false)
+  const [loadingButton, setLoadingButton] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [loading, setLoading] = React.useState(false);
@@ -163,7 +164,7 @@ export default function Feed() {
       setImage(res.data.publicUrl);
 
       setSuccess(true);
-      setSuccessMessage("File Upload Successfull ✅")
+      setSuccessMessage("File Upload Successfull ✅");
       setLoading(false);
       setLoadingButton(false);
 
@@ -174,6 +175,8 @@ export default function Feed() {
   const HandleFileChange = async (e) => {
     setEnableUpload(false);
     setFiles(e.target.files[0]);
+    console.log(e.target.files[0]);
+    setFilename(e.target.files[0].name);
   };
 
   return (
@@ -254,16 +257,31 @@ export default function Feed() {
                           </small>
 
                           <div>
-                            <label htmlFor="contained-button-file">
+
+                    
+                            <label className="buttonLabel" htmlFor="contained-button-file">
                               Upload a Image
+                            
+                              </label>
                               <Input
                                 onChange={(e) => HandleFileChange(e)}
+                                style={{
+                                  opacity: "0",
+                                  zIndex: "-1",
+                                  position: "absolute"
+                                }}
                                 accept="image/*"
                                 id="contained-button-file"
                                 multiple
                                 type="file"
                               />
-                            </label>
+                                <TextField
+                                margin="normal"
+                                variant="outlined"
+                                fullWidth
+                                value={filename}
+                                disabled={true}
+                              />
                           </div>
                           {/* <Button disabled={enableUpload} variant="raised" component="span" onClick={() => HandleUpload()}>
                                                             Upload

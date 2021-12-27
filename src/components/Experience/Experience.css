@@ -25,16 +25,67 @@
   }
 
   .experience_content{
-    font-family: Arial, Helvetica, sans-serif;
       border-bottom: 0.5px solid rgb(231, 231, 231);
       color: rgb(37, 37, 36);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -5px -4px 2px 3px rgb(85, 102, 255);
+      margin-left: .5rem;
+      margin-right: 1rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      padding: 2rem;
+      border-radius: 20px;
   }
 
-  .experience__info > p{
-    font-family: Arial, Helvetica, sans-serif;
-    color: grey;
-  }
 
-  .experience__info{
-    margin-left: 55px;
-  }
+.div_edit_button {
+  transition: 500ms;
+  border-radius: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-right: .5rem;
+
+  padding: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.div_edit_button:hover {
+  background-color: rgb(170, 170, 170);
+ 
+}
+
+.delete_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 400ms;
+  border-radius: 60px;
+
+  padding: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.delete_button:hover {
+  background-color: rgb(170, 170, 170);
+}
+
+.buttonLabel {
+
+  color: white;
+  background-color: black;
+  padding: .7rem;
+  border-radius: 20px;
+  transition: transform 500ms;
+  display: block;
+
+
+}
+
+.buttonLabel:hover {
+  transform: scale(1.04);
+}

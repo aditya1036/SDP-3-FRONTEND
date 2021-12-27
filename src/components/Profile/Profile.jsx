@@ -28,6 +28,7 @@ import Select from '@mui/material/Select';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import Link from '@material-ui/core/Link';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import Projects from '../Projects/Projects';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -344,6 +345,7 @@ export default function Profile() {
         <div style={{marginLeft: "2rem"}}>
 
         <Experience/>
+        <Projects />
         <Education/>
         <Certification/>
         </div>
