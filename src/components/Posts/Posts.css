@@ -15,18 +15,18 @@
   align-items: center;
 
 }
-.post__header > .MuiAvatar-colorDefault {
+/* .post__header > .MuiAvatar-colorDefault {
   background-color: #70b5f9;
   width: 45px;
   height: 45px;
   border: 2px solid rgb(255, 255, 255);
-}
+} */
 
-.post__header > .MuiAvatar-root {
+/* .post__header > .MuiAvatar-root {
   width: 45px;
   height: 45px;
   border: 2px solid rgb(235, 235, 235);
-}
+} */
 .post__info {
   margin-left: 10px;
   display: flex;

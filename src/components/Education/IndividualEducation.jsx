@@ -176,7 +176,7 @@ function IndividualEducation({edu, education, setEducation}) {
             label="Institution Name"
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />&nbsp;
           <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -205,7 +205,7 @@ function IndividualEducation({edu, education, setEducation}) {
             onChange={(e) => setLocation(e.target.value)}
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />
           <TextField
@@ -217,7 +217,7 @@ function IndividualEducation({edu, education, setEducation}) {
             label="Degree"
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />
         </DialogContent>

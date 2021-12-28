@@ -60,3 +60,20 @@ hr {
     }
   
   }
+  .buttonLabel {
+
+    color: white;
+    background-color: black;
+    padding: .7rem;
+    border-radius: 20px;
+    transition: transform 500ms;
+    display: block;
+    max-width: 50vh;
+    min-width: 20vh;
+  
+  
+  }
+  
+  .buttonLabel:hover {
+    transform: scale(1.04);
+  }

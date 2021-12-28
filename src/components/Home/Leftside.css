@@ -40,7 +40,7 @@
     border-top-right-radius: 10px;
     object-fit: cover;
   }
-  
+/*   
   .sidebar__top > .MuiAvatar-colorDefault {
     background-color: #70b5f9;
     width: 70px;
@@ -53,7 +53,7 @@
     width: 70px;
     height: 70px;
     border: 2px solid rgb(255, 255, 255);
-  }
+  } */
   
   .sidebar__stat {
     margin-top: 10px;

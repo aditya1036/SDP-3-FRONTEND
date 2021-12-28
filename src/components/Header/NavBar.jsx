@@ -124,7 +124,6 @@ const NavBar = () => {
           <TextField
                     margin='dense'
                     variant="outlined"
-                    
                     id="search"
                     label="Search"
                     name="search"

@@ -62,7 +62,8 @@ function IndividualPost({ post }) {
 
       return `${Math.floor(diff)} days ago`;
     } else if (diff > 10080) {
-      return f;
+
+      return new Date(f).toLocaleString();
     }
   };
 
@@ -118,8 +119,8 @@ function IndividualPost({ post }) {
               ></Avatar>
 
 
-                <Link to={`post/${individualPost.id}`}>
-                <span>{individualPost.title}</span>
+                <Link to={`/post/${individualPost.id}`}>
+                <span style={{fontWeight: "500"}} >{individualPost.title}</span>
                 </Link>
               <div className="post__info" style={{float: "right"}}>
               
@@ -141,7 +142,7 @@ function IndividualPost({ post }) {
                     {isReadMore ? "...read more" : " show less"}
                   </span>
                 )}
-                <p>{individualPost.hashtags.map((el) => `${el} `)}</p>
+                <p style={{color: "rgb(3, 146, 255)"}}>{individualPost.hashtags.map((el) => `${el} `)}</p>
               </div>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <img

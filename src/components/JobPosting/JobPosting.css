@@ -35,7 +35,7 @@
     display: flex;
     margin-bottom: 10px;
   }
-  .jobposting__header > .MuiAvatar-colorDefault {
+  /* .jobposting__header > .MuiAvatar-colorDefault {
     background-color: #70b5f9;
     width: 45px;
     height: 45px;
@@ -46,7 +46,7 @@
     width: 45px;
     height: 45px;
     border: 2px solid rgb(235, 235, 235);
-  }
+  } */
   .jobposting__info {
     margin-left: 10px;
   }

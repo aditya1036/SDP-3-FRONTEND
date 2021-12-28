@@ -176,7 +176,7 @@ function IndividualExperience({ experiences, exp, setExpereinces }) {
               label="Title"
               type="text"
               fullWidth
-              variant="standard"
+              variant="outlined"
               required
             />
             &nbsp;
@@ -206,19 +206,21 @@ function IndividualExperience({ experiences, exp, setExpereinces }) {
               onChange={(e) => setLocation(e.target.value)}
               type="text"
               fullWidth
-              variant="standard"
+              variant="outlined"
               required
             />
             <TextField
               autoFocus
               margin="dense"
+              multiline
+              minRows={10}
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               label="Description"
               type="text"
               fullWidth
-              variant="standard"
+              variant="outlined"
               required
             />
           </DialogContent>

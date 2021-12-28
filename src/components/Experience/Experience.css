@@ -74,18 +74,3 @@
   background-color: rgb(170, 170, 170);
 }
 
-.buttonLabel {
-
-  color: white;
-  background-color: black;
-  padding: .7rem;
-  border-radius: 20px;
-  transition: transform 500ms;
-  display: block;
-
-
-}
-
-.buttonLabel:hover {
-  transform: scale(1.04);
-}

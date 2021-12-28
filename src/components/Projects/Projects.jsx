@@ -226,7 +226,7 @@ const Projects = () => {
               label="Title"
               type="text"
               fullWidth
-              variant="standard"
+              variant="outlined"
               required
             />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -255,7 +255,7 @@ const Projects = () => {
               onChange={(e) => setGit(e.target.value)}
               type="text"
               fullWidth
-              variant="standard"
+              variant="outlined"
               required
             />
             <TextField
@@ -267,7 +267,7 @@ const Projects = () => {
               label="Description"
               type="text"
               fullWidth
-              variant="standard"
+              variant="outlined"
               required
             />
           </DialogContent>
@@ -291,7 +291,7 @@ const Projects = () => {
               label="Title"
               type="text"
               fullWidth
-              variant="standard"
+              variant="outlined"
               required
             />
             &nbsp;
@@ -321,7 +321,7 @@ const Projects = () => {
               onChange={(e) => setGit(e.target.value)}
               type="text"
               fullWidth
-              variant="standard"
+              variant="outlined"
               required
             />
             <TextField
@@ -333,7 +333,7 @@ const Projects = () => {
               label="Description"
               type="text"
               fullWidth
-              variant="standard"
+              variant="outlined"
               required
             />
           </DialogContent>

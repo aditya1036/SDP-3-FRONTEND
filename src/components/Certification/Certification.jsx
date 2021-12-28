@@ -216,7 +216,7 @@ const Certification = () => {
             label="License Name"
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />&nbsp;
           <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -245,7 +245,7 @@ const Certification = () => {
             onChange={(e) => setPdfLink(e.target.value)}
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />
         </DialogContent>
@@ -268,7 +268,7 @@ const Certification = () => {
             label="License Name"
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />&nbsp;
           <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -297,7 +297,7 @@ const Certification = () => {
             onChange={(e) => setPdfLink(e.target.value)}
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />
         </DialogContent>

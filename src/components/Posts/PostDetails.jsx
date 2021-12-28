@@ -50,7 +50,7 @@ function PostDetails() {
 
       return `${Math.floor(diff)} days ago`;
     } else if (diff > 10080) {
-      return f;
+      return new Date(f).toLocaleString();
     }
   };
 
@@ -197,7 +197,7 @@ function PostDetails() {
                       border: "2px solid rgb(255, 255, 255)",
                     }}
                   ></Avatar>
-                  <span>{individualPost.title}</span>
+                  <span style={{fontWeight: "500"}}>{individualPost.title}</span>
 
                   <div
                     style={{

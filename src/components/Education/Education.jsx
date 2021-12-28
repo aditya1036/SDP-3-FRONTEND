@@ -187,7 +187,7 @@ const Education = () => {
             label="Institution Name"
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />&nbsp;
           <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -216,7 +216,7 @@ const Education = () => {
             onChange={(e) => setLocation(e.target.value)}
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />
           <TextField
@@ -228,7 +228,7 @@ const Education = () => {
             label="Degree"
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />
         </DialogContent>

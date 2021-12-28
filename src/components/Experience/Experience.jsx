@@ -166,7 +166,7 @@ const Experience = () => {
             label="Title"
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />
           &nbsp;
@@ -196,11 +196,12 @@ const Experience = () => {
             onChange={(e) => setLocation(e.target.value)}
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />
           <TextField
-            autoFocus
+            multiline
+            minRows={10}
             margin="dense"
             id="description"
             value={description}
@@ -208,7 +209,7 @@ const Experience = () => {
             label="Description"
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />
         </DialogContent>

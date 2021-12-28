@@ -39,13 +39,13 @@
  
 }
 
-.profile__sidebar__top > .MuiAvatar-colorDefault {
+/* .profile__sidebar__top > .MuiAvatar-colorDefault {
   background-color: #70b5f9;
   width: 70px;
   height: 70px;
   border: 2px solid rgb(255, 255, 255);
 
-}
+} */
 
 .profile__info{
   color: grey;
@@ -61,11 +61,11 @@
   font-weight: bolder;
 }
 
-.profile__  sidebar__top > .MuiAvatar-root {
+/* .profile__  sidebar__top > .MuiAvatar-root {
   width: 70px;
   height: 70px;
   border: 2px solid rgb(255, 255, 255);
-}
+} */
 
 .profile__sidebar__top > p {
   margin-top: -20px;
@@ -88,10 +88,10 @@
   padding: 10px;
 }
 
-.profile__widgets__header > .MuiSvgIcon-root {
+/* .profile__widgets__header > .MuiSvgIcon-root {
   color: #000000;
 
-}
+} */
 
 
 .profile__widgets__header > h2 {
@@ -115,9 +115,9 @@
   margin-right: 5px;
 }
 
-.profile__widgets__articleLeft > .MuiSvgIcon-root {
+/* .profile__widgets__articleLeft > .MuiSvgIcon-root {
   font-size: 15px;
-}
+} */
 
 
 .profile__widgets__articleRight{
