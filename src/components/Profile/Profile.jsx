@@ -9,10 +9,12 @@ import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import "./Profile.css";
 import Experience from "../Experience/Experience";
 import { useParams } from "react-router-dom";
-
+import { Input, Box } from "@material-ui/core";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import Education from "../Education/Education";
 import Certification from "../Certification/Certification";
+import SaveIcon from "@mui/icons-material/Save";
+
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -28,8 +30,10 @@ import Select from "@mui/material/Select";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Link from "@material-ui/core/Link";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import Projects from "../Projects/Projects";
 import { Typography } from "@material-ui/core";
+import Project from "../Projects/Project";
+import { LoadingButton } from "@mui/lab";
+import axios from "axios";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -56,6 +60,21 @@ function getStyles(name, personName, theme) {
 export default function Profile() {
   const { id } = useParams();
 
+  const [files, setFiles] = React.useState(null);
+  const [image, setImage] = React.useState("");
+  const [enableUpload, setEnableUpload] = React.useState(true);
+  const [loadingButton, setLoadingButton] = React.useState(false);
+  const [filename, setFilename] = React.useState("");
+
+  const [file, setFile] = React.useState(null);
+  const [enableUploadResume, setEnableUploadResume] = React.useState(true);
+  const [loadingButtonResume, setLoadingButtonResume] = React.useState(false);
+  const [resumeLink, setresumeLink] = React.useState("");
+  const [Resumefilename, setResumeFileName] = React.useState("");
+
+  const [loading, setLoading] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
+  const [SuccessMessage, setSuccessMessage] = React.useState("");
   const user_state = useSelector(selectUser);
   const [open, setOpen] = useState(false);
   const [userProfile, setUserProfile] = useState({});
@@ -80,6 +99,8 @@ export default function Profile() {
       const data = await res.json();
       console.log(data);
       setUserProfile(data.data[0]);
+      setImage(data.data[0].profile_image);
+      setresumeLink(data.data[0].resumeLink);
     }
     initialUser();
   }, []);
@@ -107,6 +128,79 @@ export default function Profile() {
     );
   };
 
+  const HandleUpload = async () => {
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+      setLoadingButton(true);
+      setEnableUpload(true);
+
+      let form = new FormData();
+
+      form.append("image", files, files.name);
+
+      let res = await axios.post("http://localhost:3002/upload/profile", form, {
+        onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
+      });
+
+      console.log(res);
+
+      setImage(res.data.publicUrl);
+
+      setSuccess(true);
+      setSuccessMessage("File Upload Successfull ✅");
+      setLoading(false);
+      setLoadingButton(false);
+
+      setFiles(null);
+    }
+  };
+
+  const HandleFileChange = async (e) => {
+    setEnableUpload(false);
+    setFiles(e.target.files[0]);
+    // console.log(e.target.files[0]);
+    setFilename(e.target.files[0].name);
+    
+  };
+
+  const HandleResumeFileChange = async (e) => {
+    setEnableUploadResume(false);
+    setFile(e.target.files[0]);
+    console.log(e.target.files[0].name);
+    setResumeFileName(e.target.files[0].name);
+      
+  };
+
+   
+  const HandleResumeUpload = async () => {
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+      setLoadingButtonResume(true);
+      setEnableUploadResume(true);
+
+      let form = new FormData();
+
+      form.append("file", file, file.name);
+
+      let res = await axios.post("http://localhost:3002/upload/resume", form, {
+        onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
+      });
+
+      console.log(res);
+
+      setresumeLink(res.data.publicUrl);
+
+      setSuccess(true);
+      setSuccessMessage("File Upload Successfull ✅");
+      setLoading(false);
+      setLoadingButtonResume(false);
+
+      setFile(null);
+    }
+  };
+
   const handleUpdate = async (e, id) => {
     e.preventDefault();
     const res = await fetch(`${API_URL}/api/profile/user/profile/update`, {
@@ -124,7 +218,8 @@ export default function Profile() {
         bio: bio,
         skills: skills,
         languages: languages,
-        profile_image: null,
+        profile_image: image,
+        resumeLink: resumeLink
       }),
     });
 
@@ -141,6 +236,7 @@ export default function Profile() {
     });
     handleClose();
   };
+  console.log(resumeLink)
 
   const handleClose = () => {
     setOpen(false);
@@ -161,9 +257,11 @@ export default function Profile() {
   return (
     <>
       <div>
+      
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Update Profile</DialogTitle>
           <DialogContent>
+          
             <TextField
               autoFocus
               value={linked_link}
@@ -189,17 +287,113 @@ export default function Profile() {
             />
             <TextField
               multiline
-              minRows={10}              
+              minRows={10}
               margin="dense"
               id="name"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              label="Description"
+              label="Bio"
               type="text"
               fullWidth
               variant="outlined"
               required
             />
+              <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexDirection: "row-reverse",
+              }}
+            >
+              <div style={{ marginLeft: "1rem" }}>
+                <label className="buttonLabel" htmlFor="contained-button-file">
+                  Upload a Image
+                </label>
+
+                <Input
+                  onChange={(e) => HandleFileChange(e)}
+                  style={{
+                    opacity: "0",
+                    zIndex: "-1",
+                    position: "absolute",
+                  }}
+                  accept="image/*"
+                  id="contained-button-file"
+                  multiple
+                  type="file"
+                />
+              </div>
+              <div>
+                <TextField
+                  margin="dense"
+                  variant="outlined"
+                  fullWidth
+                  value={filename}
+                  disabled={true}
+                />
+              </div>
+              <Box sx={{ m: 1, position: "relative" }}>
+                <LoadingButton
+                  loading={loadingButton}
+                  disabled={enableUpload}
+                  loadingPosition="start"
+                  startIcon={<SaveIcon />}
+                  onClick={HandleUpload}
+                  variant="outlined"
+                >
+                  Upload
+                </LoadingButton>
+              </Box>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexDirection: "row-reverse",
+              }}
+            >
+              <div style={{ marginLeft: "1rem" }}>
+                <label className="buttonLabel" htmlFor="containedandlsnalkd">
+                  Upload a Resume
+                </label>
+
+                <Input
+                  onChange={(e) => {
+                    HandleResumeFileChange(e) }}
+                  style={{
+                    opacity: "0",
+                    zIndex: "-1",
+                    position: "absolute",
+                  }}
+                  accept="application/*"
+                  id="containedandlsnalkd"
+                  type="file"
+                />
+              </div>
+              <div>
+                <TextField
+                  margin="dense"
+                  variant="outlined"
+                  fullWidth
+                  value={Resumefilename}
+                  disabled={true}
+                />
+              </div>
+              <Box sx={{ m: 1, position: "relative" }}>
+                <LoadingButton
+                  loading={loadingButtonResume}
+                  disabled={enableUploadResume}
+                  loadingPosition="start"
+                  startIcon={<SaveIcon />}
+                  onClick={HandleResumeUpload}
+                  variant="outlined"
+                >
+                  Upload
+                </LoadingButton>
+              </Box>
+            </div>
             <Select
               multiple
               displayEmpty
@@ -218,16 +412,20 @@ export default function Profile() {
               inputProps={{ "aria-label": "Without label" }}
             >
               <MenuItem disabled value="">
-                <Typography padding={"10px"}textAlign="center">Programming Languages</Typography>
+                <Typography padding={"10px"} textAlign="center">
+                  Programming Languages
+                </Typography>
               </MenuItem>
               {names.map((name) => (
                 <MenuItem
                   key={name}
                   dense={true}
                   value={name}
-                  style={{margin: "10px"}}
+                  style={{ margin: "10px" }}
                 >
-                   <Typography padding={"10px"}textAlign="center">{name}</Typography>
+                  <Typography padding={"10px"} textAlign="center">
+                    {name}
+                  </Typography>
                 </MenuItem>
               ))}
             </Select>
@@ -284,10 +482,11 @@ export default function Profile() {
               <img src="/images/linkedIn.png" alt="background" />
 
               <Avatar
-                src="/images/avatar.png"
+                src={image}
                 className="profile__sidebar__avatar"
                 style={{ height: "150px", width: "150px", marginLeft: "2rem" }}
               ></Avatar>
+                
               <div
                 style={{
                   display: "flex",
@@ -323,6 +522,9 @@ export default function Profile() {
               <div className="profile__info">
                 <p>456 Connections</p>
               </div>
+              <div className="profile__info">
+                <a href={resumeLink} target="_blank">Resume Link 🔗</a>
+              </div>
               {userProfile.bio && (
                 <div className="profile__addition">
                   <p> Bio: {userProfile.bio}</p>
@@ -350,7 +552,7 @@ export default function Profile() {
           </div>
           <div style={{ marginLeft: "2rem" }}>
             <Experience />
-            <Projects />
+            <Project />
             <Education />
             <Certification />
           </div>

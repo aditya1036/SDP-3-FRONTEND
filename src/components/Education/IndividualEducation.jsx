@@ -41,7 +41,6 @@ function IndividualEducation({edu, education, setEducation}) {
 
     const handleClickOpen1 = (e) => {
         setOpen1(true);
-        setId(id)
     };
 
     const handleClose1 = () => {
@@ -72,15 +71,15 @@ function IndividualEducation({edu, education, setEducation}) {
         }
     }
     const handleUpdateEducation = async(e) => {
-        e.preventDefault({
-            id: id,
-            institution_name: institution_name,
-            duration: education_duration,
-            location: location,
-            degree_type : degree_type,
-            user_id: user_state.id
-        })
-        console.log()
+        e.preventDefault()
+        console.log({
+          id: id,
+          institution_name: institution_name,
+          duration: education_duration,
+          location: location,
+          degree_type : degree_type,
+          user_id: user_state.id
+      })
         const res = await fetch(`${API_URL}/api/education/update` , {
             method: "PATCH" ,
             headers:

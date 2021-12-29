@@ -100,6 +100,7 @@ function IndividualPost({ post }) {
     console.log(re);
   };
 
+  console.log(individualPost.userData.profile_image);
   // console.log("INDIVIDUAL POSSTTT", individualPost);
 
   return (
@@ -111,8 +112,8 @@ function IndividualPost({ post }) {
               <Avatar
                 src={
                   individualPost.userData.profile_image
-                    ? "/images/avatar.png"
-                    : individualPost.userData.profile_image
+                  ? individualPost.userData.profile_image
+                  : "/images/avatar.png"
                 }
 
                 style={{marginRight: "10px"}}

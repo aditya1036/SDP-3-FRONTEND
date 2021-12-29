@@ -18,6 +18,7 @@ import DateRangePicker from '@mui/lab/DateRangePicker';
 import Box from '@mui/material/Box';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import IndividualCertificate from './IndividualCertificate';
 
 
 const Certification = () => {
@@ -38,9 +39,7 @@ const Certification = () => {
         return [date.getFullYear(), mnth, day].join("-");
       }
     
-    var license_duration_start = convert(value[0])
-    var license_duration_end = convert(value[1])
-
+    var license_duration = convert(value[0]) + " to " +convert(value[1]);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -48,15 +47,6 @@ const Certification = () => {
 
     const handleClose = () => {
         setOpen(false);
-    };
-
-    const handleClickOpen1 = (e,id) => {
-        setOpen1(true);
-        setLicenseId(id)
-    };
-
-    const handleClose1 = () => {
-        setOpen1(false);
     };
 
     useEffect(() => {
@@ -73,6 +63,7 @@ const Certification = () => {
                 }
             })
             const data = await res.json();
+            console.log(data)
             setLicenses(data.data)
           
         }
@@ -92,115 +83,45 @@ const Certification = () => {
                 },
             body:JSON.stringify({
                 license_name: license_name,
-                received_date: license_duration_start,
-                expiration_date: license_duration_end,
+                duration: license_duration,
                 pdf_link: pdf_link,
                 user_id: user_state.id
             })
         })
         const data = await res.json()
-        setLicenses([...licenses ,{
+
+        console.log(data);
+        setLicenses([{
             id: data.data[0].id,
             license_name: license_name,
-            received_date: license_duration_start,
-            expiration_date: license_duration_end,
+            duration: license_duration,
             pdf_link: pdf_link,
             user_id: user_state.id
-        }])
+        }, ...licenses])
 
         handleClose()
         setLicenseName('')
         setPdfLink('')
     }
 
-
-    const deleteCertification= async (e,id) => {
-        e.preventDefault()
-        const res = await fetch(`${API_URL}/api/test/user/delete/license/${id}` , {
-            method: "DELETE",
-            headers:
-                {
-                    "Content-Type": "application/json",
-                    "Authorization" : `Bearer ${JSON.parse(localStorage.getItem("token")).token}`,
-                }
-        })
-        const data = await res.json();
-        console.log(data)
-        setLicenses(licenses.filter((lic => lic.id !== id)))
-        
-
-    
-    }
-
-
-    const handleUpdateCertification = async(e,id) => {
-        e.preventDefault()
-        const res = await fetch(`${API_URL}/api/test/user/license/update` , {
-            method: "PUT" ,
-            headers:
-                {
-                    "Content-Type": "application/json",
-                    "Authorization" : `Bearer ${JSON.parse(localStorage.getItem("token")).token}`,
-                },
-            body: JSON.stringify({
-                id: id,
-                license_name: license_name,
-                received_date: license_duration_start,
-                expiration_date: license_duration_end,
-                pdf_link: pdf_link,
-                user_id: user_state.id
-            })
-            
-        })
-
-        const data = await res.json()
-        const index = licenses.findIndex((exp) => exp.id  === id)
-        var updated_experience = [...licenses]
-        updated_experience[index] = {
-            id: id,
-            license_name: license_name,
-            received_date: license_duration_start,
-            expiration_date: license_duration_end,
-            pdf_link: pdf_link,
-            user_id: user_state.id
-            
-        }
-        setLicenses(updated_experience)
-        handleClose1()
-    }
-
-
-
-
-
     return (
-        <>
+        <div> 
+
         <div className='certification_container'>
             <div style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingTop: "1rem",
-          }}>
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              paddingTop: "1rem",
+            }}>
 
         <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>Certificate 📜</span> <span style={{cursor: "pointer"}}onClick={handleClickOpen}><AddIcon /></span>
             </div >
         {licenses.length === 0 ? <div>
           <span style={{fontSize: "1rem"}}>Please add your certificate deatils to your profile.. 📎</span>
         </div> :licenses.map((lic) => (
-                <>
-                <div className='certification_content' key={lic.id}>
-                <span onClick={(e) => handleClickOpen1(e,lic.id)}><EditIcon style={{marginLeft: "800px", marginTop: "15px"}}/></span>&nbsp;<span onClick={(e) => deleteCertification(e,lic.id)} ><DeleteIcon/></span>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>Name: {lic.license_name}</h4>
-                <div className='certification__info'>
-                <p>Recieved Date: {lic.received_date}</p>
-                <p>Expiration Date: {lic.expiration_date}</p>
-                </div>
-                <h4 style={{marginLeft: "40px", marginTop: "30px"}}>Link: {lic.pdf_link}</h4>
-                
-                </div>
-                </>  
-            ))}
+          <IndividualCertificate key={lic.id} lic={lic} licenses={licenses} setLicenses={setLicenses} />
+          ))}
         </div>
         <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add License Or Certification</DialogTitle>
@@ -218,23 +139,23 @@ const Certification = () => {
             fullWidth
             variant="outlined"
             required
-          />&nbsp;
+            />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DateRangePicker
                 startText="From"
                 endText="To"
                 value={value}
                 onChange={(newValue) => {
-                setValue(newValue);
+                  setValue(newValue);
                 }}
                 renderInput={(startProps, endProps) => (
-                <React.Fragment>
+                  <React.Fragment>
                     <TextField {...startProps} />
                     <Box sx={{ mx: 2 }}> to </Box>
                     <TextField {...endProps} />
                 </React.Fragment>
                 )}
-            />
+                />
             </LocalizationProvider>
           <TextField
             autoFocus
@@ -247,68 +168,18 @@ const Certification = () => {
             fullWidth
             variant="outlined"
             required
-          />
+            />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={(e) => handleAddLicense(e,user_state.id)}>Add</Button>
         </DialogActions>
       </Dialog>
-      <Dialog open={open1} onClose={handleClose1}>
-        <DialogTitle>Update License</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="license_name"
-            value={license_name}
-            onChange={(e) => setLicenseName(e.target.value)}
-            label="License Name"
-            type="text"
-            fullWidth
-            variant="outlined"
-            required
-          />&nbsp;
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DateRangePicker
-                startText="From"
-                endText="To"
-                value={value}
-                onChange={(newValue) => {
-                setValue(newValue);
-                }}
-                renderInput={(startProps, endProps) => (
-                <React.Fragment>
-                    <TextField {...startProps} />
-                    <Box sx={{ mx: 2 }}> to </Box>
-                    <TextField {...endProps} />
-                </React.Fragment>
-                )}
-            />
-            </LocalizationProvider>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="pdf_link"
-            label="PDF Link"
-            value={pdf_link}
-            onChange={(e) => setPdfLink(e.target.value)}
-            type="text"
-            fullWidth
-            variant="outlined"
-            required
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose1}>Cancel</Button>
-          <Button onClick={(e) => handleUpdateCertification(e,license_id)}>Update</Button>
-        </DialogActions>
-      </Dialog>
-        </>
-
-    )
-}
-
-export default Certification
+    </div>
+      
+     
+      
+      )
+    }
+    
+    export default Certification

@@ -114,42 +114,6 @@ const Education = () => {
     }
 
 
-    const handleUpdateEducation = async(e,id) => {
-        e.preventDefault()
-        const res = await fetch(`${API_URL}/api/education/update` , {
-            method: "PATCH" ,
-            headers:
-                {
-                    "Content-Type": "application/json",
-                    "Authorization" : `Bearer ${JSON.parse(localStorage.getItem("token")).token}`,
-                },
-            body: JSON.stringify({
-                id: id,
-                institution_name: institute,
-                duration: education_duration,
-                location: location,
-                degree_type : degree,
-                user_id: user_state.id
-            })
-            
-        })
-
-        const data = await res.json()
-        const index = education.findIndex((edu) => edu.id  === id)
-        var updated_education = [...education]
-        updated_education[index] = {
-            id: id,
-            institution_name: institute,
-            duration: education_duration,
-            location: location,
-            degree_type : degree,
-            user_id: user_state.id
-        }
-        setEducation(updated_education)
-        handleClose1()
-    }
-
-
 
     return (
         <>
