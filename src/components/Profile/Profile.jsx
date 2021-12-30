@@ -85,6 +85,8 @@ export default function Profile() {
   const [skills, setSkills] = useState([]);
   const [languages, setLanguages] = useState([]);
 
+  const [fullName, setFullName] = useState("");
+
   useEffect(() => {
     async function initialUser() {
       const res = await fetch(`${API_URL}/api/profile/user/profile/${id}`, {
@@ -100,7 +102,14 @@ export default function Profile() {
       console.log(data);
       setUserProfile(data.data[0]);
       setImage(data.data[0].profile_image);
+      setGithub(data.data[0].github_link)
+      setLinkedIn(data.data[0].linkedIn_link)
+      setSkills([...skills,...data.data[0].skills])
       setresumeLink(data.data[0].resumeLink);
+      setFullName(data.data[0].fullname)
+      setBio(data.data[0].bio)
+      setLanguages([...languages,...data.data[0].languages])
+
     }
     initialUser();
   }, []);
@@ -219,7 +228,8 @@ export default function Profile() {
         skills: skills,
         languages: languages,
         profile_image: image,
-        resumeLink: resumeLink
+        resumeLink: resumeLink,
+        fullname : fullName
       }),
     });
 
@@ -261,9 +271,21 @@ export default function Profile() {
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Update Profile</DialogTitle>
           <DialogContent>
+
+          <TextField
+              autoFocus
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              margin="dense"
+              id="fullname"
+              label="Full Name"
+              type="text"
+              fullWidth
+              variant="outlined"
+              required
+            />
           
             <TextField
-              autoFocus
               value={linked_link}
               onChange={(e) => setLinkedIn(e.target.value)}
               margin="dense"
@@ -496,7 +518,7 @@ export default function Profile() {
                 }}
               >
                 <span style={{ padding: "20px", fontSize: "2rem" }}>
-                  {user_state.first_name}&nbsp;{user_state.last_name}
+                  {fullName}
                 </span>
               
                 {  user_state.id*1 !== id*1 ? <></> :<span onClick={handleClickOpen} style={{ marginRight: "1rem" }}>
@@ -506,14 +528,14 @@ export default function Profile() {
               </div>
               <div>
                 <Link
-                  href={userProfile.github_link}
+                  href={github_link}
                   style={{ marginLeft: "30px" }}
                   target="_blank"
                 >
                   <GitHubIcon style={{ color: "black" }} />
                 </Link>
                 <Link
-                  href={userProfile.linkedIn_link}
+                  href={linked_link}
                   style={{ marginLeft: "10px" }}
                   target="_blank"
                 >
@@ -528,21 +550,21 @@ export default function Profile() {
               </div>
               {userProfile.bio && (
                 <div className="profile__addition">
-                  <p> Bio: {userProfile.bio}</p>
+                  <p> Bio: {bio}</p>
                   <p>
                     Languages:{" "}
-                    {userProfile.languages &&
-                      userProfile.languages.map((e, i) => {
-                        if (i === userProfile.languages.length - 1)
+                    {languages &&
+                     languages.map((e, i) => {
+                        if (i === languages.length - 1)
                           return <span>{e}</span>;
                         else return <span>{e}, </span>;
                       })}
                   </p>
                   <p>
                     Skills:{" "}
-                    {userProfile.skills &&
-                      userProfile.skills.map((e, i) => {
-                        if (i == userProfile.skills.length - 1)
+                    {skills &&
+                     skills.map((e, i) => {
+                        if (i == skills.length - 1)
                           return <span>{e}</span>;
                         else return <span>{e}, </span>;
                       })}

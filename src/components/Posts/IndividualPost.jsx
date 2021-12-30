@@ -109,6 +109,8 @@ function IndividualPost({ post }) {
         <div key={individualPost.id}>
           <div className="post">
             <div className="post__header">
+              <Link to={`/profile/${individualPost.userData.id}`}>
+             
               <Avatar
                 src={
                   individualPost.userData.profile_image
@@ -118,6 +120,7 @@ function IndividualPost({ post }) {
 
                 style={{marginRight: "10px"}}
               ></Avatar>
+               </Link>
 
 
                 <Link to={`/post/${individualPost.id}`}>

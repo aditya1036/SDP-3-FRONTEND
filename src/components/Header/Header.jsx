@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RemoveUser } from '../redux/UserContext/UserSlice';
 import { Card } from '@mui/material';
 import  { selectUser } from "../redux/UserContext/UserSlice"
+
 const Header = () => {
 
   const dispatch = useDispatch();
@@ -26,14 +27,13 @@ const Header = () => {
     <Navigate to='/signin' />
   }
     return (
-       <Card style={{position: "sticky"}}>
+       <Card style={{position: "fixed" , width: "100%"}}>
        <div className='header'>
       <Link to="/" >
       <img className="logo__header"  src='images/SignUp.png'  alt='Not Found' />
       </Link>
       <div className="header__search">
-      <TextField  variant="outlined" size="small"
-            />
+      <TextField  fullWidth variant="outlined" name="search" placeholder='search'/>
           {/* Search Logo */}
           <SearchIcon className="header__searchIcon" />
       </div>

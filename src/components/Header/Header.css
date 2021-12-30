@@ -1,4 +1,4 @@
-/* .header
+.header
 {
     height: 60px;
     display: flex;
@@ -8,14 +8,16 @@
     top: 0;
     z-index: 100;
     text-decoration: none;
+    justify-content: space-between;
+
 }
 
 .header__search
 {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex: 1;
-    border-radius: 24px;
 
 }
 
@@ -37,12 +39,7 @@
     border: none;
 }
 
-.header__searchIcon
-{
-    padding: 5px;
-    height: 22px !important;
-    background-color: white;
-}
+
 
 
 .header__nav
@@ -74,4 +71,4 @@
 }
 
 
- */
+

@@ -13,16 +13,23 @@ import UserPosts from './components/Posts/UserPosts';
 import JobPosting from "./components/JobPosting/JobPosting"
 import "./App.css"
 import StepForm from './components/Jobform/StepForm';
-import NavBar from "./components/Header/NavBar"
+
+import Header from './components/Header/Header';
+import NavBar from './components/Header/NavBar';
+import { useSelector } from 'react-redux';
+import { selectUser } from './components/redux/UserContext/UserSlice';
 
 function App() {
+  const user = useSelector(selectUser);
 
   const { token, setToken } = useToken()
+
+  console.log(user.first_name);
 
   return (
     <>
       <Router>
-     {localStorage.getItem("token")?<NavBar /> :null }  
+     {user.first_name !== undefined? <NavBar /> :null }  
         <Routes>
           <Route path='/signup' element={<><SignUp /></>} />
           <Route path='/signin' element={<><SignIn setToken={setToken} /></>} />

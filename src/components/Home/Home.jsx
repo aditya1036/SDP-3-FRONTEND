@@ -12,7 +12,7 @@ const Home = ({ token }) => {
   //Done with everything
   return (
     <div>
-      <Container>
+      <Container >
         <Layout>
           <Leftside />
           <Feed />
