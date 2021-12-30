@@ -15,9 +15,12 @@ import DateRangePicker from "@mui/lab/DateRangePicker";
 import Box from "@mui/material/Box";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { useParams } from 'react-router-dom';
 
 function IndividualEducation({edu, education, setEducation}) {
 
+
+    const {paramid} = useParams();
     const user_state = useSelector(selectUser);
     const [educati, seteducati] = useState(edu)
     const [institution_name, setInstitueName] = useState(edu.institution_name)
@@ -120,6 +123,7 @@ function IndividualEducation({edu, education, setEducation}) {
           </div>
 
           <div>
+          {user_state.id*1 !== paramid*1 ? <></> :
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div className="div_edit_button">
                 <span
@@ -139,7 +143,7 @@ function IndividualEducation({edu, education, setEducation}) {
                   <DeleteIcon />
                 </span>
               </div>
-            </div>
+            </div> }
           </div>
                 </div>
                 <div

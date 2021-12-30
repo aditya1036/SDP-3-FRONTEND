@@ -19,9 +19,12 @@ import Box from '@mui/material/Box';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import IndividualEducation from "./IndividualEducation"
+import { useParams } from 'react-router-dom';
 
 
 const Education = () => {
+
+  const {id} = useParams()
 
     const user_state = useSelector(selectUser)
     const[education , setEducation] = useState([])
@@ -126,7 +129,9 @@ const Education = () => {
           }}>
 
 
-        <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>Education 📃 </span> <span style={{cursor: "pointer"}} onClick={handleClickOpen}><AddIcon/></span>
+        <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>Education 📃 </span> 
+        {user_state.id*1 !== id*1 ? <></> :
+        <span style={{cursor: "pointer"}} onClick={handleClickOpen}><AddIcon/></span> }
         
           </div>
             { education.length === 0 ? <div>

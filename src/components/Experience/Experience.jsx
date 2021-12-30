@@ -19,8 +19,10 @@ import Box from "@mui/material/Box";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import IndividualExperience from "./IndividualExperience";
+import { useParams } from "react-router-dom";
 
 const Experience = () => {
+  const { id } = useParams();
   const user_state = useSelector(selectUser);
   const [experience, setExperience] = useState([]);
   const [description, setDescription] = useState("");
@@ -132,9 +134,10 @@ const Experience = () => {
           <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>
             Experience 📄
           </span>
-          <span style={{ cursor: "pointer" }} onClick={handleClickOpen}>
+          {user_state.id*1 !== id*1 ? <></>:   <span style={{ cursor: "pointer" }} onClick={handleClickOpen}>
             <AddIcon />
-          </span>
+          </span> }
+        
         </div>
         {experience.length === 0 ? (
           <div>

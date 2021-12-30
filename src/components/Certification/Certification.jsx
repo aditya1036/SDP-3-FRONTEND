@@ -19,9 +19,12 @@ import Box from '@mui/material/Box';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import IndividualCertificate from './IndividualCertificate';
+import { useParams } from 'react-router-dom';
 
 
 const Certification = () => {
+
+  const {id} = useParams()
 
     const user_state = useSelector(selectUser)
     const[licenses, setLicenses] = useState([])
@@ -115,7 +118,9 @@ const Certification = () => {
               paddingTop: "1rem",
             }}>
 
-        <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>Certificate 📜</span> <span style={{cursor: "pointer"}}onClick={handleClickOpen}><AddIcon /></span>
+        <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>Certificate 📜</span> 
+        {user_state.id*1 !== id*1 ? <></> :
+        <span style={{cursor: "pointer"}}onClick={handleClickOpen}><AddIcon /></span> }
             </div >
         {licenses.length === 0 ? <div>
           <span style={{fontSize: "1rem"}}>Please add your certificate deatils to your profile.. 📎</span>

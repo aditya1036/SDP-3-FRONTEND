@@ -18,9 +18,11 @@ import DateRangePicker from "@mui/lab/DateRangePicker";
 import Box from "@mui/material/Box";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { useParams } from "react-router-dom";
 
 function IndividualExperience({ experiences, exp, setExpereinces }) {
   const user_state = useSelector(selectUser);
+  const {id} = useParams();
   const [experience, setExperience] = useState(exp);
   const [description, setDescription] = useState(exp.description);
   const [value, setValue] = useState(exp.duration.split("to"));
@@ -50,6 +52,7 @@ function IndividualExperience({ experiences, exp, setExpereinces }) {
 
   const deleteEducation = async (e) => {
     e.preventDefault();
+
     let newex = experiences.filter((el) => el.id != experience.id);
     setExpereinces(newex);
     const res = await fetch(
@@ -121,6 +124,8 @@ function IndividualExperience({ experiences, exp, setExpereinces }) {
             </span>
           </div>
           <div>
+
+            {user_state.id*1 !== id*1 ? <></> :
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div className="div_edit_button">
                 <span
@@ -132,6 +137,7 @@ function IndividualExperience({ experiences, exp, setExpereinces }) {
                 </span>
               </div>
 
+
               <div className="delete_button">
                 <span
                   style={{ cursor: "pointer" }}
@@ -140,7 +146,7 @@ function IndividualExperience({ experiences, exp, setExpereinces }) {
                   <DeleteIcon />
                 </span>
               </div>
-            </div>
+            </div> }
           </div>
         </div>
         <div

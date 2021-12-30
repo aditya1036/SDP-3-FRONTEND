@@ -19,8 +19,10 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { API_URL } from "../../config/env";
 import IndividualProject from "./IndividualProject";
+import { useParams } from "react-router-dom";
 
 const Project = () => {
+  const {id} = useParams()
   const user_state = useSelector(selectUser);
   const [projects, setProjects] = useState([]);
   const [name, setName] = useState("");
@@ -117,7 +119,8 @@ const Project = () => {
               paddingTop: "1rem",
             }}>
 
-        <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>Projects ☕</span> <span style={{cursor: "pointer"}}onClick={handleClickOpen}><AddIcon /></span>
+
+        <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>Projects ☕</span> {user_state.id*1 !== id*1 ? <></> :<span style={{cursor: "pointer"}}onClick={handleClickOpen}><AddIcon /></span> }
             </div >
         {projects.map((project) => (
           <>

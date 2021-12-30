@@ -498,10 +498,11 @@ export default function Profile() {
                 <span style={{ padding: "20px", fontSize: "2rem" }}>
                   {user_state.first_name}&nbsp;{user_state.last_name}
                 </span>
-
-                <span onClick={handleClickOpen} style={{ marginRight: "1rem" }}>
+              
+                {  user_state.id*1 !== id*1 ? <></> :<span onClick={handleClickOpen} style={{ marginRight: "1rem" }}>
                   <EditIcon />
-                </span>
+                </span> }
+                
               </div>
               <div>
                 <Link

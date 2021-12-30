@@ -16,8 +16,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { API_URL } from "../../config/env";
 import { selectUser } from "../redux/UserContext/UserSlice";
+import { useParams } from "react-router-dom";
 
 function IndividualCertificate({ lic, licenses, setLicenses }) {
+  const {paramid} = useParams()
   const user_state = useSelector(selectUser);
   const [license, setLicense] = useState(lic);
   const [value, setValue] = useState(lic.duration.split("to"));
@@ -108,6 +110,7 @@ function IndividualCertificate({ lic, licenses, setLicenses }) {
           </div>
 
           <div>
+          {user_state.id*1 !== paramid*1 ? <></> :
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div className="div_edit_button">
                 <span
@@ -127,7 +130,7 @@ function IndividualCertificate({ lic, licenses, setLicenses }) {
                   <DeleteIcon />
                 </span>
               </div>
-            </div>
+            </div> }
           </div>
         </div>
         <div

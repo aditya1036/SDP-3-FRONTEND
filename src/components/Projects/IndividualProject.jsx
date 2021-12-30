@@ -16,8 +16,10 @@ import Box from "@mui/material/Box";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { API_URL } from "../../config/env";
+import { useParams } from "react-router-dom";
 
 const IndividualProject = ({ projects, setProjects, project }) => {
+  const {id} = useParams()
   const [name, setName] = useState(project.name);
   const [description, setDescription] = useState(project.description);
   const [git_link, setGitLink] = useState(project.git_link);
@@ -120,6 +122,8 @@ const IndividualProject = ({ projects, setProjects, project }) => {
           </div>
 
           <div>
+
+            {user_state.id*1 !== id*1 ? <></> :
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div className="div_edit_button">
                 <span
@@ -139,7 +143,7 @@ const IndividualProject = ({ projects, setProjects, project }) => {
                   <DeleteIcon />
                 </span>
               </div>
-            </div>
+            </div> }
           </div>
         </div>
         <div
