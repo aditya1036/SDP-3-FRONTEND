@@ -2,7 +2,7 @@ import React from 'react'
 import styled from "styled-components";
 import { JobCard } from './JobCard';
 import Leftside from '../Home/Leftside';
-import CreateIcon from "@material-ui/icons/Create";
+import CreateIcon from '@mui/icons-material/Create';
 import './JobPosting.css'
 
 const JobPosting = () => {

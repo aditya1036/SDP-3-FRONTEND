@@ -55,7 +55,7 @@ const Experience = () => {
 
     async function userExperience() {
       const res = await fetch(
-        `${API_URL}/api/experience/getByUserId/${user_state.id}`,
+        `${API_URL}/api/experience/getByUserId/${id}`,
         {
           method: "GET",
           headers: {

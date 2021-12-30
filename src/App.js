@@ -37,7 +37,7 @@ function App() {
           <Route path='/' element={<PrivateRoute> <Home/></PrivateRoute>} />
           <Route path='/aboutus' element={<><PrivateRoute> <Aboutus /></PrivateRoute></>} />
           <Route path='/userposts' element={<PrivateRoute> <UserPosts /></PrivateRoute>} />
-          <Route path='/jobposting' element={<><PrivateRoute> <JobPosting /></PrivateRoute></>} />
+          <Route path='/jobs' element={<><PrivateRoute> <JobPosting /></PrivateRoute></>} />
           <Route path='/jobform' element={<><PrivateRoute><StepForm /></PrivateRoute></>}/>
           <Route path='/post/:id' element={<><PrivateRoute> <PostDetails /></PrivateRoute></>} />
           <Route path='*' element={<><NotFound/></>} />

@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Paper, TextField } from "@material-ui/core";
+import { Avatar, Button, Card, Paper, TextField } from "@mui/material";
 import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";

@@ -19,14 +19,14 @@ import { selectUser } from "../redux/UserContext/UserSlice";
 import { useParams } from "react-router-dom";
 
 function IndividualCertificate({ lic, licenses, setLicenses }) {
-  const {paramid} = useParams()
+  const {id} = useParams()
   const user_state = useSelector(selectUser);
   const [license, setLicense] = useState(lic);
   const [value, setValue] = useState(lic.duration.split("to"));
   const [open1, setOpen1] = useState(false);
   const [license_name, setLicenseName] = useState(lic.license_name);
   const [pdf_link, setPdfLink] = useState(lic.pdf_link);
-  const [id, setId] = useState(lic.id);
+  const [id1, setId] = useState(lic.id);
 
 
   function convert(str) {
@@ -48,10 +48,10 @@ function IndividualCertificate({ lic, licenses, setLicenses }) {
 
   const deleteCertification = async (e) => {
     e.preventDefault();
-    setLicenses(licenses.filter((lics) => lics.id !== id));
+    setLicenses(licenses.filter((lics) => lics.id !== id1));
 
     const res = await fetch(
-      `${API_URL}/api/test/user/delete/license/${id}`,
+      `${API_URL}/api/test/user/delete/license/${id1}`,
       {
         method: "DELETE",
         headers: {
@@ -68,7 +68,7 @@ function IndividualCertificate({ lic, licenses, setLicenses }) {
 
   const handleUpdateCertification = async (e) => {
     e.preventDefault();
-    console.log(id)
+    console.log(id1)
     const res = await fetch(`${API_URL}/api/test/user/license/update`, {
       method: "PUT",
       headers: {
@@ -78,7 +78,7 @@ function IndividualCertificate({ lic, licenses, setLicenses }) {
         }`,
       },
       body: JSON.stringify({
-        id: id,
+        id: id1,
         license_name: license_name,
         duration: license_duration,
         pdf_link: pdf_link,
@@ -110,7 +110,7 @@ function IndividualCertificate({ lic, licenses, setLicenses }) {
           </div>
 
           <div>
-          {user_state.id*1 !== paramid*1 ? <></> :
+          {user_state.id*1 !== id*1 ? <></> :
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div className="div_edit_button">
                 <span

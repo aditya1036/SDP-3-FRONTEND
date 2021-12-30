@@ -51,7 +51,7 @@ const Project = () => {
   useEffect(() => {
     async function userProjects() {
       const res = await fetch(
-        `${API_URL}/api/project/getbyuserid/${user_state.id}`,
+        `${API_URL}/api/project/getbyuserid/${id}`,
         {
           method: "GET",
           headers: {

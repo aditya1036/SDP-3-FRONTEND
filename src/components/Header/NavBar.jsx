@@ -11,15 +11,60 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { TextField } from '@material-ui/core';
+import {TextField, styled, InputBase} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import {Link, Navigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { RemoveUser, selectUser } from '../redux/UserContext/UserSlice';
-
+import HomeIcon from '@mui/icons-material/Home';
+import WorkIcon from '@mui/icons-material/Work';
+import PersonIcon from '@mui/icons-material/Person';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import {alpha} from '@mui/system'
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+
+    },
+  },
+}));
+
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -51,7 +96,7 @@ const NavBar = () => {
   };
 
   return (
-    <AppBar position="sticky" variant='elevation' color='default'>
+    <AppBar position="sticky" variant='elevation' style={{backgroundColor: "rgb(14, 35, 71)"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -60,11 +105,11 @@ const NavBar = () => {
             component="span"
             sx={{ mr: 0, display: { xs: 'none', md: 'flex' } }}
           >
-                <img className="logo__header"  src='https://sdp3jobber.s3.ap-south-1.amazonaws.com/SignUp2.png'  alt='Not Found' style={{height: "3rem"}} />
+                <img className="logo__header"  src='https://sdp3jobber.s3.ap-south-1.amazonaws.com/navlogo-removebg-preview.png'  alt='Not Found' style={{height: "3rem"}} />
 
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, color: "black" }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, color: "white" }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -115,29 +160,29 @@ const NavBar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-             <img className="logo__header"  src='https://sdp3jobber.s3.ap-south-1.amazonaws.com/SignUp2.png'  alt='Not Found'  style={{height: "6rem"}} />
+             <img className="logo__header"  src='https://sdp3jobber.s3.ap-south-1.amazonaws.com/Gradient_Financial_Services_Company_Logo__4_-removebg-preview.png'  alt='Not Found'  style={{height: "6rem"}} />
 
           </Typography>
           <Box sx={{ flexGrow: 1, alignItems: "center",justifyContent: "space-between",display: { xs: 'none', md: 'flex' }, marginLeft: "30px" }}>
           <Box sx={{ flexGrow: 1, justifyContent: "left", alignItems: "center",display: { xs: 'none', md: 'flex' }, marginLeft: "30px" }}>
-
-          <TextField
-                    margin='dense'
-                    variant="outlined"
-                    id="search"
-                    label="Search"
-                    name="search"
-                    style={{ marginRight: "10px" ,width: "100%" }}
-                    />
+          <Search>
+            <SearchIconWrapper>
               <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
                     </Box>
-            <Box sx={{ flexGrow: 1, justifyContent: "right",display: { xs: 'none', md: 'flex' }, color: "black",marginRight: "30px" }}>
+            <Box sx={{ flexGrow: 1, justifyContent: "right",display: { xs: 'none', md: 'flex' }, color: "white",marginRight: "30px",alignItems:"center" }}>
 
               <Link to="/">
               
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
+                sx={{ mr: "1rem", color: 'white' }}
+                startIcon={<HomeIcon />}
                 >
                   Home
               </Button>
@@ -147,7 +192,8 @@ const NavBar = () => {
 
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
+                sx={{ mr: "1rem",color: 'white' }}
+                startIcon={<WorkIcon />}
                 >
                   Jobs
               </Button>
@@ -158,7 +204,8 @@ const NavBar = () => {
               <Button
                 
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
+                sx={{ mr: "1rem",color: 'white' }}
+                startIcon={<NotificationsActiveIcon/>}
                 >
                   Notification
               </Button>
@@ -168,7 +215,8 @@ const NavBar = () => {
 
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
+                sx={{ mr: "1rem",color: 'white' }}
+                startIcon={< PersonIcon/>}
                 >
                   Profile
               </Button>
@@ -199,20 +247,20 @@ const NavBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <MenuItem style={{margin: "10px"}} onClick={handleCloseNavMenu} >
+                <MenuItem onClick={handleCloseNavMenu} >
                   <Typography textAlign="center" padding={"10px"} >Profile</Typography>
                 </MenuItem>
-                <br />
-                <MenuItem style={{margin: "10px"}} onClick={handleCloseNavMenu}>
+                
+                <MenuItem onClick={handleCloseNavMenu}>
                   <Typography  padding={"10px"}textAlign="center">Account</Typography>
                 </MenuItem>
-                <br />
+                
                 <Link to="/signin">
-                <MenuItem onClick={handleLogout} style={{margin: "10px"}}>
+                <MenuItem onClick={handleLogout}>
                   <Typography  padding={"10px"} textAlign="center">Logout</Typography>
                 </MenuItem>
                 </Link>
-                <br />
+                
             </Menu>
           </Box>
         </Toolbar>

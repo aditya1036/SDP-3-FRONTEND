@@ -65,7 +65,7 @@ const Education = () => {
 
         async function userEducation()
         {
-            const res = await fetch(`${API_URL}/api/education/getbyuserid/${user_state.id}` , 
+            const res = await fetch(`${API_URL}/api/education/getbyuserid/${id}` , 
             {
                 method:'GET',
                 headers:

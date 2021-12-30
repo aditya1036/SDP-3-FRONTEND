@@ -1,6 +1,6 @@
 import React from "react";
 import "./Feed.css";
-import CreateIcon from "@material-ui/icons/Create";
+import CreateIcon from '@mui/icons-material/Create';
 import Posts from "../Posts/Posts";
 import ModelForm from "./ModelForm";
 

@@ -1,11 +1,13 @@
 import React from "react";
 import "./Posts.css";
 import { useState, useEffect } from "react";
-import { Avatar, Collapse } from "@material-ui/core";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
-import ShareOutlinedIcon from "@material-ui/icons/ShareOutlined";
-import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
+import Avatar from '@mui/material/Avatar';
+import Collapse from '@mui/material/Collapse';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ChatIcon from '@mui/icons-material/Chat';
+
+import ShareIcon from '@mui/icons-material/Share';
+import SendIcon from '@mui/icons-material/Send';
 import InputOption from "../Home/InputOption";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
@@ -172,20 +174,20 @@ function IndividualPost({ post }) {
               <span onClick={ToggleComment}>
                 <InputOption
                   className="PostIcons"
-                  Icon={ChatOutlinedIcon}
+                  Icon={ChatIcon}
                   title="Comment"
                   color="gray"
                 />
               </span>
               <InputOption
                 className="PostIcons"
-                Icon={ShareOutlinedIcon}
+                Icon={ShareIcon}
                 title="Share"
                 color="gray"
               />
               <InputOption
                 className="PostIcons"
-                Icon={SendOutlinedIcon}
+                Icon={SendIcon}
                 title="Send"
                 color="gray"
               />

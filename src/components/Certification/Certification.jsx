@@ -56,7 +56,7 @@ const Certification = () => {
         
         async function userExperience()
         {
-            const res = await fetch(`${API_URL}/api/test/user/licenses/${user_state.id}` , 
+            const res = await fetch(`${API_URL}/api/test/user/licenses/${id}` , 
             {
                 method:'GET',
                 headers:

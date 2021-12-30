@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { green } from "@material-ui/core/colors";
+import { green } from "@mui/material/colors";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/UserContext/UserSlice";
 import { LoadingButton } from "@mui/lab";
@@ -10,12 +10,11 @@ import {
   Box,
   Button,
   Input,
-  Modal,
   TextField,
   Dialog,
   Toolbar,
-} from "@material-ui/core";
-import DialogActions from "@mui/material/DialogActions";
+} from "@mui/material";
+
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -23,23 +22,11 @@ import "./Feed.css";
 import SaveIcon from "@mui/icons-material/Save";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
-const style = {
-  position: "sticky",
-  left: "20%",
-  top: "5%",
-  transform: "translate(-50%, -50%)",
-  p: 3,
-  width: 800,
-  bgcolor: "background.paper",
-  borderRadius: "15px",
-};
 
 function ModelForm({ posts, setPosts, handleClose, open, setOpen }) {
   const user = useSelector(selectUser);
@@ -185,19 +172,15 @@ function ModelForm({ posts, setPosts, handleClose, open, setOpen }) {
         fullWidth
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: "relative" }}>
-          <Toolbar>
-            <IconButton
+
+        <DialogTitle style={{textAlign: "center" , display: "flex" ,flexDirection : "row-reverse", justifyContent: "space-between"}}>    <IconButton
               edge="start"
               color="inherit"
               onClick={handleClose}
               aria-label="close"
             >
               <CloseIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <DialogTitle style={{textAlign: "center"}}> <span style={{fontSize: "1.4rem", fontWeight: "500"}}>
+            </IconButton> <span style={{fontSize: "1.4rem", fontWeight: "500"}}>
            Create a post 📝
           </span>
            </DialogTitle>

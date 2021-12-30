@@ -1,7 +1,9 @@
 import React from 'react';
 import "./Widgets.css"
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+
 
 function Widgets() {
 

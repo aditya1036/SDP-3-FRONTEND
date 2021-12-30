@@ -1,4 +1,4 @@
-import { Avatar, Card, Paper } from '@material-ui/core'
+import { Avatar, Card, Paper } from '@mui/material'
 import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector } from 'react-redux';

@@ -20,17 +20,16 @@ import { useParams } from 'react-router-dom';
 function IndividualEducation({edu, education, setEducation}) {
 
 
-    const {paramid} = useParams();
+    const {id}  = useParams();
     const user_state = useSelector(selectUser);
     const [educati, seteducati] = useState(edu)
     const [institution_name, setInstitueName] = useState(edu.institution_name)
     const [value, setValue] = useState(edu.duration.split("to"));
     const [location, setLocation] = useState(edu.location)
     const [degree_type, setDegree_type] = useState(edu.degree_type);
-    const [id, setId] = useState(edu.id)
+    const [id1, setId] = useState(edu.id)
     const [open, setOpen] = useState(false);
     const [open1, setOpen1] = useState(false);
-
 
     function convert(str) {
         var date = new Date(str),
@@ -76,7 +75,7 @@ function IndividualEducation({edu, education, setEducation}) {
     const handleUpdateEducation = async(e) => {
         e.preventDefault()
         console.log({
-          id: id,
+          id: id1,
           institution_name: institution_name,
           duration: education_duration,
           location: location,
@@ -91,7 +90,7 @@ function IndividualEducation({edu, education, setEducation}) {
                     "Authorization" : `Bearer ${JSON.parse(localStorage.getItem("token")).token}`,
                 },
             body: JSON.stringify({
-                id: id,
+                id: id1,
                 institution_name: institution_name,
                 duration: education_duration,
                 location: location,
@@ -123,7 +122,7 @@ function IndividualEducation({edu, education, setEducation}) {
           </div>
 
           <div>
-          {user_state.id*1 !== paramid*1 ? <></> :
+          {user_state.id*1 !== id*1 ? <></> :
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div className="div_edit_button">
                 <span

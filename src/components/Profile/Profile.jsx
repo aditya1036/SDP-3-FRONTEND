@@ -5,12 +5,12 @@ import Avatar from "@mui/material/Avatar";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import EditIcon from "@mui/icons-material/Edit";
-import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import InfoIcon from '@mui/icons-material/Info';
 import "./Profile.css";
 import Experience from "../Experience/Experience";
 import { useParams } from "react-router-dom";
-import { Input, Box } from "@material-ui/core";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import { Input, Box } from "@mui/material";
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import Education from "../Education/Education";
 import Certification from "../Certification/Certification";
 import SaveIcon from "@mui/icons-material/Save";
@@ -28,19 +28,19 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import Link from "@material-ui/core/Link";
+import Link from "@mui/material/Link";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import Project from "../Projects/Project";
 import { LoadingButton } from "@mui/lab";
 import axios from "axios";
-const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 40;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      width: 40,
     },
   },
 };
@@ -320,7 +320,8 @@ export default function Profile() {
               variant="outlined"
               required
             />
-              <div
+            <div >
+               <div
               style={{
                 display: "flex",
                 justifyContent: "space-between",
@@ -403,7 +404,7 @@ export default function Profile() {
                   disabled={true}
                 />
               </div>
-              <Box sx={{ m: 1, position: "relative" }}>
+               <Box sx={{ m: 1, position: "relative" }}> 
                 <LoadingButton
                   loading={loadingButtonResume}
                   disabled={enableUploadResume}
@@ -414,11 +415,15 @@ export default function Profile() {
                 >
                   Upload
                 </LoadingButton>
-              </Box>
+              </Box> 
+            </div> 
             </div>
+            <div>
+
             <Select
               multiple
               displayEmpty
+              style={{maxWidth :"30vh"}}
               value={skills}
               keepMounted
               onChange={handleChange}
@@ -427,14 +432,14 @@ export default function Profile() {
                 if (selected.length === 0) {
                   return <em>Programming Languages</em>;
                 }
-
+                
                 return selected.join(", ");
               }}
               MenuProps={MenuProps}
               inputProps={{ "aria-label": "Without label" }}
             >
               <MenuItem disabled value="">
-                <Typography padding={"10px"} textAlign="center">
+                <Typography textAlign="center">
                   Programming Languages
                 </Typography>
               </MenuItem>
@@ -443,19 +448,21 @@ export default function Profile() {
                   key={name}
                   dense={true}
                   value={name}
-                  style={{ margin: "10px" }}
+                
                 >
-                  <Typography padding={"10px"} textAlign="center">
+                  <Typography textAlign="center">
                     {name}
                   </Typography>
                 </MenuItem>
               ))}
             </Select>
-            &nbsp;&nbsp;
+            </div>
+
             <Select
               multiple
               displayEmpty
               value={languages}
+              style={{maxWidth :"30vh"}}
               onChange={handleChange1}
               input={<OutlinedInput />}
               renderValue={(selected) => {
@@ -583,7 +590,7 @@ export default function Profile() {
         <div className="profile__widgets">
           <div className="profile__widgets__header">
             <h2>Job Interests</h2>
-            <InfoOutlinedIcon />
+            <InfoIcon />
           </div>
 
           {newsArticle(
