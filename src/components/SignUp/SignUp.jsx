@@ -14,10 +14,15 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './SignUp.css'
 import {useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from '../redux/UserContext/UserSlice';
 
 const theme = createTheme();
 
 const SignUp = () => {
+
+  const isAuth = useSelector(selectIsAuth);
+
 
   const [first_name , setFirstName]  = useState('')
   const [last_name , setLastName]  = useState('')
@@ -72,6 +77,13 @@ const SignUp = () => {
     setAddress('')
 
   }
+  
+if(isAuth)
+{
+  return <Navigate to="/" />
+}
+
+
 
   if(success)
   {

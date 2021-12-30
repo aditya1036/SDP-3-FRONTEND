@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { InitializeUser, RemoveUser } from '../redux/UserContext/UserSlice';
+import { InitializeUser, RemoveUser, selectIsAuth } from '../redux/UserContext/UserSlice';
 
 import {useState, useRef } from 'react';
 import {Navigate} from 'react-router-dom'
@@ -38,6 +38,7 @@ const SignIn = ({setToken}) => {
   const [redirect , setRedirect] = useState(false)
   const [formErrors, setFormErrors] = useState({});
   const [loginfailure, setloginfailure] = useState(false);
+  const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
 
   let errorStatus = false;
@@ -105,7 +106,7 @@ const SignIn = ({setToken}) => {
 
 
 
-if(redirect)
+if(isAuth)
 {
   return <Navigate to="/" />
 }

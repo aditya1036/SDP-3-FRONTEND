@@ -17,19 +17,16 @@ import StepForm from './components/Jobform/StepForm';
 import Header from './components/Header/Header';
 import NavBar from './components/Header/NavBar';
 import { useSelector } from 'react-redux';
-import { selectUser } from './components/redux/UserContext/UserSlice';
+import { selectIsAuth, selectUser } from './components/redux/UserContext/UserSlice';
 
 function App() {
-  const user = useSelector(selectUser);
+  const isAuth = useSelector(selectIsAuth);
 
   const { token, setToken } = useToken()
-
-  console.log(user.first_name);
-
   return (
     <>
       <Router>
-     {user.first_name !== undefined? <NavBar /> :null }  
+     {isAuth && <NavBar /> }  
         <Routes>
           <Route path='/signup' element={<><SignUp /></>} />
           <Route path='/signin' element={<><SignIn setToken={setToken} /></>} />

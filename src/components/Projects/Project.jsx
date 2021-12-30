@@ -22,7 +22,7 @@ import IndividualProject from "./IndividualProject";
 import { useParams } from "react-router-dom";
 
 const Project = () => {
-  const {id} = useParams()
+  const { id } = useParams();
   const user_state = useSelector(selectUser);
   const [projects, setProjects] = useState([]);
   const [name, setName] = useState("");
@@ -50,18 +50,15 @@ const Project = () => {
 
   useEffect(() => {
     async function userProjects() {
-      const res = await fetch(
-        `${API_URL}/api/project/getbyuserid/${id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem("token")).token
-            }`,
-          },
-        }
-      );
+      const res = await fetch(`${API_URL}/api/project/getbyuserid/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).token
+          }`,
+        },
+      });
 
       const data = await res.json();
       console.log(data);
@@ -112,21 +109,42 @@ const Project = () => {
   return (
     <>
       <div className="project_container">
-      <div style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              paddingTop: "1rem",
-            }}>
-
-
-        <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>Projects ☕</span> {user_state.id*1 !== id*1 ? <></> :<span style={{cursor: "pointer"}}onClick={handleClickOpen}><AddIcon /></span> }
-            </div >
-        {projects.map((project) => (
-          <>
-            <IndividualProject project = {project} projects={projects} setProjects = {setProjects} />
-          </>
-        ))}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingTop: "1rem",
+          }}
+        >
+          <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>
+            Projects ☕
+          </span>{" "}
+          {user_state.id * 1 !== id * 1 ? (
+            <></>
+          ) : (
+            <span style={{ cursor: "pointer" }} onClick={handleClickOpen}>
+              <AddIcon />
+            </span>
+          )}
+        </div>
+        {projects.length === 0 ? (
+          <div>
+            <span style={{ fontSize: "1rem" }}>
+              Please add your project deatils to your profile.. 💀
+            </span>
+          </div>
+        ) : (
+          projects.map((project) => (
+            <>
+              <IndividualProject
+                project={project}
+                projects={projects}
+                setProjects={setProjects}
+              />
+            </>
+          ))
+        )}
       </div>
       <div>
         <Dialog open={open} onClose={handleClose}>
