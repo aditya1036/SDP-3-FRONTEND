@@ -10,14 +10,13 @@ import Profile from './components/Profile/Profile'
 import PostDetails from './components/Posts/PostDetails';
 import NotFound from './components/NotFoundPage/NotFound';
 import UserPosts from './components/Posts/UserPosts';
-import JobPosting from "./components/JobPosting/JobPosting"
+
 import "./App.css"
 import StepForm from './components/Jobform/StepForm';
-
-import Header from './components/Header/Header';
 import NavBar from './components/Header/NavBar';
 import { useSelector } from 'react-redux';
 import { selectIsAuth, selectUser } from './components/redux/UserContext/UserSlice';
+import JobPage from './components/JobPage/JobPage';
 
 function App() {
   const isAuth = useSelector(selectIsAuth);
@@ -34,7 +33,7 @@ function App() {
           <Route path='/' element={<PrivateRoute> <Home/></PrivateRoute>} />
           <Route path='/aboutus' element={<><PrivateRoute> <Aboutus /></PrivateRoute></>} />
           <Route path='/userposts' element={<PrivateRoute> <UserPosts /></PrivateRoute>} />
-          <Route path='/jobs' element={<><PrivateRoute> <JobPosting /></PrivateRoute></>} />
+          <Route path='/jobs' element={<><PrivateRoute> <JobPage /></PrivateRoute></>} />
           <Route path='/jobform' element={<><PrivateRoute><StepForm /></PrivateRoute></>}/>
           <Route path='/post/:id' element={<><PrivateRoute> <PostDetails /></PrivateRoute></>} />
           <Route path='*' element={<><NotFound/></>} />

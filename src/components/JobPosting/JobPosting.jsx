@@ -11,18 +11,10 @@ const JobPosting = () => {
 
     return (
         <div>
-        <Container>
-        <Layout>
-        <div className='jobposting__main'>
-          <div className='jobposting__inputContainer'>
-            <div className='jobPosting__input'>
-              <JobCard/>
-
-            </div>
-          </div>
-        </div>
-        </Layout>
-        </Container>
+             <div className='jobPage_buttonscard'>
+           
+         </div>
+        
         </div>
     )
 }

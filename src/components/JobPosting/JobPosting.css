@@ -69,3 +69,8 @@
         display: none;
     }
   }
+
+.jobPage_buttonscard {
+  height: 20vh;
+  background-color: aqua;
+}

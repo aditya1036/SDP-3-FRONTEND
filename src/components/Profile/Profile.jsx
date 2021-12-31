@@ -99,16 +99,16 @@ export default function Profile() {
         },
       });
       const data = await res.json();
-      console.log(data);
+      console.log(data)
       setUserProfile(data.data[0]);
       setImage(data.data[0].profile_image);
       setGithub(data.data[0].github_link)
       setLinkedIn(data.data[0].linkedIn_link)
-      setSkills([...skills,...data.data[0].skills])
+      setSkills([...skills, ...data.data[0].skills || []])
       setresumeLink(data.data[0].resumeLink);
       setFullName(data.data[0].fullname)
       setBio(data.data[0].bio)
-      setLanguages([...languages,...data.data[0].languages])
+      setLanguages([...languages,...data.data[0].languages || []])
 
     }
     initialUser();

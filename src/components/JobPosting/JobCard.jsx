@@ -65,8 +65,8 @@ export const JobCard = () => {
 
   return (
     <>
-      <div className="jobposting__main">
-        <div className="left_det">
+      {/* <div className="jobposting__main"> */}
+        {/* <div className="left_det"> */}
           {isFirstLoad ? (
             <h3
               style={{
@@ -124,8 +124,8 @@ export const JobCard = () => {
               ) : null}
             </>
           )}
-        </div>
-        <div className="right_det">
+        {/* </div> */}
+        {/* <div className="right_det"> */}
           {componentState ? (
             <div class="card">
               <div class="container">
@@ -139,7 +139,7 @@ export const JobCard = () => {
               </div>
             </div>
           )}
-        </div>
+        {/* </div> */}
         {last && (
           <div>
             <div>
@@ -147,7 +147,7 @@ export const JobCard = () => {
             </div>
           </div>
         )}
-      </div>
+      {/* </div> */}
     </>
   );
 };
