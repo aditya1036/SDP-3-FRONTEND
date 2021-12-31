@@ -309,7 +309,7 @@ export default function Profile() {
             />
             <TextField
               multiline
-              minRows={10}
+              minRows={5}
               margin="dense"
               id="name"
               value={bio}

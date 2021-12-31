@@ -17,6 +17,7 @@ import NavBar from './components/Header/NavBar';
 import { useSelector } from 'react-redux';
 import { selectIsAuth, selectUser } from './components/redux/UserContext/UserSlice';
 import JobPage from './components/JobPage/JobPage';
+import AppliedJobsView from './components/AppliedJobsPage/AppliedJobsView';
 
 function App() {
   const isAuth = useSelector(selectIsAuth);
@@ -35,6 +36,7 @@ function App() {
           <Route path='/userposts' element={<PrivateRoute> <UserPosts /></PrivateRoute>} />
           <Route path='/jobs' element={<><PrivateRoute> <JobPage /></PrivateRoute></>} />
           <Route path='/jobform' element={<><PrivateRoute><StepForm /></PrivateRoute></>}/>
+          <Route path='/applied' element={<PrivateRoute> <AppliedJobsView /> </PrivateRoute>} />
           <Route path='/post/:id' element={<><PrivateRoute> <PostDetails /></PrivateRoute></>} />
           <Route path='*' element={<><NotFound/></>} />
           </Routes>

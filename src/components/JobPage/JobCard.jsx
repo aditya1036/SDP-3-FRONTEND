@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import "./JobPage.css";
 import Divider from "@mui/material/Divider";
 import { Button } from "@mui/material";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+
 
 function JobCard({ job, setJobDetail }) {
   const [singleJob, setSingleJob] = useState(job);
 
-    const HandleClick = async () => {
-        setJobDetail(singleJob);
-    }
+  const HandleClick = async () => {
+    console.log(singleJob);
+    setJobDetail(singleJob);
+  };
 
   return (
     <div className="main-job-card">
@@ -48,7 +50,14 @@ function JobCard({ job, setJobDetail }) {
           </div>
         </div>
         <div className="job-card-action">
-            <Button variant="contained" endIcon={<ArrowForwardIcon />} onClick={HandleClick} color="primary">details</Button>
+          <Button
+            variant="contained"
+            endIcon={<ArrowForwardIcon />}
+            onClick={HandleClick}
+            color="primary"
+          >
+            details
+          </Button>
         </div>
       </div>
     </div>
