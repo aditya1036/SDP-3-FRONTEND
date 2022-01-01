@@ -35,7 +35,6 @@ import Project from "../Projects/Project";
 import { LoadingButton } from "@mui/lab";
 import axios from "axios";
 import Widgets from "../Widgets/Widgets";
-import { Document, Page, pdfjs } from 'react-pdf';
 
 const ITEM_HEIGHT = 40;
 const ITEM_PADDING_TOP = 8;
@@ -102,8 +101,6 @@ export default function Profile() {
     setNumPages(numPages);
   }
 
-  pdfjs.GlobalWorkerOptions.workerSrc = 
-    `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
   useEffect(() => {
     async function initialUser() {
