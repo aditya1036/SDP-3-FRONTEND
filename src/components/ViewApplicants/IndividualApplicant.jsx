@@ -41,15 +41,8 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
       console.log(emailData);
 
       let mail = await axios.post(
-        `https://secure-stream-79742.herokuapp.com/api/mail/send`,
-        emailData,
-        {
-          headers: {
-            Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem("token")).token
-            }`,
-          },
-        }
+        `https://upload-sdp3.herokuapp.com/upload/sendmail`,
+        emailData
       );
 
       console.log(mail);
@@ -93,21 +86,14 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
         recipient: email,
         subject: applicant.userData.fullname,
         message:
-          "This is to inform you that you application has been rejected by ${applicant.postData.company}. Please don't give up and try again later.",
+          `This is to inform you that you application has been rejected by ${applicant.postData.company}. Please don't give up and try again later.`,
       };
 
       console.log(emailData);
 
       let mail = await axios.post(
-        `https://secure-stream-79742.herokuapp.com/api/mail/send`,
-        emailData,
-        {
-          headers: {
-            Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem("token")).token
-            }`,
-          },
-        }
+        `https://upload-sdp3.herokuapp.com/upload/sendmail`,
+        emailData
       );
 
       let res = await axios.delete(

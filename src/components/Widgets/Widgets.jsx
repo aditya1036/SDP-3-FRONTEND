@@ -14,13 +14,13 @@ function Widgets() {
 
         async function fetchNews()
         {
-            const res  = await fetch('https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=a0ca097c9ac84d08b61d4f8a82fe3775', {
+            const res  = await fetch('http://api.mediastack.com/v1/news?access_key=dba5e96ff92ce740e85f2e61011e27da&categories=technology&languages=en', {
                 method: "GET",
                 
             })
 
             const new_data = await res.json()
-            setLatestNews(new_data.articles)
+            setLatestNews(new_data.data)
         }
 
         fetchNews()
