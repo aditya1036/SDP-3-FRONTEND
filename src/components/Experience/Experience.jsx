@@ -1,179 +1,230 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { selectUser } from '../redux/UserContext/UserSlice'
-import {API_URL} from '../../config/env'
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-
-function getStyles(name, personName, theme) {
-    return {
-      fontWeight:
-        personName.indexOf(name) === -1
-          ? theme.typography.fontWeightRegular
-          : theme.typography.fontWeightMedium,
-    };
-  }
+import React from "react";
+import "./Experience.css";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useState, useEffect } from "react";
+import { API_URL } from "../../config/env";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/UserContext/UserSlice";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import DateRangePicker from "@mui/lab/DateRangePicker";
+import Box from "@mui/material/Box";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import IndividualExperience from "./IndividualExperience";
+import { useParams } from "react-router-dom";
 
 const Experience = () => {
+  const { id } = useParams();
+  const user_state = useSelector(selectUser);
+  const [experience, setExperience] = useState([]);
+  const [description, setDescription] = useState("");
+  const [value, setValue] = useState([null, null]);
+  const [location, setLocation] = useState("");
+  const [title, setTitle] = useState("");
+  const [exp_id, setExp] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
 
-    const state = useSelector(selectUser)
-    const [experience , setExperience] = useState([])
-    const [title, setTitle] = useState('')
-    const [duration, setDuration] = useState('')
-    const [location, setLocation] = useState('')
-    const [open, setOpen] = useState(false);
-    
+  function convert(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
 
+  var experience_duration = convert(value[0]) + " to    " + convert(value[1]);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+  useEffect(() => {
+    let fetching = true;
 
-    useEffect(() => {
-
-        async function UserExperience(){
-            const res = await fetch(`http://localhost:8080/api/experience/getByUserId/${state.id}`,{
-                method: 'GET',
-             headers: {
-                 "Authorization": `Bearer ${JSON.parse(localStorage.getItem("token")).token}`
-             }
-            })
-            const data = await res.json()
-            setExperience(...experience,data.Listdata)
-        } 
-
-        UserExperience()
-    },[])
-
-  
-    const handleSubmit = async (e) => {
-     
-        e.preventDefault();
-        const res = await fetch(`${API_URL}/api/experience/addExperience` ,{
-            headers:{
-                'Content-Type': "application/json",
-                "Authorization": `Bearer ${JSON.parse(localStorage.getItem("token")).token}`,
-            },
-            method: "POST",
-            body:  JSON.stringify({
-              "title": title,
-              "location" : location,
-              "duration" : duration,
-              "user_id" : state.id
-          })
-        })
-        const data  = await res.json()
-        setExperience((e) => [...e, data.data]);
-        
-      
-        setTitle('')
-        setDuration('')
-        setLocation('')
-
-        
+    async function userExperience() {
+      const res = await fetch(
+        `${API_URL}/api/experience/getByUserId/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("token")).token
+            }`,
+          },
+        }
+      );
+      const data = await res.json();
+      if (fetching) {
+        setExperience(data.Listdata);
+      }
+    }
+    if (fetching) {
+      userExperience();
     }
 
+    return () => {
+      fetching = false;
+    };
+  }, []);
 
+  const handleAddExperience = async (e, id) => {
+    e.preventDefault();
 
-    return (
+    const res = await fetch(`${API_URL}/api/experience/addExperience`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("token")).token
+        }`,
+      },
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        duration: experience_duration,
+        location: location,
+        user_id: id,
+      }),
+    });
+
+    const data = await res.json();
+    console.log(data);
+    setExperience([
+      {
+        id: data.data.id,
+        title: title,
+        description: description,
+        duration: experience_duration,
+        location: location,
+        user_id: id,
+      },
+      ...experience,
+    ]);
+
+    handleClose();
+    setTitle("");
+    setDescription("");
+    setLocation("");
+  };
+
+  return (
+    <>
+      <div className="experience_container">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingTop: "1rem",
+          }}
+        >
+          <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>
+            Experience 📄
+          </span>
+          {user_state.id*1 !== id*1 ? <></>:   <span style={{ cursor: "pointer" }} onClick={handleClickOpen}>
+            <AddIcon />
+          </span> }
         
-        <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-        Add
-      </Button>
+        </div>
+        {experience.length === 0 ? (
+          <div>
+            <span style={{ fontSize: "1rem" }}>
+              Please Add some Experience to your profile.. 👨‍💼
+            </span>
+          </div>
+        ) : (
+          experience.map((exp) => (
+            <IndividualExperience
+              key={exp.id}
+              exp={exp}
+              setExpereinces={setExperience}
+              experiences={experience}
+            />
+          ))
+        )}
+      </div>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Experience</DialogTitle>
         <DialogContent>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <DialogContentText></DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            id="name"
-            label="Title"
-            value = {title}
+            id="title"
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
+            label="Title"
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
+            required
           />
+          &nbsp;
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DateRangePicker
+              startText="From"
+              endText="To"
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue);
+              }}
+              renderInput={(startProps, endProps) => (
+                <React.Fragment>
+                  <TextField {...startProps} />
+                  <Box sx={{ mx: 2 }}> to </Box>
+                  <TextField {...endProps} />
+                </React.Fragment>
+              )}
+            />
+          </LocalizationProvider>
           <TextField
             autoFocus
             margin="dense"
-            id="name"
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
-            label="Duration"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
+            id="location"
+            label="Location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            label="Location"
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
+            required
           />
-          
-        
+          <TextField
+            multiline
+            minRows={10}
+            margin="dense"
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            label="Description"
+            type="text"
+            fullWidth
+            variant="outlined"
+            required
+          />
+        </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose} type='submit'>ADD</Button>
+          <Button onClick={(e) => handleAddExperience(e, user_state.id)}>
+            Add
+          </Button>
         </DialogActions>
-          </Box>
-        </DialogContent>
-        
-      </Dialog>    
-        <h1>Experience Component</h1>
-        {experience.length === 0 && <h1>No Experience</h1>}
-        { experience &&
-            experience.map((exp) => (
-                <div key={exp.id}>
-                <h4>{exp.title}</h4>
-                <h4>{exp.duration}</h4>
-                <h4>{exp.location}</h4>
-                </div>
-            ))
-        }
-        
+      </Dialog>
+    </>
+  );
+};
 
-          
-        </div>
-    )
-}
-
-export default Experience
+export default Experience;

@@ -14,4 +14,3 @@ const persistedReducer = persistReducer(persistConfig, userReducer)
 
 export const store = createStore(persistedReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 export let persistor = persistStore(store)
-  

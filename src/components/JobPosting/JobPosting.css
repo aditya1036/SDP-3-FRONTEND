@@ -1,0 +1,76 @@
+.jobposting__main{
+    flex: 0.5;
+
+}
+
+.jobposting__inputContainer {
+    background-color: white;
+    padding: 10px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px ;
+}
+
+.jobposting__input {
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    display: flex;
+    padding: 10px;
+    color: gray;
+    padding-left: 15px;
+
+}
+
+.jobposting {
+
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 3px 11px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 3px 11px 1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .jobposting__header {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  /* .jobposting__header > .MuiAvatar-colorDefault {
+    background-color: #70b5f9;
+    width: 45px;
+    height: 45px;
+    border: 2px solid rgb(255, 255, 255);
+  }
+  
+  .jobposting__header > .MuiAvatar-root {
+    width: 45px;
+    height: 45px;
+    border: 2px solid rgb(235, 235, 235);
+  } */
+  .jobposting__info {
+    margin-left: 10px;
+  }
+  
+  .jobposting__info > p {
+    font-size: 12px;
+    color: gray;
+  }
+  
+  .jobposting__body {
+    overflow-wrap: anywhere;
+  }
+  
+  .jobposting__info > h2 {
+    font-size: 15px;
+  }
+  
+  @media screen and (max-width: 750px) {
+    .widgets {
+        display: none;
+    }
+  }
+
+.jobPage_buttonscard {
+  height: 20vh;
+  background-color: aqua;
+}

@@ -1,81 +1,115 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
-import { API_URL } from '../../config/env';
-import { selectUser } from '../redux/UserContext/UserSlice';
+import React from "react";
+import "./Posts.css";
+import { useState, useEffect } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import IndividualPost from "./IndividualPost";
+import { Skeleton } from "@mui/material";
 
+export default function Posts({ posts, setPosts }) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  var last = false;
+  var page = 0;
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
-const Posts = () => {
-    const state = useSelector(selectUser)
-    const [posts, setPosts] = useState([])
+    fetchPosts();
 
+    window.addEventListener("scroll", handleScroll);
+  }, []);
 
-    useEffect(() => {
+  const fetchPosts = () => {
+    setIsLoading(true);
 
-        async function userPosts(){
-         const res = await fetch(`${API_URL}/api/post/getallpostbyuserid/${state.id}`, {
-             method: 'GET',
-             headers: {
-                 "Authorization": `Bearer ${JSON.parse(localStorage.getItem("token")).token}`
-             }
-         })
-         
-         const data = await res.json();
-         setPosts([...posts,...data.ListData])
-         
-        }
-        userPosts()
-    },[])
-
-    
-
-
-    const handleDeletePost =async (e,id) =>
-    {
-        e.preventDefault()
-
-        let newpost = posts.filter(el => el.id !== id);
-
-        setPosts(newpost);
-
-            const res = await fetch(`${API_URL}/api/post/deletepostbyid/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    "Authorization": `Bearer ${JSON.parse(localStorage.getItem("token")).token}`
-                }
-            })
-            
-            const data = await res.json();
-      
- }
+    fetch(`http://localhost:8080/api/post/getallposts?pageNo=${page}`, {
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("token")).token
+        }`,
+      },
+    })
+      .then((data) => data.json())
+      .then((data) => {
         
+        setPosts((posts) => [...posts, ...data.content]);
+        last = data.last;
+        setIsFirstLoad(false);
+        console.log(data.content);
 
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
+  const handleScroll = () => {
+    if (
+      Math.ceil(window.innerHeight + window.scrollY) >=
+      document.documentElement.offsetHeight
+    ) {
+      if (last) {
+        return;
+      }
+      page = page + 1;
+      fetchPosts();
+    }
+  };
 
-
-    return (
+  return (
+    <>
+      {isFirstLoad ? (
         <div>
-
-<h1>Posts Component</h1>
-{posts.length === 0 && <h1>No Post available</h1>}
-      { posts &&
-    //   <h1>Posts Not Available</h1>:
-      posts.map(post => (
-        <div key={post.id}>
-          <h4>{post.title} </h4>
-          <h4>{post.image}</h4>
-          <h4>{post.description}</h4>
-          <h4>{post.like_count}</h4>
-              {post.hashtags.map((tag) => (
-            <h4>{tag}</h4>
-          ))}
-
-          <button onClick={(e) => handleDeletePost(e, post.id)}>Delete</button>
-          {/* <button onClick={handleUpdatePost(post.id)}>Update</button> */}
+          <SkeletonPosts />
+          <SkeletonPosts />
+          <SkeletonPosts />
+       
+      </div>
+      ) : (
+        <>
+          {posts.length ? (
+            <>
+              {posts.map((post) => (
+                <IndividualPost key={post.id} post={post} />
+              ))}
+            </>
+          ) : null}
+        </>
+      )}
+      {last && (
+        <div>
+          <div>
+            Loading . . . <CircularProgress disableShrink />
           </div>
-      ))}
-            
         </div>
-    )
+      )}
+    </>
+  );
 }
 
-export default Posts
+
+const SkeletonPosts = () => {
+  return  <div className="post">
+  <div className="post__header">
+  <Skeleton variant="circular" width={40} height={40} animation="pulse" style={{marginRight: "1rem"}}/>
+      <Skeleton animation="wave" width={"10vh"} />
+    <div className="post__info" style={{float: "right"}}>
+    
+    <Skeleton animation="wave"  width={"10vh"} />
+    </div>
+  </div>
+
+  <div className="post__body">
+  <Skeleton animation="wave" width={"70vh"} />
+  <Skeleton animation="wave" width={"70vh"} />
+  <Skeleton animation="wave" width={"70vh"} style={{marginBottom : "1rem"}}/>
+  <Skeleton animation="wave" variant="rectangular" height={"50vh"} width={"85vh"}/>
+
+  </div>
+
+  <div style={{display: "flex", justifyContent:"center", alignItems: "center"}}>
+    
+  <Skeleton animation="wave" width={"70vh"} height={"10vh"}/>
+  </div>
+</div>
+}
