@@ -1,6 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { selectUser } from "../redux/UserContext/UserSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser, updateImage } from "../redux/UserContext/UserSlice";
 import Avatar from "@mui/material/Avatar";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
@@ -93,6 +93,8 @@ export default function Profile() {
   const [follow, setFollow] = useState(false);
 
   const [fullName, setFullName] = useState("");
+
+  const dispatch = useDispatch();
 
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -211,6 +213,8 @@ export default function Profile() {
       setSuccessMessage("File Upload Successfull ✅");
       setLoading(false);
       setLoadingButton(false);
+
+      dispatch(updateImage(res.data.publicUrl))
 
       setFiles(null);
     }

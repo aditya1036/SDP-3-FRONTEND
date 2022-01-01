@@ -61,7 +61,13 @@ const Testimonial = () => {
         <div className='testimonial_aboutus_container'>
         <h1 style={{marginLeft: "20px"}}>About us</h1> 
         <div className='testimonial_content'>
-            <h2 style={{marginLeft: "40px", marginTop: "30px"}}> Sit elit tempor nostrud ex dolore anim anim duis sunt minim mollit. Ad laboris ea duis velit pariatur do qui ullamco culpa aliquip. Ullamco irure excepteur irure amet enim amet. Proident ipsum qui sint tempor nisi sit. Adipisicing nostrud sunt duis officia exercitation pariatur fugiat proident occaecat.</h2>
+            <span style={{ textAlign : "center", fontSize : "1.2rem" }}>
+
+                Hey, welcome to jobbers <br/>
+                Here we are commited to find you the next big thing in your career <br />
+                Our team is dedicated and devoted into building the best UI and UX possible <br />
+
+            </span>
         </div>
         </div>
         </div>

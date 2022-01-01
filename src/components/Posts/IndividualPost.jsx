@@ -179,18 +179,17 @@ function IndividualPost({ post }) {
                   color="gray"
                 />
               </span>
+              <span onClick={() => {
+                 navigator.clipboard.writeText(`https://jobbers.netlify.app/post/${individualPost.id}`);
+              }}>
+
               <InputOption
                 className="PostIcons"
                 Icon={ShareIcon}
                 title="Share"
                 color="gray"
-              />
-              <InputOption
-                className="PostIcons"
-                Icon={SendIcon}
-                title="Send"
-                color="gray"
-              />
+                />
+                </span>
             </div>
           </div>
           <Collapse in={showComments}>

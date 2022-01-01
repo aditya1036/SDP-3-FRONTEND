@@ -15,7 +15,7 @@ import {TextField, styled, InputBase} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import {Link, Navigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { RemoveUser, selectUser } from '../redux/UserContext/UserSlice';
+import { RemoveUser, selectImage, selectUser } from '../redux/UserContext/UserSlice';
 import HomeIcon from '@mui/icons-material/Home';
 import WorkIcon from '@mui/icons-material/Work';
 import PersonIcon from '@mui/icons-material/Person';
@@ -72,6 +72,7 @@ const NavBar = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
+  const image = useSelector(selectImage);
 
   const handleLogout = () =>
   {
@@ -210,7 +211,7 @@ const NavBar = () => {
                   Notification
               </Button>
                     </Link>
-              <Link to={`/profile/${user.id}`}>
+              <Link to={`/aboutus`}>
 
 
               <Button
@@ -218,7 +219,7 @@ const NavBar = () => {
                 sx={{ mr: "1rem",color: 'white' }}
                 startIcon={< PersonIcon/>}
                 >
-                  Profile
+                  About Us
               </Button>
                     </Link>
                   </Box>
@@ -227,7 +228,9 @@ const NavBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+
+
+                <Avatar alt="Remy Sharp" src={image} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -247,14 +250,12 @@ const NavBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+              <Link to={`/profile/${user.id}`}>
+
                 <MenuItem onClick={handleCloseNavMenu} >
                   <Typography textAlign="center" padding={"10px"} >Profile</Typography>
                 </MenuItem>
-                
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography  padding={"10px"}textAlign="center">Account</Typography>
-                </MenuItem>
-                
+                </Link>
                 <Link to="/signin">
                 <MenuItem onClick={handleLogout}>
                   <Typography  padding={"10px"} textAlign="center">Logout</Typography>

@@ -85,3 +85,8 @@
     flex-direction: column;
 }
 
+.testimonial_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
