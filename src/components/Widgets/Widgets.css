@@ -1,7 +1,7 @@
 .widgets {
     top: 80px;
     flex: 0.3;
-    margin-right: auto;
+    margin-right: 1rem;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     border:  1px solid lightgray;

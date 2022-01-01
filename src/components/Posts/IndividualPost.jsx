@@ -154,7 +154,7 @@ function IndividualPost({ post }) {
                 <img
                   src={individualPost.image}
                   alt=""
-                  style={{ maxHeight: "400px", maxWidth: "600px" }}
+                  style={{ maxHeight: "400px", maxWidth: "600px", objectFit: "contain" }}
                 />
               </div>
             </div>

@@ -184,10 +184,12 @@ const PersonalForm = () => {
         name="job_description"
         render={({ field }) => (
           <TextField
+          multiline
+          minRows={5}
             id="job_description"
             label="Job Description"
             variant="outlined"
-            placeholder="Enter JobDescription"
+            placeholder="Describe about the job and the pay"
             fullWidth
             margin="normal"
             {...field}
@@ -294,7 +296,13 @@ const StepForm = () => {
 
 
   return (
-    <div style={{display:"flex" , alignItems: "center" , justifyContent:"center" , flexDirection:"column",marginTop: "5rem"}}>
+    <div style={{display:"flex" , alignItems: "center" , justifyContent:"center" , flexDirection:"column",marginTop: "2rem"}}>
+
+      <div style={{ marginBottom: "2rem"}}>
+        <span style={{fontSize: "2rem"}}>Post A Job 💼</span>
+      </div>
+
+    <div >
       <Stepper alternativeLabel activeStep={activeStep}>
         {steps.map((step, index) => {
           const labelProps = {};
@@ -326,9 +334,10 @@ const StepForm = () => {
         <>
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(handleNext)}>
-            <div>
+            <div style={{marginTop: "2rem"}}>
               {getStepContent(activeStep)}
-              
+              <div style={{marginTop: "2rem"}}>
+
               <Button
                 style={{marginRight: "1rem"}}
                 disabled={activeStep === 0}
@@ -357,11 +366,15 @@ const StepForm = () => {
                 {activeStep === steps.length - 1 ? "Finish" : "Next"}
               </Button>
               </div>
+
+              </div>
             </form>
           </FormProvider>
         </>
       )}
     </div>
+    </div>
+
   )
 }
 

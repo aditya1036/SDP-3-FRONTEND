@@ -7,7 +7,7 @@ import axios from 'axios';
 
 function IndividualComment({data, setComments, comments}) {
     const user = useSelector(selectUser);
-
+console.log(data);
     const HandleDelete = async () => {
 
         try {
@@ -43,7 +43,7 @@ function IndividualComment({data, setComments, comments}) {
 
             <Paper elevation={3} className="team__member">
                 <Card style={{ borderRadius: "50%", marginRight: "10px" }}>
-                    <Avatar src="/images/avatar.png" width="20%" height="20%" />
+                    <Avatar src={`${data.userData.profile_image}`} width="20%" height="20%" />
                 </Card>
                 <div style={{ flex: " 1" }}>
                     <div >

@@ -41,7 +41,7 @@ export default function Sidebar() {
             <div className="sidebar__top">
                 <img src="/images/linkedIn.png" alt="background" />
                 <Avatar src={userData ? userData.profile_image : "/images/avatar.png"} className="sidebar__avatar"> </Avatar>
-                <span>{user.first_name + " " + user.last_name}</span>
+                <span>{userData.fullname}</span>
                 <span>{user.email}</span>
             </div>
             

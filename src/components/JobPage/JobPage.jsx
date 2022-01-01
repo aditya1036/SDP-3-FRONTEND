@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import JobCard from "./JobCard";
 import "./JobPage.css";
 import Divider from "@mui/material/Divider";
@@ -15,16 +15,21 @@ import AddBoxTwoToneIcon from "@mui/icons-material/AddBoxTwoTone";
 import CreateTwoToneIcon from "@mui/icons-material/CreateTwoTone";
 import ArticleTwoToneIcon from "@mui/icons-material/ArticleTwoTone";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/UserContext/UserSlice";
+
 
 function JobPage() {
+  const user = useSelector(selectUser);
+
+  const listInnerRef = useRef();
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [componentState, setComponentState] = useState(false);
   const [jobDetail, setJobDetail] = useState(null);
-
-  let page = 0;
-  let last = false;
+  const [page, setPage] = useState(0);
+  const [last, setLast] = useState(false);
 
   useEffect(() => {
     fetchJobs();
@@ -42,8 +47,13 @@ function JobPage() {
     })
       .then((data) => data.json())
       .then((data) => {
-        setJobs((jobs) => [...jobs, ...(data.content || [])]);
-        last = data.last;
+        console.log(data)
+       let newdata = data.content.filter(el => el.user_id !== user.id)
+        setJobs((jobs) => [...jobs, ...(newdata || [])]);
+        setLast(data.last);
+        if (page === 0) {
+          setPage(el=>el+1)
+        }
         console.log(data.content);
         setIsFirstLoad(false);
         setIsLoading(false);
@@ -52,6 +62,23 @@ function JobPage() {
         alert("Some Error Occured try later");
       });
   };
+
+  const onScroll = (e) => {
+
+    // console.log(listInnerRef.current)
+    
+    const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+    if (Math.ceil(scrollTop + clientHeight) >= scrollHeight) {
+      if (last) {
+        return;
+      }
+
+      console.log("reached Bottom")
+      setPage(el => el+1)
+      fetchJobs();
+    }
+  
+};
 
   return (
     <div className="main-feed-div">
@@ -103,7 +130,7 @@ function JobPage() {
             </List>
           </nav>
         </div>
-        <div className="main-list-view">
+        <div className="main-list-view" onScroll={onScroll} ref={listInnerRef}>
           {jobs &&
             jobs.map((job) => (
               <JobCard key={job.id} job={job} setJobDetail={setJobDetail} />
