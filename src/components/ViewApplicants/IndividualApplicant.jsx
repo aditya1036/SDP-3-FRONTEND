@@ -7,6 +7,8 @@ import "./IndividualApplicant.css";
 function IndividualApplicant({ data, setApplicants, applicants }) {
   const [applicant, setApplicant] = React.useState(data);
 
+  console.log(data);
+
   const acceptHandler = async () => {
     if (window.confirm("You sure you want to accept?")) {
       let data = {
@@ -15,6 +17,42 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
         job_id: applicant.postData.id,
         status: true,
       };
+
+      let email = await axios.get(
+        `http://localhost:8080/api/auth/getUserEmail/${applicant.userData.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("token")).token
+            }`,
+          },
+        }
+      );
+
+      email = email.data;
+
+      let emailData = {
+        recipient: email,
+        subject: applicant.userData.fullname + " Congratulations ✨",
+        message:
+          `This is to inform you that you application has been accepted by ${applicant.postData.company} and you will be getting a call soon from our team.`,
+      };
+
+      console.log(emailData);
+
+      let mail = await axios.post(
+        `http://localhost:8080/api/mail/send`,
+        emailData,
+        {
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("token")).token
+            }`,
+          },
+        }
+      );
+
+      console.log(mail);
 
       let res = await axios.patch(
         `http://localhost:8080/api/applicant/updateapplicant`,
@@ -36,22 +74,57 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
 
   const rejectHandler = async () => {
     if (window.confirm("You sure you want to reject?")) {
-    
-        let res = await axios.delete(
-          `http://localhost:8080/api/applicant/deleteapplicantbyid/${applicant.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${
-                JSON.parse(localStorage.getItem("token")).token
-              }`,
-            },
-          }
-        );
-  
-        console.log(res);
-  
-        setApplicants(applicants.filter((el) => el.id !== data.id));
-      }
+
+        
+      let email = await axios.get(
+        `http://localhost:8080/api/auth/getUserEmail/${applicant.userData.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("token")).token
+            }`,
+          },
+        }
+      );
+
+      email = email.data;
+
+      let emailData = {
+        recipient: email,
+        subject: applicant.userData.fullname,
+        message:
+          "This is to inform you that you application has been rejected by ${applicant.postData.company}. Please don't give up and try again later.",
+      };
+
+      console.log(emailData);
+
+      let mail = await axios.post(
+        `http://localhost:8080/api/mail/send`,
+        emailData,
+        {
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("token")).token
+            }`,
+          },
+        }
+      );
+
+      let res = await axios.delete(
+        `http://localhost:8080/api/applicant/deleteapplicantbyid/${applicant.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("token")).token
+            }`,
+          },
+        }
+      );
+
+      console.log(res);
+
+      setApplicants(applicants.filter((el) => el.id !== data.id));
+    }
   };
 
   return (
