@@ -72,7 +72,7 @@ function ModelForm({ posts, setPosts, handleClose, open, setOpen }) {
         };
 
         let res = await axios.post(
-          `http://localhost:8080/api/post/addposts`,
+          `https://secure-stream-79742.herokuapp.com/api/post/addposts`,
           JSON.stringify(postData),
           {
             headers: {
@@ -133,7 +133,7 @@ function ModelForm({ posts, setPosts, handleClose, open, setOpen }) {
 
       form.append("image", files, files.name);
 
-      let res = await axios.post("http://localhost:3002/upload", form, {
+      let res = await axios.post("https://upload-sdp3.herokuapp.com/upload", form, {
         onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
       });
 

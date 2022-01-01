@@ -15,7 +15,7 @@ function CreatedJobsView() {
         
         let fetching = true;
 
-        axios.get(`http://localhost:8080/api/job/getjobsbyuserid/${user.id}`, {
+        axios.get(`https://secure-stream-79742.herokuapp.com/api/job/getjobsbyuserid/${user.id}`, {
             headers :{
                 Authorization: `Bearer ${
                     JSON.parse(localStorage.getItem("token")).token

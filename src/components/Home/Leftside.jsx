@@ -14,7 +14,7 @@ export default function Sidebar() {
 
     useEffect(() => {
         let fetching = true;
-        axios.get(`http://localhost:8080/api/profile/user/profile/${user.id}`, {
+        axios.get(`https://secure-stream-79742.herokuapp.com/api/profile/user/profile/${user.id}`, {
            headers: {
                Authorization : `Bearer ${
                 JSON.parse(localStorage.getItem("token")).token

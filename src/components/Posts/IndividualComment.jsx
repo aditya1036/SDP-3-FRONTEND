@@ -13,7 +13,7 @@ console.log(data);
         try {
 
 
-            let res = await axios.delete(`http://localhost:8080/api/post/deletepostbyid/${data.id}`, {
+            let res = await axios.delete(`https://secure-stream-79742.herokuapp.com/api/post/deletepostbyid/${data.id}`, {
                 headers: {
                     "Authorization" : `Bearer ${JSON.parse(localStorage.getItem("token")).token}`,
                     

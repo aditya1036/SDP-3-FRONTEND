@@ -55,7 +55,7 @@ const SignIn = ({setToken}) => {
 
        try{
 
-         let res = await fetch('http://localhost:8080/api/auth/signin',{
+         let res = await fetch('https://secure-stream-79742.herokuapp.com/api/auth/signin',{
            method: 'POST',
            headers:
            {
@@ -66,7 +66,7 @@ const SignIn = ({setToken}) => {
           
           const data_final = await res.json();
           setToken({'token':data_final.accessToken})
-          res = await fetch(`http://localhost:8080/api/userapi/user/${data_final.id}`, {
+          res = await fetch(`https://secure-stream-79742.herokuapp.com/api/userapi/user/${data_final.id}`, {
             method: "GET",
             headers: {
               "Authorization" : `Bearer ${data_final.accessToken}`

@@ -19,7 +19,7 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
       };
 
       let email = await axios.get(
-        `http://localhost:8080/api/auth/getUserEmail/${applicant.userData.id}`,
+        `https://secure-stream-79742.herokuapp.com/api/auth/getUserEmail/${applicant.userData.id}`,
         {
           headers: {
             Authorization: `Bearer ${
@@ -41,7 +41,7 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
       console.log(emailData);
 
       let mail = await axios.post(
-        `http://localhost:8080/api/mail/send`,
+        `https://secure-stream-79742.herokuapp.com/api/mail/send`,
         emailData,
         {
           headers: {
@@ -55,7 +55,7 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
       console.log(mail);
 
       let res = await axios.patch(
-        `http://localhost:8080/api/applicant/updateapplicant`,
+        `https://secure-stream-79742.herokuapp.com/api/applicant/updateapplicant`,
         data,
         {
           headers: {
@@ -77,7 +77,7 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
 
         
       let email = await axios.get(
-        `http://localhost:8080/api/auth/getUserEmail/${applicant.userData.id}`,
+        `https://secure-stream-79742.herokuapp.com/api/auth/getUserEmail/${applicant.userData.id}`,
         {
           headers: {
             Authorization: `Bearer ${
@@ -99,7 +99,7 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
       console.log(emailData);
 
       let mail = await axios.post(
-        `http://localhost:8080/api/mail/send`,
+        `https://secure-stream-79742.herokuapp.com/api/mail/send`,
         emailData,
         {
           headers: {
@@ -111,7 +111,7 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
       );
 
       let res = await axios.delete(
-        `http://localhost:8080/api/applicant/deleteapplicantbyid/${applicant.id}`,
+        `https://secure-stream-79742.herokuapp.com/api/applicant/deleteapplicantbyid/${applicant.id}`,
         {
           headers: {
             Authorization: `Bearer ${

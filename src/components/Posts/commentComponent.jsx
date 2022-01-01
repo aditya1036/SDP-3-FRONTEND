@@ -22,7 +22,7 @@ function CommentComponent({ parentId }) {
   React.useEffect(() => {
     let isApiSubscribed = true;
     axios
-      .get(`http://localhost:8080/api/post/getCommentByParentId/${parentId}`, {
+      .get(`https://secure-stream-79742.herokuapp.com/api/post/getCommentByParentId/${parentId}`, {
         headers: {
           Authorization: `Bearer ${
             JSON.parse(localStorage.getItem("token")).token
@@ -55,7 +55,7 @@ function CommentComponent({ parentId }) {
     if (!errorStatus) {
       try {
         let res = await axios.post(
-          `http://localhost:8080/api/post/addposts`,
+          `https://secure-stream-79742.herokuapp.com/api/post/addposts`,
           data,
           {
             headers: {

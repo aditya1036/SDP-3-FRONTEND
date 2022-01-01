@@ -31,7 +31,7 @@ export default function UserPosts() {
     setIsLoading(true);
     
 
-    fetch(`http://localhost:8080/api/post/getallpostbyuserid/${user.id}?pageNo=${page}`, {
+    fetch(`https://secure-stream-79742.herokuapp.com/api/post/getallpostbyuserid/${user.id}?pageNo=${page}`, {
       headers: {
         Authorization: `Bearer ${
           JSON.parse(localStorage.getItem("token")).token

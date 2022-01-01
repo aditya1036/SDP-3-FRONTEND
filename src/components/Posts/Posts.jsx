@@ -21,7 +21,7 @@ export default function Posts({ posts, setPosts }) {
   const fetchPosts = () => {
     setIsLoading(true);
 
-    fetch(`http://localhost:8080/api/post/getallposts?pageNo=${page}`, {
+    fetch(`https://secure-stream-79742.herokuapp.com/api/post/getallposts?pageNo=${page}`, {
       headers: {
         Authorization: `Bearer ${
           JSON.parse(localStorage.getItem("token")).token

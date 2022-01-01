@@ -38,7 +38,7 @@ function JobPage() {
   const fetchJobs = () => {
     setIsLoading(true);
 
-    fetch(`http://localhost:8080/api/job/getalljobs?pageNo=${page}`, {
+    fetch(`https://secure-stream-79742.herokuapp.com/api/job/getalljobs?pageNo=${page}`, {
       headers: {
         Authorization: `Bearer ${
           JSON.parse(localStorage.getItem("token")).token

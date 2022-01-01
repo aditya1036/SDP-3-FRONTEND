@@ -134,7 +134,7 @@ export default function Profile() {
   };
   const handleFollow = async (e) => {
     if (follow) {
-      const res = await fetch("http://localhost:8080/api/follow/unfollow", {
+      const res = await fetch("https://secure-stream-79742.herokuapp.com/api/follow/unfollow", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -150,7 +150,7 @@ export default function Profile() {
       const data = await res.json();
       console.log(data);
     } else {
-      const res = await fetch("http://localhost:8080/api/follow/follow", {
+      const res = await fetch("https://secure-stream-79742.herokuapp.com/api/follow/follow", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -199,7 +199,7 @@ export default function Profile() {
 
       form.append("image", files, files.name);
 
-      let res = await axios.post("http://localhost:3002/upload/profile", form, {
+      let res = await axios.post("https://upload-sdp3.herokuapp.com/upload/profile", form, {
         onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
       });
 
@@ -251,7 +251,7 @@ export default function Profile() {
 
       form.append("file", file, file.name);
 
-      let res = await axios.post("http://localhost:3002/upload/resume", form, {
+      let res = await axios.post("https://upload-sdp3.herokuapp.com/upload/resume", form, {
         onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
       });
 

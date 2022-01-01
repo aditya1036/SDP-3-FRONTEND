@@ -34,7 +34,7 @@ function JobDetail({ jobDetail }) {
     };
 
     let res = await axios.post(
-      `http://localhost:8080/api/applicant/addapplicant`,
+      `https://secure-stream-79742.herokuapp.com/api/applicant/addapplicant`,
       data,
       {
         headers: {

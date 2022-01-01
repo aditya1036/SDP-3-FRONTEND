@@ -12,7 +12,7 @@ function ViewApplicants() {
     let fetching = true;
 
     axios
-      .get(`http://localhost:8080/api/applicant/getapplicantbyjobid/${id}`, {
+      .get(`https://secure-stream-79742.herokuapp.com/api/applicant/getapplicantbyjobid/${id}`, {
         headers: {
           Authorization: `Bearer ${
             JSON.parse(localStorage.getItem("token")).token

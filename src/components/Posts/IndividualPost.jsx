@@ -88,7 +88,7 @@ function IndividualPost({ post }) {
     console.log(data);
 
     let re = await axios.post(
-      `http://localhost:8080/api/activity/create`,
+      `https://secure-stream-79742.herokuapp.com/api/activity/create`,
       data,
       {
         headers: {
