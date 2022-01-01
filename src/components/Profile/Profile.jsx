@@ -9,7 +9,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import "./Profile.css";
 import Experience from "../Experience/Experience";
 import { useParams } from "react-router-dom";
-import { Input, Box } from "@mui/material";
+import { Input, Box, Slide } from "@mui/material";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import Education from "../Education/Education";
 import Certification from "../Certification/Certification";
@@ -35,6 +35,8 @@ import Project from "../Projects/Project";
 import { LoadingButton } from "@mui/lab";
 import axios from "axios";
 import Widgets from "../Widgets/Widgets";
+import { Document, Page, pdfjs } from 'react-pdf';
+
 const ITEM_HEIGHT = 40;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -48,6 +50,10 @@ const MenuProps = {
 const names = ["C++", "Java", "Python", "React JS", "Angular JS"];
 
 const names1 = ["English", "Hindi", "French", "German"];
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function getStyles(name, personName, theme) {
   return {
@@ -88,6 +94,16 @@ export default function Profile() {
   const [follow, setFollow] = useState(false);
 
   const [fullName, setFullName] = useState("");
+
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
+
+  pdfjs.GlobalWorkerOptions.workerSrc = 
+    `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
   useEffect(() => {
     async function initialUser() {
@@ -215,6 +231,16 @@ export default function Profile() {
     setFile(e.target.files[0]);
     console.log(e.target.files[0].name);
     setResumeFileName(e.target.files[0].name);
+  };
+
+  const [openPdf, setOpenPdf] = React.useState(false);
+
+  const handleClickOpenPdf = () => {
+    setOpenPdf(true);
+  };
+
+  const handleClosePdf = () => {
+    setOpenPdf(false);
   };
 
   const HandleResumeUpload = async () => {
@@ -603,7 +629,7 @@ export default function Profile() {
               </div>
               <div className="profile__info"></div>
               <div className="profile__info">
-                <a href={resumeLink} target="_blank">
+                <a href={resumeLink} >
                   Resume Link 🔗
                 </a>
               </div>
@@ -630,6 +656,40 @@ export default function Profile() {
               )}
             </div>
           </div>
+          <div>
+
+      {/* <Dialog
+        fullScreen
+        open={openPdf}
+        onClose={handleClosePdf}
+        TransitionComponent={Transition}
+      >
+        <AppBar sx={{ position: 'relative' }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClosePdf}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Resume
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <div>
+      <Document
+        file="https://cors-anywhere.herokuapp.com/http://www.pdf995.com/samples/pdf.pdf"
+        onLoadSuccess={onDocumentLoadSuccess}
+      >
+        <Page pageNumber={pageNumber} />
+      </Document>
+      <p>Page {pageNumber} of {numPages}</p>
+    </div>
+      </Dialog> */}
+    </div>
           <div style={{ marginLeft: "2rem" }}>
             <Experience />
             <Project />
