@@ -2,8 +2,8 @@ import {Avatar} from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import './Leftside.css';
 
-import  { selectUser } from "../redux/UserContext/UserSlice"
-import { useSelector } from 'react-redux';
+import  { selectUser, updateImage } from "../redux/UserContext/UserSlice"
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -11,6 +11,9 @@ import axios from 'axios';
 export default function Sidebar() {
     const user = useSelector(selectUser);
     const [userData , setUserData] = useState({}); 
+
+  const dispatch = useDispatch();
+    
     const [postCount, setPostCount] = useState(0);
     useEffect(() => {
         let fetching = true;
@@ -27,6 +30,8 @@ export default function Sidebar() {
         .then((data) => {
             // console.log(data.numberOfElements)
             setPostCount(data.totalElements)
+            // console.log(data)
+            // 
         //   setPosts((posts) => [...posts, ...data.content]);
         //   last = data.last;
           // console.log(data.content);
@@ -47,7 +52,7 @@ export default function Sidebar() {
           }).then((res) => {
             if (fetching) {
                 setUserData(res.data.data[0]);
-
+                dispatch(updateImage(res.data.data[0].profile_image))
             }
 
         }).catch(e => {

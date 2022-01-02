@@ -82,6 +82,8 @@ const NavBar = () => {
     <Navigate to='/signin' />
   }
 
+  
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };

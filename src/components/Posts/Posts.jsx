@@ -4,8 +4,12 @@ import { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import IndividualPost from "./IndividualPost";
 import { Skeleton } from "@mui/material";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/UserContext/UserSlice";
 
 export default function Posts({ posts, setPosts }) {
+
+  const user = useSelector(selectUser)
   const [isLoading, setIsLoading] = useState(true);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   var last = false;
@@ -34,7 +38,8 @@ export default function Posts({ posts, setPosts }) {
         setPosts((posts) => [...posts, ...data.content]);
         last = data.last;
         setIsFirstLoad(false);
-        // console.log(data);
+        
+        // dispatch(updateImage())
 
         setIsLoading(false);
       })
