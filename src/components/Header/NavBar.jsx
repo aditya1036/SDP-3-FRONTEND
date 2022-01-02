@@ -146,9 +146,9 @@ const NavBar = () => {
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">Jobs</Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
+                {/* <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">Notification</Typography>
-                </MenuItem>
+                </MenuItem> */}
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
@@ -199,7 +199,7 @@ const NavBar = () => {
                   Jobs
               </Button>
                   </Link>
-
+{/* 
                   <Link to="/notification">
 
               <Button
@@ -210,7 +210,7 @@ const NavBar = () => {
                 >
                   Notification
               </Button>
-                    </Link>
+                    </Link> */}
               <Link to={`/aboutus`}>
 
 
