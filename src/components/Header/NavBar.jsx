@@ -106,8 +106,9 @@ const NavBar = () => {
             component="span"
             sx={{ mr: 0, display: { xs: 'none', md: 'flex' } }}
           >
+            <Link to="/">
                 <img className="logo__header"  src='https://sdp3jobber.s3.ap-south-1.amazonaws.com/navlogo-removebg-preview.png'  alt='Not Found' style={{height: "3rem"}} />
-
+                </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, color: "white" }}>
@@ -161,6 +162,7 @@ const NavBar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
+            
              <img className="logo__header"  src='https://sdp3jobber.s3.ap-south-1.amazonaws.com/Gradient_Financial_Services_Company_Logo__4_-removebg-preview.png'  alt='Not Found'  style={{height: "6rem"}} />
 
           </Typography>

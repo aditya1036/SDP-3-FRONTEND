@@ -34,7 +34,7 @@ export default function Posts({ posts, setPosts }) {
         setPosts((posts) => [...posts, ...data.content]);
         last = data.last;
         setIsFirstLoad(false);
-        // console.log(data.content);
+        // console.log(data);
 
         setIsLoading(false);
       })

@@ -11,9 +11,33 @@ import axios from 'axios';
 export default function Sidebar() {
     const user = useSelector(selectUser);
     const [userData , setUserData] = useState({}); 
-
+    const [postCount, setPostCount] = useState(0);
     useEffect(() => {
         let fetching = true;
+
+        
+    fetch(`https://secure-stream-79742.herokuapp.com/api/post/getallpostbyuserid/${user.id}`, {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("token")).token
+          }`,
+        },
+      })
+        .then((data) => data.json())
+        .then((data) => {
+            // console.log(data.numberOfElements)
+            setPostCount(data.totalElements)
+        //   setPosts((posts) => [...posts, ...data.content]);
+        //   last = data.last;
+          // console.log(data.content);
+    // setIsFirstLoad(false);
+  
+    //       setIsLoading(false);
+        })
+        .catch((e) => {
+          // console.log(e);
+        });
+
         axios.get(`https://secure-stream-79742.herokuapp.com/api/profile/user/profile/${user.id}`, {
            headers: {
                Authorization : `Bearer ${
@@ -50,7 +74,7 @@ export default function Sidebar() {
                 <Link to="/userposts">
                 <span>Views of your post</span>
                 </Link>
-                <span className="sidebar__statNumber">67</span>
+                <span className="sidebar__statNumber">{postCount}</span>
                 </div>
 
             </div>
