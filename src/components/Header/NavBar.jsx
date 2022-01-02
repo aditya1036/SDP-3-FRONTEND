@@ -77,6 +77,7 @@ const NavBar = () => {
   const handleLogout = () =>
   {
     dispatch(RemoveUser())
+    dispatch(removeImage())
     localStorage.removeItem("token");
     <Navigate to='/signin' />
   }

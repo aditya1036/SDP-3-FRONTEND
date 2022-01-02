@@ -39,7 +39,10 @@ export const userSlice = createSlice({
     },
     updateImage: (state, action) => {
       state.image = action.payload
-    } 
+    },
+    removeImage : (state) => {
+      state.image = "/static/images/avatar/2.jpg"
+    }
     // Use the PayloadAction type to declare the contents of `action.payload`
     // incrementByAmount: (state, action) => {
     //   state.value += action.payload;
@@ -60,7 +63,7 @@ export const userSlice = createSlice({
 });
 
 // export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-export const { InitializeUser, RemoveUser, updateImage } = userSlice.actions;
+export const { InitializeUser, RemoveUser, updateImage,removeImage} = userSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
