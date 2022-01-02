@@ -20,7 +20,7 @@ const Testimonial = () => {
             name: "Navneet Kumar Singh",
             designation: 'CEO',
             description: "I am a developer that like to work on MERN and I have worked on the authetication part of the project",
-            img: 'images/avatar.png',
+            img: 'https://sdp3jobber.s3.ap-south-1.amazonaws.com/photo_2021-10-09_23-15-47.jpg',
             github_link: 'https://github.com/Navneet7716',
             linked_link: 'https://www.linkedin.com/in/navneet7716/',
             featured: false
@@ -31,7 +31,7 @@ const Testimonial = () => {
             name: "Udbhav Govindu",
             designation: 'Web Developer',
             description: "I am a developer that like to work on MERN and I have worked on the authetication part of the project",
-            img: 'images/avatar.png',
+            img: 'https://sdp3jobber.s3.ap-south-1.amazonaws.com/youtube-icon.jpeg',
             github_link: 'https://github.com/udbhav3101',
             linked_link: 'https://www.linkedin.com/in/udbhav-govindu/',
             featured: true
@@ -43,7 +43,7 @@ const Testimonial = () => {
             name: "Aditya khandelwal",
             designation: 'Web Developer',
             description: "I am a developer that like to work on MERN and I have worked on the authetication part of the project",
-            img: 'images/avatar.png',
+            img: 'https://sdp3jobber.s3.ap-south-1.amazonaws.com/aditya.jpg',
             github_link: 'https://github.com/aditya1036',
             linked_link: 'https://www.linkedin.com/in/aditya-khandelwal-6237821aa/',
             featured: false
