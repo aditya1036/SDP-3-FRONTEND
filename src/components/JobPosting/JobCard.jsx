@@ -37,7 +37,7 @@ export const JobCard = () => {
       .then((data) => {
         setJobs((jobs) => [...jobs, ...data.content]);
         last = data.last;
-        console.log(data.content);
+        // console.log(data.content);
         setIsFirstLoad(false);
         setIsLoading(false);
       })

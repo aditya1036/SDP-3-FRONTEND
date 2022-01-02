@@ -84,7 +84,7 @@ function ModelForm({ posts, setPosts, handleClose, open, setOpen }) {
           }
         );
 
-        console.log("RESSS", res);
+        // console.log("RESSS", res);
 
         setPosts([res.data.data, ...posts]);
         setTitle("");
@@ -95,7 +95,7 @@ function ModelForm({ posts, setPosts, handleClose, open, setOpen }) {
         setOpen(false);
       } catch (e) {
         setsubmitfailure(true);
-        console.log(e);
+        // console.log(e);
       }
     }
   };
@@ -134,10 +134,10 @@ function ModelForm({ posts, setPosts, handleClose, open, setOpen }) {
       form.append("image", files, files.name);
 
       let res = await axios.post("https://upload-sdp3.herokuapp.com/upload", form, {
-        onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
+        onUploadProgress: (progressEvent) => {},
       });
 
-      console.log(res);
+      // console.log(res);
 
       setImage(res.data.publicUrl);
 
@@ -153,7 +153,7 @@ function ModelForm({ posts, setPosts, handleClose, open, setOpen }) {
   const HandleFileChange = async (e) => {
     setEnableUpload(false);
     setFiles(e.target.files[0]);
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     setFilename(e.target.files[0].name);
   };
   return (

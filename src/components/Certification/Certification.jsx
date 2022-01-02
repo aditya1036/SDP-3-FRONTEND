@@ -66,7 +66,7 @@ const Certification = () => {
                 }
             })
             const data = await res.json();
-            console.log(data)
+            // console.log(data)
             setLicenses(data.data)
           
         }
@@ -93,7 +93,7 @@ const Certification = () => {
         })
         const data = await res.json()
 
-        console.log(data);
+        // console.log(data);
         setLicenses([{
             id: data.data[0].id,
             license_name: license_name,

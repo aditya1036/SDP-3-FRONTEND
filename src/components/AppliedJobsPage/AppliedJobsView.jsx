@@ -29,7 +29,7 @@ function AppliedJobsView() {
       .then((data) => {
         if (fetching) {
           setAppliedJobs([...appliedJobs, ...data.data.ListData]);
-          console.log(data);
+          // console.log(data);
         }
       });
 

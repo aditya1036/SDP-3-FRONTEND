@@ -66,14 +66,14 @@ function CommentComponent({ parentId }) {
           }
         );
 
-        console.log(res);
+        // console.log(res);
 
         setComments([res.data.data, ...comments]);
 
         setDesc("");
       } catch (e) {
         setSubmitfailure(true);
-        console.log(e);
+        // console.log(e);
       }
     }
   };

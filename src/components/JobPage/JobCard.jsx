@@ -9,7 +9,7 @@ function JobCard({ job, setJobDetail }) {
   const [singleJob, setSingleJob] = useState(job);
 
   const HandleClick = async () => {
-    console.log(singleJob);
+    // console.log(singleJob);
     setJobDetail(singleJob);
   };
 

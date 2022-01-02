@@ -7,7 +7,7 @@ import "./IndividualApplicant.css";
 function IndividualApplicant({ data, setApplicants, applicants }) {
   const [applicant, setApplicant] = React.useState(data);
 
-  console.log(data);
+  // console.log(data);
 
   const acceptHandler = async () => {
     if (window.confirm("You sure you want to accept?")) {
@@ -38,14 +38,14 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
           `This is to inform you that you application has been accepted by ${applicant.postData.company} and you will be getting a call soon from our team.`,
       };
 
-      console.log(emailData);
+      // console.log(emailData);
 
       let mail = await axios.post(
         `https://upload-sdp3.herokuapp.com/upload/sendmail`,
         emailData
       );
 
-      console.log(mail);
+      // console.log(mail);
 
       let res = await axios.patch(
         `https://secure-stream-79742.herokuapp.com/api/applicant/updateapplicant`,
@@ -59,7 +59,7 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
         }
       );
 
-      console.log(res);
+      // console.log(res);
 
       setApplicants(applicants.filter((el) => el.id !== data.id));
     }
@@ -89,7 +89,7 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
           `This is to inform you that you application has been rejected by ${applicant.postData.company}. Please don't give up and try again later.`,
       };
 
-      console.log(emailData);
+      // console.log(emailData);
 
       let mail = await axios.post(
         `https://upload-sdp3.herokuapp.com/upload/sendmail`,
@@ -107,7 +107,7 @@ function IndividualApplicant({ data, setApplicants, applicants }) {
         }
       );
 
-      console.log(res);
+      // console.log(res);
 
       setApplicants(applicants.filter((el) => el.id !== data.id));
     }

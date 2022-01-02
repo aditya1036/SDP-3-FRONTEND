@@ -41,9 +41,9 @@ function IndividualPost({ post }) {
 
   const getTimeForPost = (f) => {
 
-    // console.log(new Date(f).getTime());
+    // // console.log(new Date(f).getTime());
     let diff = (new Date().getTime() - new Date(f).getTime()) / 60000;
-    console.log(diff)
+    // console.log(diff)
     if (diff < 1) {
       return "Just now";
     } else if (diff >= 1 && diff <= 60) {
@@ -85,7 +85,7 @@ function IndividualPost({ post }) {
     }
 
     let data = { userId: user.id, postId: post.id, isliked: !isLiked };
-    console.log(data);
+    // console.log(data);
 
     let re = await axios.post(
       `https://secure-stream-79742.herokuapp.com/api/activity/create`,
@@ -99,11 +99,11 @@ function IndividualPost({ post }) {
       }
     );
 
-    console.log(re);
+    // console.log(re);
   };
 
-  console.log(individualPost.userData.profile_image);
-  // console.log("INDIVIDUAL POSSTTT", individualPost);
+  // console.log(individualPost.userData.profile_image);
+  // // console.log("INDIVIDUAL POSSTTT", individualPost);
 
   return (
     <div>

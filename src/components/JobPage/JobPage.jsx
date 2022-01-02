@@ -47,14 +47,14 @@ function JobPage() {
     })
       .then((data) => data.json())
       .then((data) => {
-        console.log(data)
+        // console.log(data)
        let newdata = data.content.filter(el => el.user_id !== user.id)
         setJobs((jobs) => [...jobs, ...(newdata || [])]);
         setLast(data.last);
         if (page === 0) {
           setPage(el=>el+1)
         }
-        console.log(data.content);
+        // console.log(data.content);
         setIsFirstLoad(false);
         setIsLoading(false);
       })
@@ -65,7 +65,7 @@ function JobPage() {
 
   const onScroll = (e) => {
 
-    // console.log(listInnerRef.current)
+    // // console.log(listInnerRef.current)
     
     const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
     if (Math.ceil(scrollTop + clientHeight) >= scrollHeight) {
@@ -73,7 +73,7 @@ function JobPage() {
         return;
       }
 
-      console.log("reached Bottom")
+      // console.log("reached Bottom")
       setPage(el => el+1)
       fetchJobs();
     }

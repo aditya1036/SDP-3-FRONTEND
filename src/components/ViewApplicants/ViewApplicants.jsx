@@ -23,7 +23,7 @@ function ViewApplicants() {
         if (fetching) {
             let newData = data.data.ListData.filter(el => el.status !== true);
           setApplicants([...applicants, ...newData || []])
-          console.log(data);
+          // console.log(data);
         }
       });
 

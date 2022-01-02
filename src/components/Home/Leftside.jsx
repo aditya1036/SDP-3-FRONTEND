@@ -28,7 +28,7 @@ export default function Sidebar() {
 
         }).catch(e => {
             fetching = false;
-            console.log(e);
+            // console.log(e);
         })
         return () => {
             fetching = false;

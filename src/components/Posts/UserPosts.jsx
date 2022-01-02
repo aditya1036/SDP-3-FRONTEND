@@ -42,13 +42,13 @@ export default function UserPosts() {
       .then((data) => {
         setPosts((posts) => [...posts, ...data.content]);
         last = data.last;
-        console.log(data.content);
+        // console.log(data.content);
   setIsFirstLoad(false);
 
         setIsLoading(false);
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
       });
   };
 

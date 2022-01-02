@@ -67,21 +67,21 @@ function IndividualEducation({edu, education, setEducation}) {
                     }
             })
             const data = await res.json();
-            console.log(data);
+            // console.log(data);
         }else {
             return;
         }
     }
     const handleUpdateEducation = async(e) => {
         e.preventDefault()
-        console.log({
-          id: id1,
-          institution_name: institution_name,
-          duration: education_duration,
-          location: location,
-          degree_type : degree_type,
-          user_id: user_state.id
-      })
+        // console.log({
+      //     id: id1,
+      //     institution_name: institution_name,
+      //     duration: education_duration,
+      //     location: location,
+      //     degree_type : degree_type,
+      //     user_id: user_state.id
+      // })
         const res = await fetch(`${API_URL}/api/education/update` , {
             method: "PATCH" ,
             headers:
@@ -101,7 +101,7 @@ function IndividualEducation({edu, education, setEducation}) {
         })
 
         const data = await res.json()
-        console.log(data)
+        // console.log(data)
         seteducati(data.Data)
         handleClose1()
     }

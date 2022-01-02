@@ -251,7 +251,7 @@ const StepForm = () => {
   const handleNext = async (data) => {
     
     if (activeStep === steps.length - 1) {
-      console.log(data.job_title , data.employment_type,data.company,data.job_description)
+      // console.log(data.job_title , data.employment_type,data.company,data.job_description)
       setActiveStep(activeStep + 1);
      const res = await fetch(`${API_URL}/api/job/addjob` , {
        method: "POST" , 
@@ -271,7 +271,7 @@ const StepForm = () => {
      })
      
      const data_final = await res.json()
-     console.log(data_final)
+     // console.log(data_final)
     } else {
       setActiveStep(activeStep + 1);
       setSkippedSteps(

@@ -63,12 +63,12 @@ function IndividualCertificate({ lic, licenses, setLicenses }) {
       }
     );
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
   };
 
   const handleUpdateCertification = async (e) => {
     e.preventDefault();
-    console.log(id1)
+    // console.log(id1)
     const res = await fetch(`${API_URL}/api/test/user/license/update`, {
       method: "PUT",
       headers: {
@@ -87,7 +87,7 @@ function IndividualCertificate({ lic, licenses, setLicenses }) {
     });
 
     const data = await res.json();   
-    console.log(data)
+    // console.log(data)
     setLicense(data.data[0]);
     handleClose1();
   };

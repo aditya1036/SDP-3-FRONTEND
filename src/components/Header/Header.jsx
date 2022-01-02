@@ -15,7 +15,7 @@ const Header = () => {
   const user_state = useSelector(selectUser);
 
   const data = getUserPayload(localStorage.getItem("token"));
-  console.log(data);
+  // console.log(data);
   const handleLogout = () => {
     dispatch(RemoveUser());
     localStorage.removeItem("token");

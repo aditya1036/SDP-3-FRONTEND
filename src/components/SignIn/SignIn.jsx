@@ -73,7 +73,7 @@ const SignIn = ({setToken}) => {
             }
           })
           res = await res.json();
-          console.log(res.data[0])
+          // console.log(res.data[0])
           dispatch(InitializeUser(res.data[0]))
           setEmail('')
           setPassword('')

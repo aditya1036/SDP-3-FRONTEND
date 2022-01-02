@@ -15,7 +15,7 @@ function JobDetail({ jobDetail }) {
   const [isApplied, setIsApplied] = useState(jobDetail.applied);
 
   useEffect(() => {
-    console.log("JOB DETAILS: ", jobDetail)
+    // console.log("JOB DETAILS: ", jobDetail)
     setIsApplied(jobDetail.applied)
   }, [])
 
@@ -50,7 +50,7 @@ function JobDetail({ jobDetail }) {
     handleClose();
   };
 
-  console.log("JOB DETAILS IS APPPLIED: ", isApplied)
+  // console.log("JOB DETAILS IS APPPLIED: ", isApplied)
 
   function chunkString(str, length = 80) {
     return str.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|");

@@ -7,7 +7,7 @@ import axios from 'axios';
 
 function IndividualComment({data, setComments, comments}) {
     const user = useSelector(selectUser);
-console.log(data);
+// console.log(data);
     const HandleDelete = async () => {
 
         try {
@@ -20,7 +20,7 @@ console.log(data);
                 }
             })
             
-            console.log(res);
+            // console.log(res);
             
             let newComments = comments.filter(el => el.id !== data.id);
 
@@ -31,7 +31,7 @@ console.log(data);
             
         }
         catch (e) {
-            console.log(e);
+            // console.log(e);
         }
 
     }

@@ -116,7 +116,7 @@ export default function Profile() {
         },
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       setUserProfile(data.data[0]);
       setImage(data.data[0].profile_image);
       setGithub(data.data[0].github_link);
@@ -150,7 +150,7 @@ export default function Profile() {
         }),
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
     } else {
       const res = await fetch("https://secure-stream-79742.herokuapp.com/api/follow/follow", {
         method: "POST",
@@ -166,7 +166,7 @@ export default function Profile() {
         }),
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
     }
     setFollow(!follow);
   };
@@ -202,10 +202,10 @@ export default function Profile() {
       form.append("image", files, files.name);
 
       let res = await axios.post("https://upload-sdp3.herokuapp.com/upload/profile", form, {
-        onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
+        onUploadProgress: (progressEvent) => {},
       });
 
-      console.log(res);
+      // console.log(res);
 
       setImage(res.data.publicUrl);
 
@@ -223,14 +223,14 @@ export default function Profile() {
   const HandleFileChange = async (e) => {
     setEnableUpload(false);
     setFiles(e.target.files[0]);
-    // console.log(e.target.files[0]);
+    // // console.log(e.target.files[0]);
     setFilename(e.target.files[0].name);
   };
 
   const HandleResumeFileChange = async (e) => {
     setEnableUploadResume(false);
     setFile(e.target.files[0]);
-    console.log(e.target.files[0].name);
+    // console.log(e.target.files[0].name);
     setResumeFileName(e.target.files[0].name);
   };
 
@@ -256,10 +256,10 @@ export default function Profile() {
       form.append("file", file, file.name);
 
       let res = await axios.post("https://upload-sdp3.herokuapp.com/upload/resume", form, {
-        onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
+        onUploadProgress: (progressEvent) => {},
       });
 
-      console.log(res);
+      // console.log(res);
 
       setresumeLink(res.data.publicUrl);
 
@@ -296,7 +296,7 @@ export default function Profile() {
     });
 
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     setUserProfile({
       id: user_state.id,
       github_link: github_link,
@@ -308,7 +308,7 @@ export default function Profile() {
     });
     handleClose();
   };
-  console.log(resumeLink);
+  // console.log(resumeLink);
 
   const handleClose = () => {
     setOpen(false);
@@ -325,7 +325,7 @@ export default function Profile() {
       </div>
     </div>
   );
-  // console.log(languages)
+  // // console.log(languages)
   return (
     <>
       <div>

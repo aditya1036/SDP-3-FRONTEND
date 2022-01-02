@@ -68,7 +68,7 @@ function IndividualExperience({ experiences, exp, setExpereinces }) {
       }
     );
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
   };
 
   const handleUpdateExperience = async (e, id) => {
@@ -93,7 +93,7 @@ function IndividualExperience({ experiences, exp, setExpereinces }) {
 
     const data = await res.json();
 
-    console.log(data);
+    // console.log(data);
     // const index = experience.findIndex((exp) => exp.id === id);
     // var updated_experience = [...experience];
     // updated_experience[index] = {

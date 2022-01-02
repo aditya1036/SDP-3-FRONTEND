@@ -24,7 +24,7 @@ function CreatedJobsView() {
         }).then(data => { 
             if(fetching) {
                 setJobs([...jobs, ...data.data.content || null])
-                console.log(data.data.content)
+                // console.log(data.data.content)
             }
         
         })
