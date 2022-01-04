@@ -33,6 +33,7 @@ const SignUp = () => {
   const [phone,setPhone] = useState('')
   const [address , setAddress] = useState('')
   const [success , setSuccess] = useState(false)
+  const [loading, setLoading] = useState(false);
   
 
 
@@ -41,6 +42,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
 
     e.preventDefault();
+    setLoading(true);
     const res = await fetch('https://secure-stream-79742.herokuapp.com/api/auth/signup' , {
         method: 'POST',
         headers : {
@@ -61,6 +63,7 @@ const SignUp = () => {
       // console.log(data)
       if(data.success)
       {
+        setLoading(false);
         setSuccess(true)
       }
       else
@@ -214,6 +217,7 @@ if(isAuth)
                     type="submit"
                     variant="contained"
                     fullWidth
+                    disabled={loading}
                     >
                     Sign Up
                 </Button>

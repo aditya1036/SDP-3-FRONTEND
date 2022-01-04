@@ -204,6 +204,7 @@ function PostDetails() {
           hashtags: hashtags1,
           post_type: "parent",
           title: title,
+          likeCount: likeCount
         };
         // console.log("POST DATA ",  postData)
 

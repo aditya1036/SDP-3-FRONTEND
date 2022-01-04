@@ -42,7 +42,7 @@ function App() {
           <Route path='/applied' element={<PrivateRoute> <AppliedJobsView /> </PrivateRoute>} />
           <Route path='/applicants/:id' element={<PrivateRoute> <ViewApplicants /> </PrivateRoute>} />
           <Route path='/post/:id' element={<><PrivateRoute> <PostDetails /></PrivateRoute></>} />
-          <Route path='*' element={<><NotFound/></>} />
+          {/* <Route path='/*' element={<><NotFound/></>} /> */}
           </Routes>
       </Router>
     </>

@@ -40,6 +40,7 @@ const SignIn = ({setToken}) => {
   const [loginfailure, setloginfailure] = useState(false);
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   let errorStatus = false;
 
@@ -48,6 +49,7 @@ const SignIn = ({setToken}) => {
       const handleSubmit = async (e) => {
         setloginfailure(false);
           e.preventDefault();
+          setLoading(true);
 
           validate({"email" : email, "password" : password});
 
@@ -74,6 +76,7 @@ const SignIn = ({setToken}) => {
           })
           res = await res.json();
           // console.log(res.data[0])
+          setLoading(false);
           dispatch(InitializeUser(res.data[0]))
           setEmail('')
           setPassword('')
@@ -175,6 +178,7 @@ if(isAuth)
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
+                  disabled={loading}
                 >
                   Sign In
                 </Button>

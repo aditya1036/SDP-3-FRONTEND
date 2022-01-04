@@ -15,6 +15,8 @@ function AppliedJobsView() {
   React.useEffect(() => {
     let fetching = true;
 
+    console.log(user);
+
     axios
       .get(
         `https://secure-stream-79742.herokuapp.com/api/applicant/getapplicantbyuserid/${user.id}`,
@@ -28,7 +30,8 @@ function AppliedJobsView() {
       )
       .then((data) => {
         if (fetching) {
-          setAppliedJobs([...appliedJobs, ...data.data.ListData]);
+          // console.log(data)
+          setAppliedJobs([...appliedJobs, ...data.data.ListData || []]);
           // console.log(data);
         }
       });
